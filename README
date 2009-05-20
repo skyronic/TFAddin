@@ -1,0 +1,11 @@
+This will hold the taskforce addin files, hopefully segregating it from the MonoDevelop svn trunk effectively.
+
+To try it out, checkout the MonoDevelop source tree
+cd extras/
+mkdir MonoDevelop.TaskForce
+cd MonoDevelop.TaskForce
+git clone (check it out from github in this path)
+
+You should add this existing project/solution to the MonoDevelop workspace, and have built it already.
+
+This is being built as a Google summer of code project for MonoDevelop by Anirudh Sanjeev <andy@ninjagod.com> under the mentorship of Michael Hutchinson <mjhutchinson@gmail.com>.
