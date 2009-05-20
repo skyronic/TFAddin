@@ -1,0 +1,16 @@
+<Addin id          = "MonoDevelop.TaskForce"
+       namespace   = "MonoDevelop"
+       name        = "TaskForce for MonoDevelop"
+       author      = "Anirudh Sanjeev"
+       copyright   = "MIT X11"
+       url         = "http://monodevelop.com/"
+       description = "Task oriented development"
+       category    = "IDE Extensions"
+       version     = "2.1.0">
+       <Dependencies>
+           <Addin id="Core" version="2.1.0"></Addin>
+           <Addin id="Core.Gui" version="2.1.0"></Addin>
+           <Addin id="Projects" version="2.1.0"></Addin>           
+       </Dependencies>
+       
+</Addin>
