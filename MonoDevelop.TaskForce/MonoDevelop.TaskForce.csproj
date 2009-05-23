@@ -26,4 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="MonoDevelop.TaskForce.addin.xml" />
+  </ItemGroup>
 </Project>
