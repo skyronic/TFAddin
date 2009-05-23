@@ -2,10 +2,12 @@ This will hold the taskforce addin files, hopefully segregating it from the Mono
 
 To try it out, checkout the MonoDevelop source tree
 cd extras/
-mkdir MonoDevelop.TaskForce
-cd MonoDevelop.TaskForce
-git clone (check it out from github in this path)
+git clone git://github.com/ninjagod/TFAddin.git
+mv TFAddin MonoDevelop.TaskForce
+
+Add absolute path to MonoDevelop.TaskForce/build to the main.addins in local-config. Also, you might have to set PKG_CONFIG_PATH to the absolute path to local-config
 
 You should add this existing project/solution to the MonoDevelop workspace, and have built it already.
+
 
 This is being built as a Google summer of code project for MonoDevelop by Anirudh Sanjeev <andy@ninjagod.com> under the mentorship of Michael Hutchinson <mjhutchinson@gmail.com>.
