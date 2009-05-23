@@ -27,8 +27,6 @@
 	
 	
 <Extension path = "/MonoDevelop/Ide/WorkbenchContexts/Edit">
-		<ContextPad id = "MonoDevelop.DesignerSupport.ToolboxPad" />
-		<ContextPad id = "MonoDevelop.DesignerSupport.PropertyPad" />
-		<ContextPad id = "MonoDevelop.DesignerSupport.DocumentOutlinePad" />
+		<ContextPad id = "MonoDevelop.TaskForce.TasksPad" />		
 	</Extension>       
 </Addin>
