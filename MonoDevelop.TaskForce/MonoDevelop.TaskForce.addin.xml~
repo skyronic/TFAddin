@@ -10,16 +10,17 @@
     <Dependencies>
 	    <Addin id="Core" version="2.1.0"/>
 	    <Addin id="Core.Gui" version="2.1.0"/>
-    	<Addin id="Projects" version="2.1.0"/>
-		<Addin id="Projects.Gui" version="2.1.0"/>
 		<Addin id="Ide" version="2.1.0"/>
 		<Addin id="Components" version="2.1.0"/>
 	</Dependencies>
+	<Runtime>
+	<Import assembly = "MonoDevelop.TaskForce.dll"></Import>
+	</Runtime>
 	
 	
 	<Extension path = "/MonoDevelop/Ide/Pads">
-	    <Pad id = "MonoDevelop.TaskForce.TaskPad"
-	         class = "MonoDevelop.TaskForce.TaskPad"
+	    <Pad id = "MonoDevelop.TaskForce.TasksPad"
+	         class = "MonoDevelop.TaskForce.TasksPad"
 	         _label = "TaskForce"
 	         defaultPlacement = "right"></Pad>
 	</Extension>
