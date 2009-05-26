@@ -13,10 +13,6 @@
 		<Addin id="Ide" version="2.1.0"/>
 		<Addin id="Components" version="2.1.0"/>
 	</Dependencies>
-	<Runtime>
-	<Import assembly = "MonoDevelop.TaskForce.dll"></Import>
-	</Runtime>
-	
 	
 	<Extension path = "/MonoDevelop/Ide/Pads">
 	    <Pad id = "MonoDevelop.TaskForce.TasksPad"
