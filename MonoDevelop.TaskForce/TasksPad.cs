@@ -16,7 +16,7 @@ namespace MonoDevelop.TaskForce
 			get
 			{
 				Gtk.Label temp = new Gtk.Label();
-				temp.Text = "Hello World";
+				temp.Text = "Hello World";				
 				return temp;
 			}
 		}
