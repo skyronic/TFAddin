@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TasksPad.cs" />
+    <Compile Include="MonoDevelop.TaskForce.TaskPad\TempNodeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.TaskForce.addin.xml" />
@@ -85,5 +85,8 @@
     <EmbeddedResource Include="icons\toolbox-pad-16.png">
       <LogicalName>toolbox-pad-16.png</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.TaskForce.TaskPad\" />
   </ItemGroup>
 </Project>
