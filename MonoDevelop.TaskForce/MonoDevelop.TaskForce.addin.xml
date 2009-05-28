@@ -15,8 +15,8 @@
 	</Dependencies>
 	
 	<Extension path = "/MonoDevelop/Ide/Pads">
-<SolutionPad id="MonoDevelop.TaskForce.TaskPad" _label="TaskForce Exp" defaultPlacement = "Left">
-<NodeBuilder id = "MonoDevelop.TaskForce.TaskPad.Temp" class="MonoDevelop.TaskForce.TaskPad.TempNodeBuilder"></NodeBuilder>
+<SolutionPad id="MonoDevelop.TaskForce.TasksPad" _label="TaskForce Exp" class="MonoDevelop.TaskForce.TasksPad" defaultPlacement = "Left">
+<NodeBuilder id = "MonoDevelop.TaskForce.TasksPad.Temp" class="MonoDevelop.TaskForce.TaskPad.TempNodeBuilder"></NodeBuilder>
 </SolutionPad>
 	</Extension>
 	
