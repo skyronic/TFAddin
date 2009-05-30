@@ -11,12 +11,12 @@ namespace MonoDevelop.TaskForce.TaskData
 		public int seed, data;
 		public ArrayList children;
 		LogUtil log;
-		public IntTaskData()
-		{
-		}
+		public IntTaskData parent;
+		
 		
 		public IntTaskData(int _seed)
 		{
+			parent = null; // for root nodes
 			log = new LogUtil("IntTaskData" + _seed.ToString());
 			
 			log.DEBUG("new IntTaskData");			
@@ -27,9 +27,12 @@ namespace MonoDevelop.TaskForce.TaskData
 			for(int i = data - 1; i>0; i--)
 			{
 				IntTaskData child = new IntTaskData(i);
+				// set the parent's ref as the current object
+				child.parent = this;
+				
 				// push the child's ref onto the children list
 				
-				children.Add(child);								
+				children.Add(child);
 			}
 		}
 		
