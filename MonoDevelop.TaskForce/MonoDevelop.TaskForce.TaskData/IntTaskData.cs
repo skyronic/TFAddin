@@ -19,7 +19,6 @@ namespace MonoDevelop.TaskForce.TaskData
 			parent = null; // for root nodes
 			log = new LogUtil("IntTaskData" + _seed.ToString());
 			
-			log.DEBUG("new IntTaskData");			
 			seed = _seed;
 			data = seed;
 			

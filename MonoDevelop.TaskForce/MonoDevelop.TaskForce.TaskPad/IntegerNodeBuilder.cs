@@ -19,12 +19,10 @@ namespace MonoDevelop.TaskForce.TaskPad
 		public override void BuildNode (MonoDevelop.Ide.Gui.Components.ITreeBuilder treeBuilder, object dataObject, ref string label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
 		{
 			base.BuildNode (treeBuilder, dataObject, ref label, ref icon, ref closedIcon);
-			log.DEBUG("Building a node");
 			
 			ITaskData taskData = (ITaskData)dataObject;
 			if(taskData.GetTaskType() == TaskType.IntTask)
 			{
-				log.DEBUG("Found an integer task type");
 				IntTaskData intTaskData = (IntTaskData)taskData;
 				
 				// Set the label based on the current data
@@ -36,7 +34,6 @@ namespace MonoDevelop.TaskForce.TaskPad
 		public override bool HasChildNodes (MonoDevelop.Ide.Gui.Components.ITreeBuilder builder, object dataObject)
 		{
 			
-			log.DEBUG("Checking for child nodes");
 			
 			ITaskData taskData = (ITaskData)dataObject;
 			if(taskData.GetTaskType() == TaskType.IntTask)
@@ -105,6 +102,12 @@ namespace MonoDevelop.TaskForce.TaskPad
 		
 		public override bool CanDropNode (object dataObject, MonoDevelop.Ide.Gui.Components.DragOperation operation)
 		{
+			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
+			// assume that the object is an IntTaskData
+			IntTaskData newChild = (IntTaskData)dataObject;
+			log.DEBUG("CurrentNODE is: " + self.data.ToString());
+			log.DEBUG("DraggedNODE is: " + newChild.data.ToString());			
+			
 			if(((ITaskData)dataObject).GetTaskType() == TaskType.IntTask)
 			{
 				return true;				
@@ -118,7 +121,7 @@ namespace MonoDevelop.TaskForce.TaskPad
 			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
 			// assume that the object is an IntTaskData
 			IntTaskData newChild = (IntTaskData)dataObjects;
-			
+			log.DEBUG("The current data is: " + self.data.ToString());
 			log.DEBUG("Dropping node with data: " + newChild.data.ToString());
 			// add this to the list of my children
 
@@ -131,7 +134,22 @@ namespace MonoDevelop.TaskForce.TaskPad
 			
 			newChild.parent = self;
 			self.children.Add(newChild);
+			
+			
+			base.OnNodeDrop(dataObjects, operation);
 		}
+		
+		public override void RenameItem (string newName)
+		{
+			//base.RenameItem (newName);
+		}
+
+		public override void OnItemSelected ()
+		{
+			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
+			log.DEBUG( self.data.ToString() + " Selected!");
+		}
+
 		
 		public override bool CanDeleteItem ()
 		{
