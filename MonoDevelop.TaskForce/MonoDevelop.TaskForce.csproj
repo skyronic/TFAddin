@@ -64,6 +64,10 @@
     <Compile Include="MonoDevelop.TaskForce.TaskPad\TempNodeBuilder.cs" />
     <Compile Include="TasksPad.cs" />
     <Compile Include="Utilities\LogUtil.cs" />
+    <Compile Include="MonoDevelop.TaskForce.TaskPad\TaskDataTemp.cs" />
+    <Compile Include="MonoDevelop.TaskForce.TaskPad\IntegerNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.TaskForce.TaskData\ITaskData.cs" />
+    <Compile Include="MonoDevelop.TaskForce.TaskData\IntTaskData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.TaskForce.addin.xml" />
@@ -95,5 +99,6 @@
   <ItemGroup>
     <Folder Include="MonoDevelop.TaskForce.TaskPad\" />
     <Folder Include="Utilities\" />
+    <Folder Include="MonoDevelop.TaskForce.TaskData\" />
   </ItemGroup>
 </Project>

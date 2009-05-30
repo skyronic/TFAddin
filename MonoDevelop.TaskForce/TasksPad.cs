@@ -7,11 +7,12 @@ using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.Ide.Gui.Pads;
 using MonoDevelop.Projects;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.TaskForce.TaskData;
 namespace MonoDevelop.TaskForce
 {
 	
 	
-	public class TasksPad : TreeViewPad
+	public class TasksPad : SolutionPad
 	{
 		LogUtil log;
 		
@@ -25,7 +26,8 @@ namespace MonoDevelop.TaskForce
 		void IdeAppWorkspaceWorkspaceItemOpened (object sender, WorkspaceItemEventArgs e)
 		{
 			log.DEBUG("Workspace item opened");
-			this.treeView.AddChild("Hi there!");
+			treeView.AddChild("Hi there!");
+			treeView.AddChild(new IntTaskData(6));
 		}
 		
 		public override void Initialize (NodeBuilder[] builders, TreePadOption[] options, string contextMenuPath)
@@ -33,8 +35,8 @@ namespace MonoDevelop.TaskForce
 			log.DEBUG("Initialize called");
 			base.Initialize (builders, options, contextMenuPath);
 			
-			foreach (WorkspaceItem it in IdeApp.Workspace.Items)
-				treeView.AddChild (it);
+			treeView.AddChild(new IntTaskData(5));
+			
 		}
 	}
 }

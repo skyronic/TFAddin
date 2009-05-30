@@ -16,12 +16,12 @@
 	
 	<Extension path = "/MonoDevelop/Ide/Pads">
 <SolutionPad id="MonoDevelop.TaskForce.TasksPad" _label="TaskForce Exp" class="MonoDevelop.TaskForce.TasksPad" defaultPlacement = "Left">
-<NodeBuilder id = "MonoDevelop.TaskForce.TasksPad.Temp" class="MonoDevelop.TaskForce.TaskPad.TempNodeBuilder"></NodeBuilder>
+<NodeBuilder id = "MonoDevelop.TaskForce.TasksPad.Temp" class="MonoDevelop.TaskForce.TaskPad.IntegerNodeBuilder"></NodeBuilder>
 </SolutionPad>
 	</Extension>
 	
 	
 <Extension path = "/MonoDevelop/Ide/WorkbenchContexts/Edit">
-		<ContextPad id = "MonoDevelop.TaskForce.TaskPad" />		
+		<ContextPad id = "MonoDevelop.TaskForce.TasksPad" />		
 	</Extension>       
 </Addin>

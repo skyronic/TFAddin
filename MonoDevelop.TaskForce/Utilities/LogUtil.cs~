@@ -23,7 +23,10 @@ namespace MonoDevelop.TaskForce.Utilities
 		
 		public void DEBUG(String message)
 		{
+			ConsoleColor currentColor = Console.ForegroundColor;
+			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine("[DEBUG]" + GetPrefix() + message);
+			Console.ForegroundColor = currentColor;
 		}
 	}
 }
