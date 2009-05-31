@@ -59,6 +59,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\main\build\bin\MonoDevelop.Projects.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MonoDevelop.TaskForce.TaskPad\TempNodeBuilder.cs" />
@@ -68,6 +69,10 @@
     <Compile Include="MonoDevelop.TaskForce.TaskPad\IntegerNodeBuilder.cs" />
     <Compile Include="MonoDevelop.TaskForce.TaskData\ITaskData.cs" />
     <Compile Include="MonoDevelop.TaskForce.TaskData\IntTaskData.cs" />
+    <Compile Include="TaskGui\TaskViewContent.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="TaskGui\TaskViewWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.TaskViewWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.TaskForce.addin.xml" />
@@ -95,10 +100,14 @@
     <EmbeddedResource Include="icons\toolbox-pad-16.png">
       <LogicalName>toolbox-pad-16.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MonoDevelop.TaskForce.TaskPad\" />
     <Folder Include="Utilities\" />
     <Folder Include="MonoDevelop.TaskForce.TaskData\" />
+    <Folder Include="TaskGui\" />
   </ItemGroup>
 </Project>

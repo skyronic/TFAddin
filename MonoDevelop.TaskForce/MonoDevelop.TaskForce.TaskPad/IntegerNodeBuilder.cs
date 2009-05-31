@@ -48,6 +48,27 @@ namespace MonoDevelop.TaskForce.TaskPad
 			return false;
 		}		
 		
+		public override void OnNodeAdded (object dataObject)
+		{
+			// try a conversioni
+			IntTaskData dropObj = dataObject as IntTaskData;
+			log.DEBUG("Node has been Added. Data:" + dropObj.data.ToString());
+			
+		}
+		
+		public override void OnNodeRemoved (object dataObject)
+		{
+			IntTaskData removeObj = dataObject as IntTaskData;
+			log.DEBUG("Node has been removed. Data: " + removeObj.data.ToString());
+		}
+		
+		public override object GetParentObject (object dataObject)
+		{
+			return (dataObject as IntTaskData).parent;
+		}
+
+
+		
 		public override void BuildChildNodes (MonoDevelop.Ide.Gui.Components.ITreeBuilder treeBuilder, object dataObject)
 		{
 			base.BuildChildNodes (treeBuilder, dataObject);
@@ -105,8 +126,10 @@ namespace MonoDevelop.TaskForce.TaskPad
 			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
 			// assume that the object is an IntTaskData
 			IntTaskData newChild = (IntTaskData)dataObject;
-			log.DEBUG("CurrentNODE is: " + self.data.ToString());
-			log.DEBUG("DraggedNODE is: " + newChild.data.ToString());			
+			
+			// makes log very verbose, disabled
+			//log.DEBUG("CurrentNODE is: " + self.data.ToString());
+			//log.DEBUG("DraggedNODE is: " + newChild.data.ToString());			
 			
 			if(((ITaskData)dataObject).GetTaskType() == TaskType.IntTask)
 			{
@@ -135,8 +158,8 @@ namespace MonoDevelop.TaskForce.TaskPad
 			newChild.parent = self;
 			self.children.Add(newChild);
 			
-			
 			base.OnNodeDrop(dataObjects, operation);
+			
 		}
 		
 		public override void RenameItem (string newName)
@@ -149,6 +172,16 @@ namespace MonoDevelop.TaskForce.TaskPad
 			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
 			log.DEBUG( self.data.ToString() + " Selected!");
 		}
+		
+		public override void ActivateItem ()
+		{
+			IntTaskData myData = this.CurrentNode.DataItem as IntTaskData;
+			TaskViewContent taskView = new TaskViewContent();
+			taskView.SetTaskIntData(myData.data);
+			
+			MonoDevelop.Ide.Gui.IdeApp.Workbench.OpenDocument(taskView, true);
+		}
+
 
 		
 		public override bool CanDeleteItem ()
