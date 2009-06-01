@@ -28,7 +28,19 @@ namespace MonoDevelop.TaskForce.TaskPad
 				// Set the label based on the current data
 				label = "Node: " + intTaskData.data.ToString();
 				
+				intTaskData.TaskDataChanged += new TaskDataChangedHandler(HandleNodeChange);
 			}
+			
+		}
+		
+		public void HandleNodeChange(object sender)
+		{
+			
+			log.DEBUG("Handling a node change");
+			ITreeBuilder treeBuilder = this.Context.GetTreeBuilder(sender);
+			
+			treeBuilder.Update();
+			treeBuilder.UpdateChildren();
 			
 		}
 		public override bool HasChildNodes (MonoDevelop.Ide.Gui.Components.ITreeBuilder builder, object dataObject)
@@ -38,7 +50,6 @@ namespace MonoDevelop.TaskForce.TaskPad
 			ITaskData taskData = (ITaskData)dataObject;
 			if(taskData.GetTaskType() == TaskType.IntTask)
 			{
-				log.DEBUG("Found an integer task type");
 				IntTaskData intTaskData = (IntTaskData)taskData;
 				
 				// return true if there are any children
@@ -66,6 +77,8 @@ namespace MonoDevelop.TaskForce.TaskPad
 		{
 			return (dataObject as IntTaskData).parent;
 		}
+		
+		
 
 
 		
@@ -143,20 +156,36 @@ namespace MonoDevelop.TaskForce.TaskPad
 			
 			IntTaskData self = this.CurrentNode.DataItem as IntTaskData;
 			// assume that the object is an IntTaskData
-			IntTaskData newChild = (IntTaskData)dataObjects;
+			IntTaskData newChild = dataObjects as IntTaskData;
 			log.DEBUG("The current data is: " + self.data.ToString());
 			log.DEBUG("Dropping node with data: " + newChild.data.ToString());
 			// add this to the list of my children
 
 			// tell the parent to remove this child.
 			// not a root node
+			IntTaskData oldParent = null;
 			if(newChild.parent != null)
 			{
 				newChild.parent.children.Remove(newChild);
+				// tell the parent to fire the changed event
+				oldParent = newChild.parent;
+			}
+			log.DEBUG("Parent currently is:" + newChild.parent.ToString());
+			newChild.parent = self;
+			log.DEBUG("Parent now is:" + newChild.parent.ToString());
+			self.children.Add(newChild);
+			
+			log.DEBUG("Triggering change in current node");
+			self.TriggerChange();
+			
+			if(oldParent != null)
+			{
+				log.DEBUG("Triggering change in dropped node");
+				oldParent.TriggerChange();
 			}
 			
-			newChild.parent = self;
-			self.children.Add(newChild);
+			
+			
 			
 			base.OnNodeDrop(dataObjects, operation);
 			

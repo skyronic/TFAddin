@@ -5,7 +5,7 @@ using System.Collections;
 namespace MonoDevelop.TaskForce.TaskData
 {
 	
-	
+	public delegate void TaskDataChangedHandler(object source);
 	public class IntTaskData : ITaskData
 	{
 		public int seed, data;
@@ -33,6 +33,13 @@ namespace MonoDevelop.TaskForce.TaskData
 				
 				children.Add(child);
 			}
+		}
+		
+		public event TaskDataChangedHandler TaskDataChanged;
+		
+		public void TriggerChange()
+		{
+			TaskDataChanged(this);
 		}
 		
 		#region ITaskData implementation
