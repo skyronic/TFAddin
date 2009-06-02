@@ -41,7 +41,7 @@ namespace MonoDevelop.TaskForce.TaskPad
 		}
 		public override string ContextMenuAddinPath {
 			get {
-				return base.ContextMenuAddinPath;
+				return "/MonoDevelop/TaskForce/Pads/AddinsPad/IntegerNode";
 			}
 		}
 
