@@ -3,18 +3,22 @@ using System;
 using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.TaskForce.TaskData;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.Components.Commands;
+
 
 namespace MonoDevelop.TaskForce.TaskPad
 {
 	
-	
+	public enum ContextCommands
+	{
+		Temp1,
+	}
 	public class IntegerNodeBuilder : TypeNodeBuilder
 	{
 		MonoDevelop.TaskForce.Utilities.LogUtil log;
 		public IntegerNodeBuilder()
 		{
 			log = new MonoDevelop.TaskForce.Utilities.LogUtil("IntNodeBuilder");
-			log.DEBUG("Initialized IntNodeBuilder");
 		}
 		public override void BuildNode (MonoDevelop.Ide.Gui.Components.ITreeBuilder treeBuilder, object dataObject, ref string label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
 		{
@@ -24,23 +28,34 @@ namespace MonoDevelop.TaskForce.TaskPad
 			if(taskData.GetTaskType() == TaskType.IntTask)
 			{
 				IntTaskData intTaskData = (IntTaskData)taskData;
+				closedIcon = Context.GetIcon(Gtk.Stock.Cancel);
+				icon = Context.GetIcon(Gtk.Stock.Apply);
 				
 				// Set the label based on the current data
 				label = "Node: " + intTaskData.data.ToString();
 				
-				intTaskData.TaskDataChanged += new TaskDataChangedHandler(HandleNodeChange);
+				
+				
 			}
 			
 		}
+		public override string ContextMenuAddinPath {
+			get {
+				return base.ContextMenuAddinPath;
+			}
+		}
+
 		
 		public void HandleNodeChange(object sender)
 		{
 			
 			log.DEBUG("Handling a node change");
-			ITreeBuilder treeBuilder = this.Context.GetTreeBuilder(sender);
 			
-			treeBuilder.Update();
-			treeBuilder.UpdateChildren();
+			ITreeBuilder treeBuilder = Context.GetTreeBuilder();
+			
+			//treeBuilder.UpdateChildren();
+			//treeBuilder.Update();
+			treeBuilder.UpdateAll();
 			
 		}
 		public override bool HasChildNodes (MonoDevelop.Ide.Gui.Components.ITreeBuilder builder, object dataObject)
@@ -64,6 +79,7 @@ namespace MonoDevelop.TaskForce.TaskPad
 			// try a conversioni
 			IntTaskData dropObj = dataObject as IntTaskData;
 			log.DEBUG("Node has been Added. Data:" + dropObj.data.ToString());
+			dropObj.TaskDataChanged += HandleNodeChange;
 			
 		}
 		
@@ -71,6 +87,7 @@ namespace MonoDevelop.TaskForce.TaskPad
 		{
 			IntTaskData removeObj = dataObject as IntTaskData;
 			log.DEBUG("Node has been removed. Data: " + removeObj.data.ToString());
+			removeObj.TaskDataChanged -= HandleNodeChange;
 		}
 		
 		public override object GetParentObject (object dataObject)
@@ -208,7 +225,8 @@ namespace MonoDevelop.TaskForce.TaskPad
 			TaskViewContent taskView = new TaskViewContent();
 			taskView.SetTaskIntData(myData.data);
 			
-			MonoDevelop.Ide.Gui.IdeApp.Workbench.OpenDocument(taskView, true);
+			//MonoDevelop.Ide.Gui.IdeApp.Workbench.OpenDocument(taskView, true);
+			myData.TriggerChange();
 		}
 
 
@@ -227,6 +245,11 @@ namespace MonoDevelop.TaskForce.TaskPad
 			// dispose?			
 		}
 
+		[CommandHandler(ContextCommands.Temp1)]
+		public void OnTemp1Menu()
+		{
+			log.DEBUG("Temp1 menu clicked");
+		}
 
 	}
 }

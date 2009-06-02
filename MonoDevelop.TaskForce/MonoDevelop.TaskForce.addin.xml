@@ -19,8 +19,14 @@
 <NodeBuilder id = "MonoDevelop.TaskForce.TasksPad.Temp" class="MonoDevelop.TaskForce.TaskPad.IntegerNodeBuilder"></NodeBuilder>
 </SolutionPad>
 	</Extension>
-	
-	
+
+	<Extension path="/MonoDevelop/Ide/Commands">
+	  <Command id="MonoDevelop.TaskForce.TaskPad.ContextCommands.Temp1" _label="temp1"></Command>
+	</Extension>
+			
+<Extension path="/MonoDevelop/TaskForce/Pads/AddinsPad/IntegerNode">
+<CommandItem id = "MonoDevelop.TaskForce.TaskPad.ContextCommands.Temp1"></CommandItem>
+</Extension>
 <Extension path = "/MonoDevelop/Ide/WorkbenchContexts/Edit">
 		<ContextPad id = "MonoDevelop.TaskForce.TasksPad" />		
 	</Extension>       

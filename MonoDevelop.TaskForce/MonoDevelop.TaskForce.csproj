@@ -77,6 +77,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MonoDevelop.TaskForce.addin.xml" />
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="icons\MonoDevelop.DesignerSupport.PropertyGrid.DefaultPropertyTab.bmp">
       <LogicalName>MonoDevelop.DesignerSupport.PropertyGrid.DefaultPropertyTab.bmp</LogicalName>
     </EmbeddedResource>
@@ -100,9 +103,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="icons\toolbox-pad-16.png">
       <LogicalName>toolbox-pad-16.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
