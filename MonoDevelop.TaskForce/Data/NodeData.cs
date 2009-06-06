@@ -51,7 +51,6 @@ namespace MonoDevelop.TaskForce.Data
 			children = new ArrayList();
 			data = new Hashtable();
 			parent = null;
-			temp = new string();
 			temp = "Placeholder";
 			data.Add("name", temp);
 			data.Add("label", temp);
@@ -72,11 +71,15 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public virtual void AddChild(NodeData childData)
 		{
+			log.DEBUG("AddChild");
 			// Check if this node can have this as a child
 			if(CanMakeChild(childData))
 			{
 				// First, remove the child from it's parent list
-				childData.parent.children.Remove(childData);
+				NodeData oldParent = childData.parent;
+				
+				if(oldParent != null)
+					childData.parent.children.Remove(childData);
 				
 				// set the child data's parent to the current object
 				childData.parent = this;
@@ -86,7 +89,9 @@ namespace MonoDevelop.TaskForce.Data
 				
 				// Inform both classes about the updates
 				this.TriggerUpdate();
-				childData.TriggerUpdate();
+				
+				if(oldParent!=null)
+					oldParent.TriggerUpdate();
 				
 				log.DEBUG("Added a new child:" + childData.ToString());
 			}

@@ -51,10 +51,23 @@ namespace MonoDevelop.TaskForce.Providers
 		/// <summary>
 		/// All the tasks that are being controlled by this provider object.
 		/// </summary>
-		ArrayList taskList;
+		public ArrayList taskList;
+		public ProviderData providerNode;
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="arg">
+		/// A <see cref="ProviderData"/>
+		/// </param>
+		public void SetProviderNode(ProviderData arg)
+		{
+			// sets the 
+		}
+		
 		
 		public abstract TaskData CreateTask();
-		public abstract IViewContent NewTaskContent(ref TaskData task);
+		public abstract void NewTaskContent(ref TaskData task);
 		public abstract IViewContent ViewTaskContent(TaskData task);
 		public abstract IViewContent EditTaskContent(ref TaskData task);
 		

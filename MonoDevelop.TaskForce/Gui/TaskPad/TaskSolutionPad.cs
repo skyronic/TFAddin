@@ -48,7 +48,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 	/// <summary>
 	/// Container class for the task solution pad
 	/// </summary>
-	public class TaskSolutionPad : SolutionPad
+	public class TaskSolutionPad : TreeViewPad
 	{
 		LogUtil log;
 		public TaskSolutionPad()
@@ -60,11 +60,11 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		public override void Initialize (MonoDevelop.Ide.Gui.Components.NodeBuilder[] builders, MonoDevelop.Ide.Gui.Components.TreePadOption[] options, string contextMenuPath)
 		{
 			// Create a temporary data provider
+			base.Initialize (builders, options, contextMenuPath);
 			ProviderData providerData = new ProviderData();
 			
 			
 			treeView.AddChild(providerData);
-			base.Initialize (builders, options, contextMenuPath);
 		}
 		
 		

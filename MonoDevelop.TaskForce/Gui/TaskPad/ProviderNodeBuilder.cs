@@ -51,7 +51,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		public ProviderNodeBuilder() : base()
 		{
 			log = new MonoDevelop.TaskForce.Utilities.LogUtil("ProviderNodeBuilder");
-		}
+	}
 		
         public override Type CommandHandlerType
         {
@@ -71,15 +71,15 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 
         public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
         {
+			log.DEBUG("building provider's child nodes");
 			base.BuildChildNodes (treeBuilder, dataObject);
-			
 			if (dataObject is ProviderData)
 			{
 				ProviderData providerData = dataObject as ProviderData;
 				
 				foreach (object child in providerData.children)
 				{
-					treeBuilder.AddChild (dataObject);
+					treeBuilder.AddChild (child);
 				}
 			}
         }
@@ -90,6 +90,8 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			// convert the data object to a nodedata
 			if (dataObject is ProviderData)
 			{
+				log.DEBUG("Building provider node");
+				log.SetHash(dataObject);
 				ProviderData providerData = dataObject as ProviderData;
 				
 				label = providerData.data["label"] as String;
@@ -145,16 +147,25 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			
 		}
 		
-		
+		[CommandHandler(ContextMenuCommands.AddTask)]
 		public void OnAddTaskContextMenu ()			
 		{
-			
+			if(this.CurrentNode.DataItem is ProviderData) // always be sure
+			{
+				ProviderData self = this.CurrentNode.DataItem as ProviderData;
+				
+				// create a new taskdata
+				// TODO: This must be done with a provider rather than a new object here
+				TaskData newTask = new TaskData();
+				
+				// Add a task to the provider
+				self.AddChild(newTask);
+			}			
 		}
 		
-		[CommandHandler(ContextMenuCommands.AddTask)]
 		public override void OnNodeChange ()
 		{
-			throw new System.NotImplementedException ();
+		
 		}
 
 	}

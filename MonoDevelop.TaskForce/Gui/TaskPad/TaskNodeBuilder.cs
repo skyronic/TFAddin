@@ -46,7 +46,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
     public class TaskNodeBuilder : TaskPadNodeBuilder
     {
-		
 		public TaskNodeBuilder () : base()
 		{
 			log = new LogUtil ("TaskNodeBuilder");
@@ -73,12 +72,13 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.BuildChildNodes (treeBuilder, dataObject);
 			
 			if (dataObject is TaskData)
-			{
+			{			log.DEBUG("Building child nodes");
+
 				TaskData taskData = dataObject as TaskData;
 				
 				foreach (object child in taskData.children)
 				{
-					treeBuilder.AddChild (dataObject);
+					treeBuilder.AddChild (child);
 				}
 			}
         }
@@ -88,7 +88,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
         {
 			// convert the data object to a nodedata
 			if (dataObject is TaskData)
-			{
+			{log.DEBUG("Building a node");
 				TaskData taskData = dataObject as TaskData;
 				
 				label = taskData.data["label"] as String;
@@ -135,6 +135,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			}
 			return "";
         }
+		
 
     }
 

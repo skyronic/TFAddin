@@ -34,6 +34,8 @@
 //------------------------------------------------------------------------------
 
 using System;
+using MonoDevelop.TaskForce.Utilities;
+
 
 
 namespace MonoDevelop.TaskForce.Data
@@ -45,6 +47,7 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public ProviderData() : base()
 		{
+			log = new LogUtil("ProviderData");
 		}
 		
 		public override NodeType nodeType {
@@ -60,7 +63,8 @@ namespace MonoDevelop.TaskForce.Data
 
 		public override bool CanMakeChild (NodeType childType)
 		{
-			if(childType == NodeType.Provider)
+			// A provider can only have a task as a datatype
+			if(childType == NodeType.Task)
 			{
 				return true;
 			}

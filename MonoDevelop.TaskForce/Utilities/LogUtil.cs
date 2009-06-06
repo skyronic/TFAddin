@@ -47,7 +47,7 @@ namespace MonoDevelop.TaskForce.Utilities
 		/// The name of the logging module
 		/// </summary>
 		public string moduleName;
-		
+		public string hashCode;
 		public LogUtil()
 		{
 			this.moduleName = "Untitled";
@@ -62,10 +62,20 @@ namespace MonoDevelop.TaskForce.Utilities
 		public LogUtil(String _moduleName)
 		{
 			this.moduleName = _moduleName;
+			this.hashCode = "";
 		}
 		protected string GetPrefix()
 		{
+			if(hashCode != "")
+				return String.Format("[TaskForce][{0}][#{1}#]",moduleName, hashCode);
+			
 			return String.Format("[TaskForce][{0}]",moduleName);
+			
+		}
+		
+		public void SetHash(object o)
+		{
+			hashCode =  o.GetHashCode().ToString();
 		}
 		
 		/// <summary>
@@ -139,6 +149,17 @@ namespace MonoDevelop.TaskForce.Utilities
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine("[ERROR]" + GetPrefix() + message);
 			Console.ForegroundColor = currentColor;
+		}
+		
+		/// <summary>
+		/// Ignore the logs, but keep them in the source code
+		/// </summary>
+		/// <param name="message">
+		/// A <see cref="String"/>
+		/// </param>
+		public void NULL(String message)
+		{
+			
 		}
 		
 	}
