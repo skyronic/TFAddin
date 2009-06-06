@@ -86,14 +86,18 @@
     <Compile Include="Utilities\LogWindow.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.Utilities.LogWindow.cs" />
     <Compile Include="Gui\TaskPad\ContextMenuCommands.cs" />
+    <Compile Include="Providers\LocalProvider.cs" />
+    <Compile Include="Gui\TaskView\NewTaskView.cs" />
+    <Compile Include="Gui\TaskView\NewTaskWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.TaskView.NewTaskWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
           <StandardHeader inheritsSet="MITX11License" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
         </Policies>
       </Properties>
     </MonoDevelop>

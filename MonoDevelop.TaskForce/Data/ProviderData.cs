@@ -35,6 +35,8 @@
 
 using System;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.TaskForce.Providers;
+
 
 
 
@@ -44,10 +46,13 @@ namespace MonoDevelop.TaskForce.Data
 	
 	public class ProviderData : NodeData
 	{
+		// The provider object
+		public TaskProvider provider;
 		
 		public ProviderData() : base()
 		{
 			log = new LogUtil("ProviderData");
+			provider = new LocalProvider();
 		}
 		
 		public override NodeType nodeType {

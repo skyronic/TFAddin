@@ -38,7 +38,7 @@ using MonoDevelop.TaskForce.Data;
 using MonoDevelop.Ide.Commands;
 using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.Components.Commands;
-
+using MonoDevelop.TaskForce.Providers;
 
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
@@ -154,18 +154,18 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			{
 				ProviderData self = this.CurrentNode.DataItem as ProviderData;
 				
+				TaskProvider provider = self.provider;
+				
+				// fire off a sequence of events
+				provider.CreateTask();
 				// create a new taskdata
 				// TODO: This must be done with a provider rather than a new object here
-				TaskData newTask = new TaskData();
-				
-				// Add a task to the provider
-				self.AddChild(newTask);
 			}			
 		}
 		
 		public override void OnNodeChange ()
 		{
-		
+					
 		}
 
 	}
