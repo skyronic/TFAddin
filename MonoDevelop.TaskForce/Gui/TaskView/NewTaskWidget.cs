@@ -71,7 +71,8 @@ namespace MonoDevelop.TaskForce.Gui.TaskView
 			log.DEBUG("Building");
 			this.ShowAll();
 			
-			log.DEBUG("Finished building");
+			log.DEBUG("Finished building"); // TODO: Why isn't the widget being displayed
+
 		}
 
 		/// <summary>
