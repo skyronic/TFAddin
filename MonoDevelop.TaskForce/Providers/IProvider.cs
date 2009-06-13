@@ -1,5 +1,5 @@
 // 
-// TaskProvider.cs
+// IProvider.cs
 //  
 // Author:
 //       Anirudh Sanjeev <anirudh@anirudhsanjeev.org>
@@ -35,47 +35,16 @@
 
 using System;
 using MonoDevelop.TaskForce.Data;
-using MonoDevelop.Ide.Gui;
-using System.Collections;
-
-
-
-
 
 namespace MonoDevelop.TaskForce.Providers
 {
 	
 	
-	public abstract class TaskProvider
+	public interface IProvider
 	{
-		/// <summary>
-		/// All the tasks that are being controlled by this provider object.
-		/// </summary>
-		public ArrayList taskList;
-		public ProviderData providerNode;
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="arg">
-		/// A <see cref="ProviderData"/>
-		/// </param>
-		public void SetProviderNode(ProviderData arg)
-		{
-			// sets the provider node to pass the task back to
-			
-		}
-		
-		
-		// All these calls must be asynchronous and affect the item later on.
-		public abstract void CreateTask();
-		public abstract void NewTaskContent(ref TaskData task);
-		public abstract void ViewTaskContent(TaskData task);
-		public abstract void EditTaskContent(ref TaskData task);
-		
-		
-		public TaskProvider()
-		{
-		}
+		string DoSomething();
+		void NewTask(ProviderData providerNode);
+		void EditTask(TaskData target);
+		void ViewTask(TaskData target);
 	}
 }

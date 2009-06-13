@@ -9,14 +9,7 @@
     <widget-library name="..\..\..\..\main\build\bin\MonoDevelop.Core.Gui.dll" />
     <widget-library name="..\..\..\..\main\build\bin\MonoDevelop.Ide.dll" />
     <widget-library name="..\..\..\..\main\build\bin\MonoDevelop.Projects.Gui.dll" />
-    <widget-library name="..\..\..\..\main\build\AddIns\MonoDevelop.TaskForce\MonoDevelop.TaskForce.dll" internal="true" />
+    <widget-library name="..\..\..\..\main\build\AddIns\MonoDevelop.TaskForce\MonoDevelop.TaskForce.dll" />
+    <widget-library name="..\..\..\..\main\build\AddIns\MonoDevelop.TaskForce\MonoDevelop.TaskForce.LocalProvider.dll" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MonoDevelop.TaskForce.Utilities.LogWindow" design-size="400 300">
-    <property name="MemberName" />
-    <property name="Title" translatable="yes">LogWindow</property>
-    <property name="WindowPosition">CenterOnParent</property>
-    <child>
-      <placeholder />
-    </child>
-  </widget>
 </stetic-interface>

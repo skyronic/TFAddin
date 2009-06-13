@@ -67,12 +67,10 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		
 		public override bool HasChildNodes (ITreeBuilder builder, object dataObject)
 		{
-			log.DEBUG("HasChildNodes");
 			// TODO: Anything more to this?
 			if(dataObject is NodeData)
 			{
 				NodeData nodeData = dataObject as NodeData;
-				log.DEBUG("The nodedata is: " + nodeData.ToString() + " and the children are: " + nodeData.children.Count);
 				return (nodeData.children.Count > 0);
 			}
 			return false;
@@ -91,7 +89,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		
 		public override void OnNodeAdded (object dataObject)
 		{
-			log.DEBUG("OnNodeAdded()");
 			base.OnNodeAdded (dataObject);
 			if (dataObject is NodeData)
 			{
@@ -102,7 +99,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		
 		public override void OnNodeRemoved (object dataObject)
 		{
-			log.DEBUG("OnNodeRemoved");
 			base.OnNodeAdded (dataObject);
 			if (dataObject is NodeData)
 			{

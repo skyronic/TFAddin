@@ -39,6 +39,8 @@ using MonoDevelop.Ide.Commands;
 using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.TaskForce.Providers;
+using Mono.Addins;
+
 
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
@@ -85,7 +87,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
         }
 
 
-        public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
+        public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string _label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
         {
 			// convert the data object to a nodedata
 			if (dataObject is ProviderData)
@@ -94,10 +96,11 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 				log.SetHash(dataObject);
 				ProviderData providerData = dataObject as ProviderData;
 				
-				label = providerData.data["label"] as String;
-				
+				_label = providerData.Label;
 				// TODO: Change the silly icons
 				icon = Context.GetIcon(Gtk.Stock.Cdrom);
+				
+				
 				closedIcon = Context.GetIcon(Gtk.Stock.Close);
 			}
 			
@@ -152,14 +155,9 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		{
 			if(this.CurrentNode.DataItem is ProviderData) // always be sure
 			{
-				ProviderData self = this.CurrentNode.DataItem as ProviderData;
+				ProviderData self = this.CurrentNode.DataItem as ProviderData;				
 				
-				TaskProvider provider = self.provider;
-				
-				// fire off a sequence of events
-				provider.CreateTask();
-				// create a new taskdata
-				// TODO: This must be done with a provider rather than a new object here
+				self.provider.NewTask(self);				
 			}			
 		}
 		

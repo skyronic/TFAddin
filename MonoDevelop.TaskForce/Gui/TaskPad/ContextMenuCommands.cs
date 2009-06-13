@@ -43,5 +43,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 	public enum ContextMenuCommands
 	{
 		AddTask,
+		ViewTask,
+		EditTask,
 	}
 }

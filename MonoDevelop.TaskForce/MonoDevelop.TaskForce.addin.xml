@@ -24,6 +24,8 @@
 	
 	<Extension path="/MonoDevelop/Ide/Commands">
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask" _label="Add Task"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.ViewTask" _label="View Task"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask" _label="Edit Task"></Command>
 	</Extension>
 	
 	<ExtensionPoint path = "/MonoDevelop/TaskForce/TaskPad/ContextMenu" name = "Task pad context menu">
@@ -36,5 +38,12 @@
 	
 	<Extension path="/MonoDevelop/TaskForce/TaskPad/ContextMenu">
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
+	<CommandItem id="MonoDevelop,TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
+	<CommandItem id="MonoDevelop,TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask"></CommandItem>
 	</Extension>
+	
+	<ExtensionPoint path="/MonoDevelop/TaskForce/Providers" name="Task providers">
+	<Description>Must implement iprovider and be a static</Description>
+	<ExtensionNode name="Provider" type="MonoDevelop.TaskForce.Providers.ProviderExtensionNode"></ExtensionNode>
+	</ExtensionPoint>
 </Addin>

@@ -1,5 +1,5 @@
 // 
-// QueryData.cs
+// NewTaskWidget.cs
 //  
 // Author:
 //       Anirudh Sanjeev <anirudh@anirudhsanjeev.org>
@@ -34,17 +34,58 @@
 //------------------------------------------------------------------------------
 
 using System;
-
-
-namespace MonoDevelop.TaskForce.Data
+using Gtk;
+using MonoDevelop.TaskForce.Data;
+namespace MonoDevelop.TaskForce.LocalProvider.NewTask
 {
 	
 	
-	public class QueryData
+	public class NewTaskWidget : Gtk.VBox
 	{
+		Gtk.HBox hbox1;
+		Label label1;
+		Entry entry1;
+		Button button1;
 		
-		public QueryData()
+		ProviderData provider1;
+		NewTaskView parentView;
+		public NewTaskWidget()
 		{
+			hbox1 = new HBox();
+			label1 = new Label("Enter task name: ");
+			entry1 = new Entry();
+			button1 = new Gtk.Button();
+			button1.Label = "Add";
+			
+			hbox1.PackStart(label1, true, true, 0);
+			hbox1.PackStart(entry1, true, true, 0);
+			hbox1.PackStart(button1, true, true, 0);
+			
+			this.PackStart(hbox1, false, false, 0);
+			this.ShowAll();
+			button1.Clicked += Button1Clicked;
+		}
+
+		void Button1Clicked (object sender, EventArgs e)
+		{
+			// Create a task data
+			TaskData newTask = new TaskData();
+			newTask.Label = entry1.Text;
+			
+			// Add the node and update the GUI
+			provider1.AddChild(newTask);
+					
+			// dispose the current iviewcontent
+			parentView.Dispose();
+		}
+		
+		public void SetProviderNode(ProviderData node)
+		{
+			provider1 = node;
+		}
+		public void SetView(NewTaskView view)
+		{
+			parentView = view;
 		}
 	}
 }

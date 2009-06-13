@@ -40,6 +40,8 @@ using System;
 using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.Components.Commands;
+
 
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
@@ -91,7 +93,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			{log.DEBUG("Building a node");
 				TaskData taskData = dataObject as TaskData;
 				
-				label = taskData.data["label"] as String;
+				label = taskData.Label;
 				
 				// TODO: Change the silly icons
 				icon = Context.GetIcon(Gtk.Stock.Apply);
@@ -131,7 +133,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
         {
 			if(dataObject is NodeData)
 			{
-				return (dataObject as NodeData).data["name"] as string;
+				return (dataObject as NodeData).Label;
 			}
 			return "";
         }
@@ -143,12 +145,50 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
     {
 		public TaskNodeCommandHandler()
 		{
+			
 		}
 		
-		public override void OnNodeChange ()
+		[CommandHandler(ContextMenuCommands.EditTask)]
+		public void EditTask()
 		{
-			throw new System.NotImplementedException ();
+			// get the current node
+			TaskData self = this.CurrentNode.DataItem as TaskData;
+			
+			// access the provider from the parent's provider object
+			if(self.parent is ProviderData) // TODO: Make this more robust if needed when categories come in
+			{
+				ProviderData selfProvider = self.parent;
+				
+				// Call the "Edit task" function on the appropriate provider
+				selfProvider.provider.EditTask(self);
+			}
 		}
+		
+		[CommandHandler(ContextMenuCommands.ViewTask)]
+		public void ViewTask()
+		{
+			// get the current node
+			TaskData self = this.CurrentNode.DataItem as TaskData;
+			
+			// access the provider from the parent's provider object
+			if(self.parent is ProviderData) // TODO: Make this more robust if needed when categories come in
+			{
+				ProviderData selfProvider = self.parent;
+				
+				// Call the "Edit task" function on the appropriate provider
+				selfProvider.provider.ViewTask(self);
+			}	
+		}
+		
+		public override void ActivateItem ()
+		{
+			base.ActivateItem ();
+			
+			// right now, a double click activates the task
+			ViewTask();
+		}
+
+		
 
     }
 

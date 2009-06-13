@@ -51,14 +51,50 @@ namespace MonoDevelop.TaskForce.Data
 			children = new ArrayList();
 			data = new Hashtable();
 			parent = null;
-			temp = "Placeholder";
-			data.Add("name", temp);
-			data.Add("label", temp);
 		}
+		
+		string label;
+		public string Label
+		{
+			get
+			{
+				return label;
+			}
+			set
+			{
+				label = value;
+			}
+		}		
 		
 		public abstract NodeType nodeType
 		{
 			get;
+		}
+		
+		Gdk.Pixbuf open_icon;
+		public Gdk.Pixbuf OpenIcon
+		{
+			get
+			{
+				return open_icon;
+			}
+			set
+			{
+				open_icon = value;
+			}
+		}
+		
+		Gdk.Pixbuf closed_icon;
+		public Gdk.Pixbuf ClosedIcon
+		{
+			get
+			{
+				return closed_icon;
+			}
+			set
+			{
+				closed_icon = value;
+			}
 		}
 		
 		public NodeData parent;
