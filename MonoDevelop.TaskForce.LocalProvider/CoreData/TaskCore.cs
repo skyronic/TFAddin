@@ -34,7 +34,7 @@
 //------------------------------------------------------------------------------
 
 using System;
-
+using System.Collections;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
@@ -44,17 +44,14 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		public string subject;
 		public string content;
 		public DateTime postDate;
+		public int TaskId;
 	}
 	
 	public class TaskCore
 	{
 		int id;
 		public int Id
-		{
-			get
-			{
-				return id;
-			}
+		{get;set;
 		}
 		
 		string title;
@@ -112,14 +109,30 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			}
 		}
 		
-		public Comment[] comments;
+		public int Depends
+		{
+			get; set;
+		}
 		
-			
+		public ArrayList Comments
+		{
+			get; set;
+		}
 		
+		public void AddComment(Comment c)
+		{
+			Comments.Add(c);			
+		}
 		
 		public TaskCore()
 		{
-			
+			Comments = new ArrayList();
 		}
+		
+		public override string ToString ()
+		{
+			return string.Format("[TaskCore: Id={0}, Title={1}, Description={2}, CreateDate={3}, DueDate={4}, Depends={5}, Comments={6}]", Id, Title, Description, CreateDate, DueDate, Depends, Comments);
+		}
+
 	}
 }

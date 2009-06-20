@@ -34,24 +34,38 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Data;
+using Mono.Data;
+using Mono.Data.Sqlite;
+using MonoDevelop.TaskForce.Utilities;
+using System.Collections;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
 	
-	
 	public class DBHelper
 	{
-		public static SQLiteConnection conn;
+		public static void LogQuery(SqliteCommand cmd)
+		{
+			log.INFO("SQL Query:" + cmd.CommandText);
+			cmd.ExecuteNonQuery();
+		}
+		public static SqliteConnection conn;
 		public static bool initialized = false;
+		private static LogUtil log;
+		public const string DateFormat = "yyyy-MM-dd";
 		
+		/// <summary>
+		/// Creates the tables. Called only once
+		/// </summary>
 		public static void CreateTables()
 		{
 			CheckInitialize();
-			SQLiteCommand cmd = new SQLiteCommand(conn);
+			SqliteCommand cmd = new SqliteCommand(conn);
 			cmd.CommandText = "CREATE TABLE Tasks(TaskID integer PRIMARY KEY AUTOINCREMENT , Name varchar (100), Priority integer ,Description varchar (5000), CreateDate datetime, DueDate datetime, Depends integer)" ;
-			cmd.ExecuteNonQuery();
+			LogQuery(cmd);
 			cmd.CommandText = "CREATE TABLE Comments(CommentID integer primary key, TaskId integer, Subject varchar(100), Message varchar(5000), PostDate datetime)";
-			cmd.ExecuteNonQuery();
+			LogQuery(cmd);
 		}
 		/// <summary>
 		/// Checks if the database is intialized and initializes if it isn't already.
@@ -64,28 +78,126 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			}
 		}
 		
+		/// <summary>
+		/// Adds a task and all the comments into the database
+		/// </summary>
+		/// <param name="input">
+		/// A <see cref="TaskCore"/> - the task to be added
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Int32"/> - the task ID
+		/// </returns>
 		public static int AddTask(TaskCore input)
 		{
-			SQLiteCommand cmd;
-			cmd.CommandText = "INSERT INTO Tasks VALUES (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})";
+			SqliteCommand cmd = new SqliteCommand(conn);
+			cmd.CommandText = String.Format("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString(DateFormat), input.DueDate.ToString(DateFormat), input.Depends.ToString());
+			LogQuery(cmd);
+			foreach(Comment c in input.Comments)
+			{
+				SqliteCommand cmd1 = new SqliteCommand(conn);
+				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}')", 0, c.subject, c.content, c.postDate.ToString(DateFormat));
+				LogQuery(cmd1);
+			}
+			return 0; //TODO: Return taskid
 		}
 		
+		/// <summary>
+		/// Gets the taskcore object from the sqlite cursor
+		/// </summary>
+		/// <param name="cursor">
+		/// A <see cref="SqliteDataReader"/>. This won't be traversed, must be 
+		/// called each time the cursor moves ahead
+		/// </param>
+		/// <returns>
+		/// A <see cref="TaskCore"/> - allocated and re-created
+		/// Returns null if reading failed
+		/// </returns>
+		public static TaskCore GetTaskCoreFromCursor(SqliteDataReader cursor)
+		{
+			// this assumes a single task exists
+			
+			// the task to be extracted from the cursor
+			TaskCore task = new TaskCore();
+			
+			try{
+			task.Id = cursor.GetInt32(cursor.GetOrdinal("TaskId"));
+			task.Depends = cursor.GetInt32(cursor.GetOrdinal("Depends"));
+			task.Title = cursor.GetString(cursor.GetOrdinal("Name"));
+			task.Description = cursor.GetString(cursor.GetOrdinal("Description"));
+			task.Priority = cursor.GetInt32(cursor.GetOrdinal("Priority"));
+				task.DueDate = cursor.GetDateTime(cursor.GetOrdinal("DueDate"));
+				task.CreateDate = cursor.GetDateTime(cursor.GetOrdinal("CreateDate"));
+			}
+			catch
+			{
+				log.ERROR("Reading from cursor failed");
+				return null;
+			}
+			
+			log.DEBUG("Extracted task as : " + task.ToString());
+			return task;
+		}
+		
+		/// <summary>
+		/// Traverses a sqlitedatareader to return an arryalist of tasks
+		/// </summary>
+		/// <param name="cursor">
+		/// A <see cref="SqliteDataReader"/>. Will be traversed.
+		/// the query should've been executed
+		/// </param>
+		/// <returns>
+		/// A <see cref="ArrayList"/> containing the resultant tasks
+		/// </returns>
+		public static ArrayList GetTasksFromCursor(SqliteDataReader cursor)
+		{
+			ArrayList tasks = new ArrayList();
+			while(cursor.Read())
+			{
+				TaskCore task = GetTaskCoreFromCursor(cursor);
+				if(tasks!=null)
+					tasks.Add(tasks);
+			}
+			
+			return tasks;
+		}
+		
+		
+		/// <summary>
+		/// The basic query which will fetch all the tasks from the database
+		/// 
+		/// this serves more like an example. 
+		/// </summary>
+		/// <returns>
+		/// A <see cref="ArrayList"/> containing all the resultant tasks
+		/// </returns>
+		public static ArrayList GetAllTasks()
+		{
+			SqliteCommand cmd = new SqliteCommand(conn);
+			cmd.CommandText = "SELECT * FROM Tasks";
+			SqliteDataReader reader = cmd.ExecuteReader();
+			
+			return GetTasksFromCursor(reader);
+		}
 		
 		public static void Initialize()
 		{
 			initialized = true;
-			conn = new SQLiteConnection();
-			conn.ConnectionString = "Data Source=tasks.db;Synchronous=Off";
-			try
-			{				
+			conn = new SqliteConnection();
+			log = new LogUtil("DBHelper");
+			
+			if(System.IO.File.Exists("tasks.db"))
+			{
+				conn.ConnectionString = "Data Source=tasks.db;Synchronous=Off";
+				log.INFO("Opening connection");
 				conn.Open();
 			}
-			catch
+			else
 			{
+				log.WARN("Creating new database");
 				conn.ConnectionString = "Data Source=tasks.db;New=True;Synchronous=Off";
-				this.CreateTables();
+				conn.Open();
+				CreateTables();
 			}
-			
 		}
 		
 	}

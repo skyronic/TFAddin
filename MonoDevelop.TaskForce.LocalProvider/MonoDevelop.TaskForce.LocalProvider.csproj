@@ -98,8 +98,8 @@
     <MonoDevelop>
       <Properties>
         <Policies>
-          <StandardHeader inheritsSet="MITX11License" />
           <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+          <StandardHeader inheritsSet="MITX11License" />
         </Policies>
       </Properties>
     </MonoDevelop>
