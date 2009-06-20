@@ -49,7 +49,8 @@ namespace MonoDevelop.TaskForce.Data
 				return NodeType.Task;
 			}
 		}
-		
+		public object CoreDataObject
+		{get;set;}
 		public TaskData() : base()
 		{
 			

@@ -36,7 +36,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 	public class NewTaskView : AbstractViewContent
 	{
 		protected LogUtil log;
-		
+		protected NewTaskWidget widget;
 
 		public override Widget Control {
 					get {
@@ -58,6 +58,18 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 				return base.IsFile;
 			}
 		}
+		
+		/// <summary>
+		/// TODO: What the hell is this function supposed to do?
+		/// </summary>
+		/// <param name="fileName">
+		/// A <see cref="System.String"/>
+		/// </param>
+		public override void Load (string fileName)
+		{
+			throw new System.NotImplementedException ();
+		}
+
 
 		public override bool IsReadOnly {
 			get {
@@ -70,10 +82,25 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			base.Dispose();
 		}
 		
-		public NewTaskView()
+		
+		/// <summary>
+		/// Don't run this class without specifying the provider node
+		/// 
+		/// No other constructor exists
+		/// </summary>
+		/// <param name="providerNode">
+		/// A <see cref="ProviderData"/>
+		/// </param>
+		public NewTaskView(ProviderData providerNode)
 		{
 			this.ContentName = "New Task";
 			log = new LogUtil("NewTaskView");
+			
+			widget = new NewTaskWidget();
+			widget.ProviderNode = providerNode;
+			widget.ViewContent = this;
+			
+			
 		}
 	}
 		

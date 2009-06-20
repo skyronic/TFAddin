@@ -36,8 +36,8 @@
 using System;
 using MonoDevelop.TaskForce.Providers;
 using MonoDevelop.Ide.Gui;
-using MonoDevelop.TaskForce.LocalProvider.NewTask;
 using MonoDevelop.TaskForce.Data;
+using MonoDevelop.TaskForce.LocalProvider.TaskWidgets;
 
 
 namespace MonoDevelop.TaskForce.LocalProvider
@@ -56,10 +56,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		
 		public void NewTask(ProviderData providerNode)
 		{
-			NewTaskView newTab = new NewTaskView();
-			
-			// set the provider node so it can save to the right area
-			newTab.SetProviderNode(providerNode);
+			NewTaskView newTab = new NewTaskView(providerNode);
 			
 			IdeApp.Workbench.OpenDocument(newTab, true);
 		}
