@@ -85,13 +85,13 @@
   <ItemGroup>
     <Compile Include="Provider.cs" />
     <Compile Include="ProviderFrontend.cs" />
-    <Compile Include="NewTask\NewTaskView.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="NewTask\NewTaskWidget.cs" />
-    <Compile Include="EditTask\EditTaskView.cs" />
     <Compile Include="EditTask\EditTaskWidget.cs" />
     <Compile Include="CoreData\TaskCore.cs" />
     <Compile Include="CoreData\DBHelper.cs" />
+    <Compile Include="TaskWidgets\ViewContents.cs" />
+    <Compile Include="TaskWidgets\NewTaskWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.TaskWidgets.NewTaskWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -106,8 +106,8 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="NewTask\" />
-    <Folder Include="ViewTask\" />
     <Folder Include="EditTask\" />
     <Folder Include="CoreData\" />
+    <Folder Include="TaskWidgets\" />
   </ItemGroup>
 </Project>
