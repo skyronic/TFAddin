@@ -46,5 +46,6 @@ namespace MonoDevelop.TaskForce.Providers
 		void NewTask(ProviderData providerNode);
 		void EditTask(TaskData target);
 		void ViewTask(TaskData target);
+		void InitializeProvider(ProviderData providerNode);
 	}
 }

@@ -58,6 +58,7 @@ namespace MonoDevelop.TaskForce.Data
 			// take nodes[0] by default
 			ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
 			provider = (IProvider) Activator.CreateInstance(node.Class);
+			
 		}
 		
 		public override NodeType nodeType {

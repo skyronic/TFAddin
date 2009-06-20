@@ -1,20 +1,30 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestBed/Main.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/NewTaskWidget.cs" ctype="Workbench">
     <Files>
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" Line="36" Column="14" />
-      <File FileName="TestBed/Main.cs" Line="5" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/NewTaskWidget.cs" Line="40" Column="46" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/ProviderFrontend.cs" Line="85" Column="30" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/ViewContents.cs" Line="103" Column="21" />
+      <File FileName="MonoDevelop.TaskForce/Data/ProviderData.cs" Line="63" Column="38" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MonoDevelop.TaskForce" expanded="True" />
+          <Node name="MonoDevelop.TaskForce" expanded="True">
+            <Node name="Data" expanded="True" />
+            <Node name="Gui" expanded="True">
+              <Node name="TaskPad" expanded="True" />
+            </Node>
+            <Node name="Providers" expanded="True" />
+          </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
-            <Node name="References" expanded="True" />
             <Node name="CoreData" expanded="True" />
+            <Node name="EditTask" expanded="True" />
+            <Node name="TaskWidgets" expanded="True">
+              <Node name="NewTaskWidget.cs" selected="True" />
+            </Node>
           </Node>
           <Node name="TestBed" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="Main.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -24,7 +34,18 @@
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">
-        <State selected="True" />
+        <State expanded="True">
+          <Node name="Tasks" expanded="True">
+            <Node name="Tables" expanded="True" selected="True">
+              <Node name="Comments" expanded="True">
+                <Node name="Columns" expanded="True" />
+              </Node>
+              <Node name="Tasks" expanded="True">
+                <Node name="Columns" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

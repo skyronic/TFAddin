@@ -134,6 +134,39 @@ namespace MonoDevelop.TaskForce.Data
 		}
 		
 		/// <summary>
+		/// Adds a child and does not update GUI. to be used when heavy
+		/// tree activity is taking place 
+		/// 
+		/// YOU HAVE TO CALL TriggerUpdate after finishing tree opeartions
+		/// </summary>
+		/// <param name="childData">
+		/// A <see cref="NodeData"/>
+		/// </param>
+		public virtual void AddChildSilent(NodeData childData)
+		{
+			log.DEBUG("AddChild");
+			// Check if this node can have this as a child
+			if(CanMakeChild(childData))
+			{
+				// First, remove the child from it's parent list
+				NodeData oldParent = childData.parent;
+				
+				if(oldParent != null)
+					childData.parent.children.Remove(childData);
+				
+				// set the child data's parent to the current object
+				childData.parent = this;
+				
+				// add the child data as a child
+				this.children.Add(childData);
+				
+				// Inform both classes about the updates
+				this.TriggerUpdate();
+				
+			}
+		}
+		
+		/// <summary>
 		/// Triggered when a node is changed
 		/// </summary>
 		public event NodeDataChangedHandler NodeDataChanged;

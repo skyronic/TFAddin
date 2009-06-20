@@ -40,7 +40,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 
 		public override Widget Control {
 					get {
-						throw new System.NotImplementedException();
+						return widget;
 					}
 				}
 
@@ -67,7 +67,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// </param>
 		public override void Load (string fileName)
 		{
-			throw new System.NotImplementedException ();
+			//throw new System.NotImplementedException ();
 		}
 
 
@@ -99,6 +99,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			widget = new NewTaskWidget();
 			widget.ProviderNode = providerNode;
 			widget.ViewContent = this;
+			
+			widget.ShowAll();
 			
 			
 		}

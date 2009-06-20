@@ -38,6 +38,8 @@ using MonoDevelop.TaskForce.Providers;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.LocalProvider.TaskWidgets;
+using MonoDevelop.TaskForce.LocalProvider.CoreData;
+using System.Collections;
 
 
 namespace MonoDevelop.TaskForce.LocalProvider
@@ -54,6 +56,12 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		}
 		#endregion
 		
+		/// <summary>
+		/// Shows the new task GUI and updates the providernode object when finished
+		/// </summary>
+		/// <param name="providerNode">
+		/// A <see cref="ProviderData"/>
+		/// </param>
 		public void NewTask(ProviderData providerNode)
 		{
 			NewTaskView newTab = new NewTaskView(providerNode);
@@ -70,10 +78,45 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		{
 			
 		}
+		
+		/// <summary>
+		/// Initializes the provider and populates the node
+		/// </summary>
+		/// <param name="providerNode">
+		/// A <see cref="ProviderData"/>
+		/// </param>
+		public void InitializeProvider(ProviderData providerNode)
+		{
+			// initialize the database
+			DBHelper.Initialize();
+			
+			// set any required details about the provider
+			providerNode.Label = "Local Provider";
+			
+			// get an arraylist of all the taskcores
+			ArrayList tasks = DBHelper.GetAllTasks(); // get all the coredata
+			foreach(TaskCore core in tasks)
+			{
+				// create a new task node
+				TaskData taskNode = new TaskData();
+				
+				// set the core data object
+				taskNode.CoreDataObject = core;
+				
+				// set the label and icon
+				taskNode.Label = core.Title;
+				
+				// update the tree without updating gui				
+				providerNode.AddChildSilent(taskNode);		
+				
+			}
+			
+			// trigger changes in the gui
+			providerNode.TriggerUpdate();
+		}
 	
 		public ProviderFrontend()
 		{
-			
 		}
 		
 		
