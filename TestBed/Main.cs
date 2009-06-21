@@ -31,7 +31,7 @@ namespace TestBed
 			
 			
 			DBHelper.Initialize();
-			//DBHelper.AddTask(stub);
+			DBHelper.AddTask(stub);
 			DBHelper.GetAllTasks();
 		}
 	}

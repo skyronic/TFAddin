@@ -1,31 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/NewTaskWidget.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" ctype="Workbench">
     <Files>
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/NewTaskWidget.cs" Line="40" Column="46" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/ProviderFrontend.cs" Line="85" Column="30" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/ViewContents.cs" Line="103" Column="21" />
-      <File FileName="MonoDevelop.TaskForce/Data/ProviderData.cs" Line="63" Column="38" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" Line="165" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MonoDevelop.TaskForce" expanded="True">
-            <Node name="Data" expanded="True" />
-            <Node name="Gui" expanded="True">
-              <Node name="TaskPad" expanded="True" />
-            </Node>
-            <Node name="Providers" expanded="True" />
-          </Node>
+          <Node name="MonoDevelop.TaskForce" expanded="True" />
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
-            <Node name="CoreData" expanded="True" />
-            <Node name="EditTask" expanded="True" />
-            <Node name="TaskWidgets" expanded="True">
-              <Node name="NewTaskWidget.cs" selected="True" />
+            <Node name="CoreData" expanded="True">
+              <Node name="DBHelper.cs" selected="True" />
             </Node>
+            <Node name="EditTask" expanded="True" />
+            <Node name="TaskWidgets" expanded="True" />
           </Node>
-          <Node name="TestBed" expanded="True">
-            <Node name="References" expanded="True" />
-          </Node>
+          <Node name="TestBed" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -34,17 +23,8 @@
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">
-        <State expanded="True">
-          <Node name="Tasks" expanded="True">
-            <Node name="Tables" expanded="True" selected="True">
-              <Node name="Comments" expanded="True">
-                <Node name="Columns" expanded="True" />
-              </Node>
-              <Node name="Tasks" expanded="True">
-                <Node name="Columns" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
+        <State expanded="True" selected="True">
+          <Node name="Tasks" expanded="True" />
         </State>
       </Pad>
     </Pads>

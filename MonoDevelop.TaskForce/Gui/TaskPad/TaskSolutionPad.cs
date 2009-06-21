@@ -63,9 +63,9 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.Initialize (builders, options, contextMenuPath);
 			ProviderData providerData = new ProviderData();
 			
-			providerData.provider.InitializeProvider(providerData);
 			
 			treeView.AddChild(providerData);
+			providerData.provider.InitializeProvider(providerData);
 		}
 		
 		

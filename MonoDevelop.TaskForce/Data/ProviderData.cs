@@ -52,7 +52,7 @@ namespace MonoDevelop.TaskForce.Data
 			log = new LogUtil("ProviderData");
 			log.SetHash(this);
 			
-			//TODO: This is temporary
+			// TODO: This is temporary
 			ExtensionNodeList nodes = AddinManager.GetExtensionNodes("/MonoDevelop/TaskForce/Providers");
 			
 			// take nodes[0] by default

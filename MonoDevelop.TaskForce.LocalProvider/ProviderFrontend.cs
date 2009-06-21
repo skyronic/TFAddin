@@ -40,7 +40,7 @@ using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.LocalProvider.TaskWidgets;
 using MonoDevelop.TaskForce.LocalProvider.CoreData;
 using System.Collections;
-
+using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.LocalProvider
 {
@@ -48,6 +48,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 	
 	public class ProviderFrontend : IProvider
 	{
+		protected LogUtil log;
 
 		#region IProvider implementation
 		public string DoSomething ()
@@ -87,6 +88,12 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		/// </param>
 		public void InitializeProvider(ProviderData providerNode)
 		{
+			log = new LogUtil("LOCAL PROVIDER");
+			
+			if(providerNode == null)
+			{
+				log.ERROR("Provider is wrong!");
+			}
 			// initialize the database
 			DBHelper.Initialize();
 			
@@ -95,8 +102,11 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			
 			// get an arraylist of all the taskcores
 			ArrayList tasks = DBHelper.GetAllTasks(); // get all the coredata
-			foreach(TaskCore core in tasks)
+			log.INFO("Tasks - Count - " + tasks.Count.ToString());
+			for(int i = 0; i < tasks.Count; i++)
 			{
+				/*TaskCore core = tasks[0] as TaskCore;
+				log.INFO("The core object is: " + core);
 				// create a new task node
 				TaskData taskNode = new TaskData();
 				
@@ -107,7 +117,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 				taskNode.Label = core.Title;
 				
 				// update the tree without updating gui				
-				providerNode.AddChildSilent(taskNode);		
+				providerNode.AddChildSilent(taskNode);*/
 				
 			}
 			

@@ -155,7 +155,10 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			{
 				TaskCore task = GetTaskCoreFromCursor(cursor);
 				if(tasks!=null)
+				{
+					log.INFO("Task added");
 					tasks.Add(tasks);
+				}
 			}
 			
 			return tasks;
