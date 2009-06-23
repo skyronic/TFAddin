@@ -143,6 +143,17 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		{
 			throw new System.NotImplementedException ();
 		}
-
+		
+		[CommandHandler(ContextMenuCommands.NewCategory)]
+		public void OnNewCategoryContextMenu ()
+		{
+			if(this.CurrentNode.DataItem is CategoryData)
+			{
+				CategoryData self = this.CurrentNode.DataItem as CategoryData;
+				
+				// call the new category view
+				self.provider.AddChildCategory(self);
+			}
+		}
 	}
 }

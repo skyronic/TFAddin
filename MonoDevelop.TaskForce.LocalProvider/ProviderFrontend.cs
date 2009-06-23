@@ -138,6 +138,22 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			
 		}
 		
+		/// <summary>
+		/// Used to nest categories.
+		/// 
+		/// TODO: Migrate createnewcategory to use this function instead
+		/// </summary>
+		/// <param name="parent">
+		/// A <see cref="NodeData"/>
+		/// </param>
+		public void AddChildCategory(NodeData parent)
+		{
+			NewCategory n = new NewCategory(parent);
+			log.INFO("Making new category with parent - " + parent.Label);
+			n.ShowAll();
+		}
+		
+		
 		
 	}
 }

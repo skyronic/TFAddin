@@ -35,7 +35,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 	
 	public partial class NewCategory : Gtk.Window
 	{
-		protected ProviderData providerNode;
+		// not neccesarily a provider, but any kind of node that allows nesting
+		protected NodeData providerNode;
 
 		protected virtual void OnButton1Clicked (object sender, System.EventArgs e)
 		{
@@ -45,13 +46,16 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			// set the label (only label for now)
 			cat.Label = this.categoryName.Text;
 			
+			// set any other data requried
+			cat.provider = providerNode.provider;
+			
 			// Add the child and trigger the updates
 			providerNode.AddChild(cat);
 			
 			this.Destroy();			
 		}
 		
-		public NewCategory(ProviderData _providerNode) : 
+		public NewCategory(NodeData _providerNode) : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			providerNode = _providerNode;
