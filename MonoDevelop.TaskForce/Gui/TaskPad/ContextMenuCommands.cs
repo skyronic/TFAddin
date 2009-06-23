@@ -45,5 +45,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		AddTask,
 		ViewTask,
 		EditTask,
+		NewCategory,
 	}
 }

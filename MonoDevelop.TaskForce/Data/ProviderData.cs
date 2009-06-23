@@ -80,6 +80,10 @@ namespace MonoDevelop.TaskForce.Data
 			{
 				return true;
 			}
+			if(childType == NodeType.Category)
+			{
+				return true;
+			}
 			
 			return false;
 		}

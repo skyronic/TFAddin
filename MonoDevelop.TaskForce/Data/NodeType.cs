@@ -44,6 +44,7 @@ namespace MonoDevelop.TaskForce.Data
 	{
 		Task,
 		Provider,
+		Category
 		
 	}
 }

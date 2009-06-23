@@ -15,6 +15,7 @@
 			<NodeBuilder id="MonoDevelop.TaskForce.Gui.TaskPad.TaskNodeBuilder" class="MonoDevelop.TaskForce.Gui.TaskPad.TaskNodeBuilder">
 			</NodeBuilder>
 			<NodeBuilder id="MonoDevelop.TaskForce.Gui.TaskPad.ProviderNodeBuilder" class="MonoDevelop.TaskForce.Gui.TaskPad.ProviderNodeBuilder"></NodeBuilder>
+			<NodeBuilder id="MonoDevelop.TaskForce.Gui.TaskPad.CategoryNodeBuilder" class="MonoDevelop.TaskForce.Gui.TaskPad.CategoryNodeBuilder"></NodeBuilder>
 		</SolutionPad>
 	</Extension>
 	
@@ -38,8 +39,9 @@
 	
 	<Extension path="/MonoDevelop/TaskForce/TaskPad/ContextMenu">
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
-	<CommandItem id="MonoDevelop,TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
-	<CommandItem id="MonoDevelop,TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.NewCategory"></CommandItem>
 	</Extension>
 	
 	<ExtensionPoint path="/MonoDevelop/TaskForce/Providers" name="Task providers">

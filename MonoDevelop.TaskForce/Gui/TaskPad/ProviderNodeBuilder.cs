@@ -161,9 +161,21 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			}			
 		}
 		
+		[CommandHandler(ContextMenuCommands.NewCategory)]
+		public void OnNewCategoryContextMenu ()
+		{
+			
+		}
+		
 		public override void OnNodeChange ()
 		{
-					
+			if(this.CurrentNode.DataItem is ProviderData)
+			{
+				ProviderData self = this.CurrentNode.DataItem as ProviderData;
+				
+				// call the new category view
+				self.provider.NewCategory();
+			}
 		}
 
 	}

@@ -92,14 +92,16 @@
     <Compile Include="Providers\ProviderExtensionNode.cs" />
     <Compile Include="Providers\IProvider.cs" />
     <Compile Include="Data\ICoreData.cs" />
+    <Compile Include="Gui\TaskPad\CategoryNodeBuilder.cs" />
+    <Compile Include="Data\CategoryData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
           <StandardHeader inheritsSet="MITX11License" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
         </Policies>
       </Properties>
     </MonoDevelop>

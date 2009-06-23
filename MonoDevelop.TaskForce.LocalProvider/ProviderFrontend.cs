@@ -49,6 +49,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 	public class ProviderFrontend : IProvider
 	{
 		protected LogUtil log;
+		protected ProviderData providerNode;
 
 		#region IProvider implementation
 		public string DoSomething ()
@@ -63,7 +64,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		/// <param name="providerNode">
 		/// A <see cref="ProviderData"/>
 		/// </param>
-		public void NewTask(ProviderData providerNode)
+		public void NewTask(ProviderData _providerNode)
 		{
 			NewTaskView newTab = new NewTaskView(providerNode);
 			
@@ -86,8 +87,10 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		/// <param name="providerNode">
 		/// A <see cref="ProviderData"/>
 		/// </param>
-		public void InitializeProvider(ProviderData providerNode)
+		public void InitializeProvider(ProviderData _providerNode)
 		{
+			providerNode = _providerNode;
+			
 			log = new LogUtil("LOCAL PROVIDER");
 			
 			if(providerNode == null)
@@ -123,6 +126,15 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			
 			// trigger changes in the gui
 			providerNode.TriggerUpdate();
+		}
+		
+		/// <summary>
+		/// Creates a new category and appends it to the provider node builder
+		/// YOU HAVE TO HAVE CALLED IntializeProvider() Before this
+		/// </summary>
+		public void NewCategory()
+		{
+		
 		}
 	
 		public ProviderFrontend()

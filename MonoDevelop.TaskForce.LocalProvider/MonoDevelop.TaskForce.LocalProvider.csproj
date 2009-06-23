@@ -92,14 +92,16 @@
     <Compile Include="TaskWidgets\ViewContents.cs" />
     <Compile Include="TaskWidgets\NewTaskWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.TaskWidgets.NewTaskWidget.cs" />
+    <Compile Include="Gui\NewCategory.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.Gui.NewCategory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
           <StandardHeader inheritsSet="MITX11License" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
         </Policies>
       </Properties>
     </MonoDevelop>
@@ -109,5 +111,6 @@
     <Folder Include="EditTask\" />
     <Folder Include="CoreData\" />
     <Folder Include="TaskWidgets\" />
+    <Folder Include="Gui\" />
   </ItemGroup>
 </Project>
