@@ -39,7 +39,16 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 
 		protected virtual void OnButton1Clicked (object sender, System.EventArgs e)
 		{
-			// get the 
+			// Create a new CategoryData node
+			CategoryData cat = new CategoryData();
+			
+			// set the label (only label for now)
+			cat.Label = this.categoryName.Text;
+			
+			// Add the child and trigger the updates
+			providerNode.AddChild(cat);
+			
+			this.Destroy();			
 		}
 		
 		public NewCategory(ProviderData _providerNode) : 

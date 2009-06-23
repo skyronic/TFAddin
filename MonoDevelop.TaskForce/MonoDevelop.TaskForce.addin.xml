@@ -27,6 +27,7 @@
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask" _label="Add Task"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.ViewTask" _label="View Task"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask" _label="Edit Task"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.NewCategory" _label="New Category"></Command>
 	</Extension>
 	
 	<ExtensionPoint path = "/MonoDevelop/TaskForce/TaskPad/ContextMenu" name = "Task pad context menu">
@@ -39,7 +40,7 @@
 	
 	<Extension path="/MonoDevelop/TaskForce/TaskPad/ContextMenu">
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
-	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.AddTask"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.ViewTask"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.EditTask"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.NewCategory"></CommandItem>
 	</Extension>
