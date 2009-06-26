@@ -86,7 +86,6 @@
     <Compile Include="Provider.cs" />
     <Compile Include="ProviderFrontend.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="EditTask\EditTaskWidget.cs" />
     <Compile Include="CoreData\TaskCore.cs" />
     <Compile Include="CoreData\DBHelper.cs" />
     <Compile Include="TaskWidgets\ViewContents.cs" />
@@ -94,21 +93,22 @@
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.TaskWidgets.NewTaskWidget.cs" />
     <Compile Include="Gui\NewCategory.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.Gui.NewCategory.cs" />
+    <Compile Include="TaskWidgets\EditTaskWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.TaskWidgets.EditTaskWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <StandardHeader inheritsSet="MITX11License" />
           <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+          <StandardHeader inheritsSet="MITX11License" />
         </Policies>
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="NewTask\" />
-    <Folder Include="EditTask\" />
     <Folder Include="CoreData\" />
     <Folder Include="TaskWidgets\" />
     <Folder Include="Gui\" />

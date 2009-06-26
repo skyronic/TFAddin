@@ -105,5 +105,84 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			
 		}
 	}
+	
+	public class EditTaskView : AbstractViewContent
+	{
+		protected LogUtil log;
+		protected EditTaskWidget widget;
+
+		public override Widget Control {
+					get {
+						return widget;
+					}
+				}
+
+		public override string ContentName {
+			get {
+				return base.ContentName;
+			}
+			set {
+				base.ContentName = value;
+			}
+		}
+
+		public override bool IsFile {
+			get {
+				return false;
+			}
+		}
+		
+		/// <summary>
+		/// TODO: What the hell is this function supposed to do?
+		/// </summary>
+		/// <param name="fileName">
+		/// A <see cref="System.String"/>
+		/// </param>
+		public override void Load (string fileName)
+		{
+			//throw new System.NotImplementedException ();
+		}
+
+
+		public override bool IsReadOnly {
+			get {
+				return base.IsReadOnly;
+			}
+		}
+
+		public override void Dispose ()
+		{
+			base.Dispose();
+		}
+		
+		
+		/// <summary>
+		/// Don't run this class without specifying the provider node
+		/// EDIT: and the TaskData or something like that.
+		/// No other constructor exists
+		/// </summary>
+		/// <param name="providerNode">
+		/// A <see cref="ProviderData"/>
+		/// </param>
+		/// <param name="seedTask">
+		/// 
+		/// </param>
+		public EditTaskView(ProviderData providerNode, TaskData seedTask)
+		{
+			this.ContentName = "Edit Task";
+			log = new LogUtil("NewTaskView");
+			
+			widget = new EditTaskWidget();
+			widget.ProviderNode = providerNode;
+			widget.ViewContent = this;
+			widget.dataSeed = seedTask;
+			widget.PopulateValuesWithSeed();
+			
+			
+			widget.ShowAll();
+			
+			
+		}
+	}	
 		
 }

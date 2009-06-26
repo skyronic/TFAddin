@@ -67,7 +67,10 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		
 		public void EditTask(TaskData target)
 		{
+			// Right now, it's safe to assume that the parent will be the provider
+			EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
 			
+			IdeApp.Workbench.OpenDocument(newTab, true);
 		}
 		
 		public void ViewTask(TaskData target)
