@@ -30,6 +30,7 @@ using MonoDevelop.TaskForce.Utilities;
 using System.Collections;
 using System.Text;
 using MonoDevelop.TaskForce.Providers;
+using System.Collections.Generic;
 
 namespace MonoDevelop.TaskForce.Data
 {
@@ -45,7 +46,7 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public NodeData()
 		{
-			children = new ArrayList();
+			children = new List<NodeData>();
 			data = new Hashtable();
 			parent = null;
 		}
@@ -95,7 +96,11 @@ namespace MonoDevelop.TaskForce.Data
 		}
 		
 		public NodeData parent;
-		public ArrayList children;
+		
+		// The children of the current node.
+		public List<NodeData> children;
+		
+		
 		protected LogUtil log;
 		public Hashtable data; // Contains all the data
 		
