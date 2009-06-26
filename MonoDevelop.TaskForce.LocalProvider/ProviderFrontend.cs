@@ -34,6 +34,7 @@ using MonoDevelop.TaskForce.LocalProvider.CoreData;
 using System.Collections;
 using MonoDevelop.TaskForce.Utilities;
 using MonoDevelop.TaskForce.LocalProvider.Gui;
+using System.Collections.Generic;
 
 namespace MonoDevelop.TaskForce.LocalProvider
 {
@@ -97,7 +98,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			providerNode.Label = "Local Provider";
 			
 			// get an arraylist of all the taskcores
-			ArrayList tasks = DBHelper.GetAllTasks(); // get all the coredata
+			List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
 			log.INFO("Tasks - Count - " + tasks.Count.ToString());
 			for(int i = 0; i < tasks.Count; i++)
 			{
