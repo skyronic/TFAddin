@@ -1,26 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" ctype="Workbench">
-    <Files>
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" Line="165" Column="3" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="MonoDevelop.TaskForce" expanded="True" />
-          <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
-            <Node name="CoreData" expanded="True">
-              <Node name="DBHelper.cs" selected="True" />
-            </Node>
-            <Node name="EditTask" expanded="True" />
-            <Node name="TaskWidgets" expanded="True" />
-          </Node>
+          <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True" />
           <Node name="TestBed" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
-        <State expanded="True" selected="True">
-          <Node name="TestBed" expanded="True" />
-        </State>
+        <State selected="True" />
       </Pad>
       <Pad Id="ConnectionManagerPad">
         <State expanded="True" selected="True">

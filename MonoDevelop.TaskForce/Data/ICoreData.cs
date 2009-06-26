@@ -42,6 +42,11 @@ namespace MonoDevelop.TaskForce.Data
 	
 	public interface ICoreData // holds the core data of tasks, providers, etc. To be used only by providers
 	{
-		string SerializeToXML();
+		//string SerializeToXML();
+	}
+	
+	public interface IGeneralData
+	{
+		//string SerializeToXML();
 	}
 }
