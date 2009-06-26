@@ -148,9 +148,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <returns>
 		/// A <see cref="ArrayList"/> containing the resultant tasks
 		/// </returns>
-		public static ArrayList GetTasksFromCursor(SqliteDataReader cursor)
+		public static List<TaskCore> GetTasksFromCursor(SqliteDataReader cursor)
 		{
-			ArrayList tasks = new ArrayList();
+			List<TaskCore> tasks = new List<TaskCore>();
 			while(cursor.Read())
 			{
 				TaskCore task = GetTaskCoreFromCursor(cursor);
@@ -173,7 +173,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <returns>
 		/// A <see cref="ArrayList"/> containing all the resultant tasks
 		/// </returns>
-		public static ArrayList GetAllTasks()
+		public static List<TaskCore> GetAllTasks()
 		{
 			SqliteCommand cmd = new SqliteCommand(conn);
 			cmd.CommandText = "SELECT * FROM Tasks";
