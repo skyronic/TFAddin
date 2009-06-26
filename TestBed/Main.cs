@@ -53,10 +53,8 @@ namespace TestBed
 		[ItemProperty]
 		public IScaryData scaryData;
 		
-		[ItemProperty]
 		public List<DataToken> children = new List<DataToken>();
 		
-		[ItemProperty]
 		public DataToken parent;
 		
 		
@@ -73,8 +71,7 @@ namespace TestBed
 			{
 				DataToken d = new DataToken(i);
 				d.parent = this;
-				
-				
+				children.Add(d);
 			}
 		}
 		
@@ -90,18 +87,14 @@ namespace TestBed
 			set;
 		}
 		
-		[ItemProperty("simpsons1")]
-		public List<DataToken> rows = new List<DataToken>();
+		//[ItemProperty("simpsons1")]
+		//public List<DataToken> rows = new List<DataToken>();
 		
+		[ItemProperty]
+		public DataToken rootNode = new DataToken(3);
 		public void populate()
 		{
-			for(int i=0;i<10;i++)
-			{
-				DataToken d = new DataToken();
-				d.Data = 42 + i;
-				
-				rows.Add(d);
-			}
+			
 		}
 		public SerializationTest()
 		{
