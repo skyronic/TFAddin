@@ -72,6 +72,7 @@
     <Folder Include="Data\" />
     <Folder Include="Utilities\" />
     <Folder Include="Providers\" />
+    <Folder Include="Gui\Components\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gui\TaskPad\TaskSolutionPad.cs" />
@@ -94,14 +95,17 @@
     <Compile Include="Data\ICoreData.cs" />
     <Compile Include="Gui\TaskPad\CategoryNodeBuilder.cs" />
     <Compile Include="Data\CategoryData.cs" />
+    <Compile Include="Gui\Components\CommentData.cs" />
+    <Compile Include="Gui\Components\CommentWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.CommentWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
         <Policies>
-          <StandardHeader inheritsSet="MITX11License" />
           <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+          <StandardHeader inheritsSet="MITX11License" />
         </Policies>
       </Properties>
     </MonoDevelop>

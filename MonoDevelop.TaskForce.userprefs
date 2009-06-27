@@ -1,11 +1,27 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" ctype="Workbench">
+    <Files>
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="1" Column="4" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/ViewContents.cs" Line="177" Column="19" />
+      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/TaskNodeBuilder.cs" Line="154" Column="5" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/ProviderFrontend.cs" Line="125" Column="4" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
-          <Node name="MonoDevelop.TaskForce" expanded="True" />
-          <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True" />
-          <Node name="TestBed" expanded="True" />
+        <State expanded="True">
+          <Node name="MonoDevelop.TaskForce" expanded="True">
+            <Node name="Data" expanded="True" />
+            <Node name="Gui" expanded="True">
+              <Node name="TaskPad" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
+            <Node name="CoreData" expanded="True" />
+            <Node name="Gui" expanded="True" />
+            <Node name="TaskWidgets" expanded="True">
+              <Node name="EditTaskWidget.cs" selected="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
