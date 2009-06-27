@@ -146,6 +146,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			SqliteCommand cmd = new SqliteCommand(conn);
 			
 			cmd.CommandText = String.Format("SELECT * FROM Comments WHERE (TaskId = {0});", task.Id);
+			log.WARN("Trying to read comments with query - " + cmd.CommandText);
 			
 			SqliteDataReader commentCursor = cmd.ExecuteReader();
 			
@@ -155,12 +156,13 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 				
 				try
 				{
-				comment.Id = cursor.GetInt32(cursor.GetOrdinal("CommentID"));
-				comment.TaskId = cursor.GetInt32(cursor.GetOrdinal("TaskId"));
-				comment.Title = cursor.GetString(cursor.GetOrdinal("Subject"));
-				comment.Author = cursor.GetString(cursor.GetOrdinal("Author"));
-				comment.Content = cursor.GetString(cursor.GetOrdinal("Message"));
-				comment.PostDate = cursor.GetDateTime(cursor.GetOrdinal("PostDate"));
+				comment.Id = commentCursor.GetInt32(commentCursor.GetOrdinal("CommentID"));
+				comment.TaskId = commentCursor.GetInt32(commentCursor.GetOrdinal("TaskId"));
+				comment.Title = commentCursor.GetString(commentCursor.GetOrdinal("Subject"));
+				comment.Author = commentCursor.GetString(commentCursor.GetOrdinal("Author"));
+				comment.Content = commentCursor.GetString(commentCursor.GetOrdinal("Message"));
+				comment.PostDate = commentCursor.GetDateTime(commentCursor.GetOrdinal("PostDate"));
+					log.DEBUG("Extracted comment - " + comment.ToString());
 				}
 				catch
 				{

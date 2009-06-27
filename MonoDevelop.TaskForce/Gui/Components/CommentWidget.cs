@@ -131,5 +131,31 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			quoteButton.Sensitive = false;
 			PopulateTreeView();
 		}
+		
+		/// <summary>
+		/// To be used only when stetic is being used
+		/// </summary>
+		public CommentWidget()
+		{
+						this.Build();
+
+		}
+		
+		/// <summary>
+		/// Call the intialize function only if you have used stetic to embed the widget
+		/// </summary>
+		/// <param name="_comments">
+		/// A <see cref="List"/>
+		/// </param>
+		public void Initialize(List<CommentData> _comments)
+		{
+			
+			log = new LogUtil("CommentWidget");
+			
+			log.DEBUG("Recieved comments with size" + _comments.Count);
+			Comments = _comments;
+			replyButton.Sensitive = false;
+			quoteButton.Sensitive = false;
+			PopulateTreeView();		}
 	}
 }

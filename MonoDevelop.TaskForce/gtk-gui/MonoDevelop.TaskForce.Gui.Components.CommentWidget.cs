@@ -100,14 +100,14 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             this.quoteButton.UseUnderline = true;
             // Container child quoteButton.Gtk.Container+ContainerChild
             Gtk.Alignment w14 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w15 = new Gtk.HBox();
             w15.Spacing = 2;
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w16 = new Gtk.Image();
             w16.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-index", Gtk.IconSize.Menu, 16);
             w15.Add(w16);
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w18 = new Gtk.Label();
             w18.LabelProp = Mono.Unix.Catalog.GetString("Quote and Reply");
             w18.UseUnderline = true;
@@ -125,14 +125,14 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             this.newComment.UseUnderline = true;
             // Container child newComment.Gtk.Container+ContainerChild
             Gtk.Alignment w23 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment2.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w24 = new Gtk.HBox();
             w24.Spacing = 2;
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w25 = new Gtk.Image();
             w25.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-new", Gtk.IconSize.Menu, 16);
             w24.Add(w25);
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w27 = new Gtk.Label();
             w27.LabelProp = Mono.Unix.Catalog.GetString("New Comment");
             w27.UseUnderline = true;
