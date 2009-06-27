@@ -65,17 +65,51 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			// set the renderer
 			headerColumn.SetCellDataFunc(headerCell, new TreeCellDataFunc(RenderCommentHeader));
 			
-			// Add the column and model to the tree
-			commentTree.AppendColumn(headerColumn);
-			commentTree.Model = treeStore;
+			
 			
 			// Add the comments into the treestore
 			foreach(CommentData comment in Comments)
 			{
-				treeStore.AppendValues(comment);
 				log.DEBUG("Added a new comment: " + comment.ToString());
+				treeStore.AppendValues(comment);
 			}
+			// Add the column and model to the tree
+			commentTree.AppendColumn(headerColumn);
+			commentTree.Model = treeStore;
 			
+			// handle a clicki
+			commentTree.SelectionNotifyEvent += HandleSelectionNotifyEvent;
+			commentTree.SelectionReceived += HandleSelectionReceived;
+			commentTree.RowActivated += HandleRowActivated;
+		}
+
+		void HandleRowActivated(object o, RowActivatedArgs args)
+		{
+			// to retrieve the data
+			TreeIter iter = new TreeIter();
+			
+			// get the iterator
+			treeStore.GetIter(out iter, args.Path);
+			
+			CommentData comment = treeStore.GetValue(iter, 0) as CommentData;
+			
+			// set the contentview's text
+			contentView.Buffer.Text = comment.Content;
+			
+			// enable the reply and the quote buttons
+			replyButton.Sensitive = true;
+			quoteButton.Sensitive = true;
+		}
+
+		void HandleSelectionNotifyEvent(object o, SelectionNotifyEventArgs args)
+		{
+			log.WARN("SelectionNotifyEvent");
+		}
+
+		void HandleSelectionReceived(object o, SelectionReceivedArgs args)
+		{
+			// get the comment
+			log.WARN("Selection recieved");
 			
 		}
 		
@@ -89,13 +123,13 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		public CommentWidget(List<CommentData> _comments)
 		{
 			log = new LogUtil("CommentWidget");
+			this.Build();
 			
 			log.DEBUG("Recieved comments with size" + _comments.Count);
-			commentTree = new TreeView();
 			Comments = _comments;
+			replyButton.Sensitive = false;
+			quoteButton.Sensitive = false;
 			PopulateTreeView();
-			commentTree.Show();
-			this.Build();
 		}
 	}
 }

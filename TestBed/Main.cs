@@ -142,6 +142,7 @@ namespace TestBed
 		
 		public static void LaunchCommentWidgetSandbox()
 		{
+			log.INFO("Creating widget Sandbox");
 			CommentWidgetSandbox wid = new CommentWidgetSandbox();
 			
 			log.INFO("Launching widget sandbox");
@@ -150,6 +151,7 @@ namespace TestBed
 		
 		public static void Main(string[] args)
 		{
+			log = new LogUtil("TestbedMain");
 			LaunchCommentWidgetSandbox();
 		}
 	}

@@ -1,24 +1,20 @@
-
 using System;
+using Gtk;
 using MonoDevelop.TaskForce.Gui.Components;
 using System.Collections.Generic;
 using MonoDevelop.TaskForce.Utilities;
-namespace TestBed
-{
-		
-	
-	public partial class CommentWidgetSandbox : Gtk.Window
+
+public partial class MainWindow: Gtk.Window
+{	
+	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
+		CreateWidgetSandbox();
+		Build ();
+	}
 		protected CommentWidget commentWidget;
-		List<CommentData> comments = new List<CommentData>();
-		
-		public CommentWidgetSandbox() : 
-				base(Gtk.WindowType.Toplevel)
-		{
-			
-			/*
-			 * Testing the comments using the seed function. do not use in production
-			 */
+		List<CommentData> comments = new List<CommentData>();	
+	protected void CreateWidgetSandbox()
+	{
 			comments.Add(new CommentData("mhutch", 45));
 			comments.Add(new CommentData("lluis", 34));
 			comments.Add(new CommentData("Sandy", 12));
@@ -27,15 +23,18 @@ namespace TestBed
 			LogUtil log = new LogUtil("CommentWidgetSandbox");
 			
 			log.WARN("Creating the widget");
-			//commentWidget = new CommentWidget(comments);
+			commentWidget = new CommentWidget(comments);
 			log.INFO("Widget creation complete");
-			//commentWidget.ShowAll();
-			
-			
-			//this.Add(commentWidget);
+			commentWidget.ShowAll();
+						
+			this.Add(commentWidget);
 			
 			this.Title = "Comment widget sandbox bootstrap";
-			this.Build();
-		}
+	}
+	
+	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+	{
+		Application.Quit ();
+		a.RetVal = true;
 	}
 }
