@@ -27,6 +27,7 @@
 using System;
 using Gtk;
 using System.Collections.Generic;
+using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
@@ -36,8 +37,64 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	public partial class CommentWidget : Gtk.Bin
 	{
 		
-		public CommentWidget()
+		private List<CommentData> Comments
 		{
+			get;
+			set;
+		}
+		
+		protected ListStore treeStore;
+		protected LogUtil log;
+		
+		
+		/// <summary>
+		/// sets up the treeview model and store
+		/// </summary>
+		protected void PopulateTreeView()
+		{
+			treeStore = new ListStore(typeof(CommentData));
+			// the header column, a single column for now
+			TreeViewColumn headerColumn = new TreeViewColumn();
+			headerColumn.Title = "Comment";
+			
+			// the header cell to show the comment header
+			// not to be confused with the Tree's header.
+			CellRendererText headerCell = new CellRendererText();
+			headerColumn.PackStart(headerCell,true);
+			
+			// set the renderer
+			headerColumn.SetCellDataFunc(headerCell, new TreeCellDataFunc(RenderCommentHeader));
+			
+			// Add the column and model to the tree
+			commentTree.AppendColumn(headerColumn);
+			commentTree.Model = treeStore;
+			
+			// Add the comments into the treestore
+			foreach(CommentData comment in Comments)
+			{
+				treeStore.AppendValues(comment);
+				log.DEBUG("Added a new comment: " + comment.ToString());
+			}
+			
+			
+		}
+		
+		private void RenderCommentHeader(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		{
+			CommentData comment = model.GetValue(iter, 0) as CommentData;
+			(cell as CellRendererText).Markup = String.Format("<b>{0}</b>  {1} \n <i>{2}</i>",comment.Author, comment.PostDate.ToString(), comment.Title);
+	
+		}
+		
+		public CommentWidget(List<CommentData> _comments)
+		{
+			log = new LogUtil("CommentWidget");
+			
+			log.DEBUG("Recieved comments with size" + _comments.Count);
+			commentTree = new TreeView();
+			Comments = _comments;
+			PopulateTreeView();
+			commentTree.Show();
 			this.Build();
 		}
 	}

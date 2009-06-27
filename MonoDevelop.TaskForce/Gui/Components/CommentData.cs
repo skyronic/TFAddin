@@ -111,5 +111,16 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		public CommentData()
 		{
 		}
+		
+		public CommentData(string seedString, int seedInt)
+		{
+			SeedComment(seedString, seedInt);
+		}
+		
+		public override string ToString ()
+		{
+			return string.Format("[CommentData: Id={0}, TaskId={1}, Title={2}, Author={3}, Content={4}, PostDate={5}]", Id, TaskId, Title, Author, Content, PostDate);
+		}
+
 	}
 }

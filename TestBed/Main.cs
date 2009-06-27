@@ -17,7 +17,6 @@ using MonoDevelop.Core;
 using MonoDevelop.Projects;
 using MonoDevelop.Projects.Policies;
 using MonoDevelop.Core.Serialization;
-
 namespace TestBed
 {
 	interface IScaryData
@@ -141,9 +140,17 @@ namespace TestBed
 			ser.Serialize(xtw,blah);
 		}
 		
+		public static void LaunchCommentWidgetSandbox()
+		{
+			CommentWidgetSandbox wid = new CommentWidgetSandbox();
+			
+			log.INFO("Launching widget sandbox");
+			wid.Show();
+		}
+		
 		public static void Main(string[] args)
 		{
-			TestSerialization();
+			LaunchCommentWidgetSandbox();
 		}
 	}
 }
