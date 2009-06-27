@@ -29,17 +29,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+// TODO: move the commenting arch somewher else
+using MonoDevelop.TaskForce.Gui.Components;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
 	
-	public struct Comment
-	{
-		public string subject;
-		public string content;
-		public DateTime postDate;
-		public int TaskId;
-	}
+	
 	
 	public class TaskCore
 	{
@@ -108,19 +104,19 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			get; set;
 		}
 		
-		public List<Comment> Comments
+		public List<CommentData> Comments
 		{
 			get; set;
 		}
 		
-		public void AddComment(Comment c)
+		public void AddComment(CommentData c)
 		{
 			Comments.Add(c);			
 		}
 		
 		public TaskCore()
 		{
-			Comments = new List<Comment>();
+			Comments = new List<CommentData>();
 		}
 		
 		public override string ToString ()

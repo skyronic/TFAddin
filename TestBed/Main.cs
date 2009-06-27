@@ -112,12 +112,12 @@ namespace TestBed
 			stub.CreateDate = DateTime.Now;
 			stub.DueDate = DateTime.Now + TimeSpan.FromDays(4);
 			
-			Comment c = new Comment();
+			/*Comment c = new CommentData();
 			c.postDate = DateTime.Now + TimeSpan.FromDays(1);
 			c.subject = "Fixed it for you2";
 			c.content = "Hey, the bug is fixed now2!";
 			
-			stub.AddComment(c);
+			stub.AddComment(c);*/
 			
 			
 			DBHelper.Initialize();

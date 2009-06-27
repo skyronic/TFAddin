@@ -32,7 +32,7 @@ using Mono.Data.Sqlite;
 using MonoDevelop.TaskForce.Utilities;
 using System.Collections;
 using System.Collections.Generic;
-
+using MonoDevelop.TaskForce.Gui.Components;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
@@ -86,10 +86,10 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			SqliteCommand cmd = new SqliteCommand(conn);
 			cmd.CommandText = String.Format("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString(DateFormat), input.DueDate.ToString(DateFormat), input.Depends.ToString());
 			LogQuery(cmd);
-			foreach(Comment c in input.Comments)
+			foreach(CommentData c in input.Comments)
 			{
 				SqliteCommand cmd1 = new SqliteCommand(conn);
-				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}')", 0, c.subject, c.content, c.postDate.ToString(DateFormat));
+				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Title, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}')", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
 				LogQuery(cmd1);
 			}
 			return 0; //TODO: Return taskid
