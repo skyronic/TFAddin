@@ -149,10 +149,17 @@ namespace TestBed
 			wid.Show();
 		}
 		
+		public static void AddStubsToDB()
+		{
+			DBHelper.Initialize();
+			DBHelper.AddTask(new TaskCore("Take Over World", 10));
+			DBHelper.AddTask(new TaskCore("Graduate", 10));
+			DBHelper.AddTask(new TaskCore("Finish Gsoc Project", 10));
+		}
+		
 		public static void Main(string[] args)
 		{
-			log = new LogUtil("TestbedMain");
-			LaunchCommentWidgetSandbox();
+			AddStubsToDB();
 		}
 	}
 }

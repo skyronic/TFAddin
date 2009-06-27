@@ -123,6 +123,52 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		{
 			return string.Format("[TaskCore: Id={0}, Title={1}, Description={2}, CreateDate={3}, DueDate={4}, Depends={5}, Comments={6}]", Id, Title, Description, CreateDate, DueDate, Depends, Comments);
 		}
+		
+		/// <summary>
+		/// Seed the taskcore object with some junk information.
+		/// 
+		/// the information is not meant to be useful but different seeds
+		/// can help differentiate between different objects and makes
+		/// creation of stubs easier.
+		/// </summary>
+		/// <param name="seedString">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="seedInt">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		public void SeedTaskCore(string seedString, int seedInt)
+		{
+			Title = seedString + "_Title";
+			Description = seedString + "__Description";
+			CreateDate = DateTime.Now;
+			DueDate = DateTime.Now + TimeSpan.FromDays(seedInt + 4);
+			this.Priority = seedInt + 10;
+			
+			Comments = new List<CommentData>();
+			// create three comments and add them
+			Comments.Add(new CommentData(seedString + "_author1", seedInt + 2));
+			Comments.Add(new CommentData(seedString + "_author2", seedInt + 5));
+			Comments.Add(new CommentData(seedString + "_author3", seedInt + 6));
+			
+		}
+		
+		/// <summary>
+		/// Just seed the taskcore from the constructor
+		/// this way we won't have to create a new object making stubbing easier.
+		/// 
+		/// Laziness for the win. er. I mean, Laziness FTW!
+		/// </summary>
+		/// <param name="seedString">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="seedInt">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		public TaskCore(string seedString, int seedInt)
+		{
+			SeedTaskCore(seedString, seedInt);
+		}
 
 	}
 }

@@ -58,7 +58,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			SqliteCommand cmd = new SqliteCommand(conn);
 			cmd.CommandText = "CREATE TABLE Tasks(TaskID integer PRIMARY KEY AUTOINCREMENT , Name varchar (100), Priority integer ,Description varchar (5000), CreateDate datetime, DueDate datetime, Depends integer)" ;
 			LogQuery(cmd);
-			cmd.CommandText = "CREATE TABLE Comments(CommentID integer primary key, TaskId integer, Subject varchar(100), Message varchar(5000), PostDate datetime)";
+			cmd.CommandText = "CREATE TABLE Comments(CommentID integer primary key, TaskId integer, Author varchar(100), Subject varchar(100), Message varchar(5000), PostDate datetime)";
 			LogQuery(cmd);
 		}
 		/// <summary>
@@ -84,12 +84,26 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		public static int AddTask(TaskCore input)
 		{
 			SqliteCommand cmd = new SqliteCommand(conn);
-			cmd.CommandText = String.Format("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString(DateFormat), input.DueDate.ToString(DateFormat), input.Depends.ToString());
+			cmd.CommandText = String.Format("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString(DateFormat), input.DueDate.ToString(DateFormat), input.Depends.ToString());			
 			LogQuery(cmd);
+			
+			// execute a query to find the new taskID of the newly created task
+			cmd.CommandText = String.Format("Select TaskID FROM Tasks WHERE(Name=\"{0}\");", input.Title);
+			SqliteDataReader cursor = cmd.ExecuteReader();
+			
+			int TaskID = -1;
+			if(cursor.Read())
+			{
+				// This HAS to execute once because theoretically
+				// there is only one row in the database that will be selected
+				TaskID = cursor.GetInt32(cursor.GetOrdinal("TaskID"));
+			}
+			
 			foreach(CommentData c in input.Comments)
 			{
+				c.TaskId = TaskID;
 				SqliteCommand cmd1 = new SqliteCommand(conn);
-				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Title, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}')", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
+				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}', {4})", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
 				LogQuery(cmd1);
 			}
 			return 0; //TODO: Return taskid
