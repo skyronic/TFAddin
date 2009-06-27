@@ -39,6 +39,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
         
         private Gtk.Calendar dueDateCal;
         
+        private Gtk.Frame commentFrame;
+        
+        private Gtk.Alignment GtkAlignment;
+        
+        private Gtk.Label GtkLabel;
+        
         private Gtk.HBox hbox4;
         
         private Gtk.Button applyButton;
@@ -163,6 +169,23 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w12.Expand = false;
             w12.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
+            this.commentFrame = new Gtk.Frame();
+            this.commentFrame.Name = "commentFrame";
+            this.commentFrame.ShadowType = ((Gtk.ShadowType)(0));
+            // Container child commentFrame.Gtk.Container+ContainerChild
+            this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.GtkAlignment.Name = "GtkAlignment";
+            this.GtkAlignment.LeftPadding = ((uint)(12));
+            this.commentFrame.Add(this.GtkAlignment);
+            this.GtkLabel = new Gtk.Label();
+            this.GtkLabel.Name = "GtkLabel";
+            this.GtkLabel.LabelProp = Mono.Unix.Catalog.GetString("<b>frame1</b>");
+            this.GtkLabel.UseMarkup = true;
+            this.commentFrame.LabelWidget = this.GtkLabel;
+            this.vbox1.Add(this.commentFrame);
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.vbox1[this.commentFrame]));
+            w14.Position = 3;
+            // Container child vbox1.Gtk.Box+BoxChild
             this.hbox4 = new Gtk.HBox();
             this.hbox4.Name = "hbox4";
             this.hbox4.Spacing = 6;
@@ -172,83 +195,83 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             this.applyButton.Name = "applyButton";
             this.applyButton.UseUnderline = true;
             // Container child applyButton.Gtk.Container+ContainerChild
-            Gtk.Alignment w13 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w15 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w14 = new Gtk.HBox();
-            w14.Spacing = 2;
+            Gtk.HBox w16 = new Gtk.HBox();
+            w16.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w15 = new Gtk.Image();
-            w15.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-apply", Gtk.IconSize.Menu, 16);
-            w14.Add(w15);
+            Gtk.Image w17 = new Gtk.Image();
+            w17.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-apply", Gtk.IconSize.Menu, 16);
+            w16.Add(w17);
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w17 = new Gtk.Label();
-            w17.LabelProp = Mono.Unix.Catalog.GetString("Apply");
-            w17.UseUnderline = true;
-            w14.Add(w17);
-            w13.Add(w14);
-            this.applyButton.Add(w13);
+            Gtk.Label w19 = new Gtk.Label();
+            w19.LabelProp = Mono.Unix.Catalog.GetString("Apply");
+            w19.UseUnderline = true;
+            w16.Add(w19);
+            w15.Add(w16);
+            this.applyButton.Add(w15);
             this.hbox4.Add(this.applyButton);
-            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.hbox4[this.applyButton]));
-            w21.Position = 0;
-            w21.Expand = false;
-            w21.Fill = false;
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.hbox4[this.applyButton]));
+            w23.Position = 0;
+            w23.Expand = false;
+            w23.Fill = false;
             // Container child hbox4.Gtk.Box+BoxChild
             this.button1 = new Gtk.Button();
             this.button1.CanFocus = true;
             this.button1.Name = "button1";
             this.button1.UseUnderline = true;
             // Container child button1.Gtk.Container+ContainerChild
-            Gtk.Alignment w22 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w24 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w23 = new Gtk.HBox();
-            w23.Spacing = 2;
+            Gtk.HBox w25 = new Gtk.HBox();
+            w25.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w24 = new Gtk.Image();
-            w24.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-revert-to-saved", Gtk.IconSize.Menu, 16);
-            w23.Add(w24);
+            Gtk.Image w26 = new Gtk.Image();
+            w26.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-revert-to-saved", Gtk.IconSize.Menu, 16);
+            w25.Add(w26);
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w26 = new Gtk.Label();
-            w26.LabelProp = Mono.Unix.Catalog.GetString("Reset");
-            w26.UseUnderline = true;
-            w23.Add(w26);
-            w22.Add(w23);
-            this.button1.Add(w22);
+            Gtk.Label w28 = new Gtk.Label();
+            w28.LabelProp = Mono.Unix.Catalog.GetString("Reset");
+            w28.UseUnderline = true;
+            w25.Add(w28);
+            w24.Add(w25);
+            this.button1.Add(w24);
             this.hbox4.Add(this.button1);
-            Gtk.Box.BoxChild w30 = ((Gtk.Box.BoxChild)(this.hbox4[this.button1]));
-            w30.Position = 1;
-            w30.Expand = false;
-            w30.Fill = false;
+            Gtk.Box.BoxChild w32 = ((Gtk.Box.BoxChild)(this.hbox4[this.button1]));
+            w32.Position = 1;
+            w32.Expand = false;
+            w32.Fill = false;
             // Container child hbox4.Gtk.Box+BoxChild
             this.button2 = new Gtk.Button();
             this.button2.CanFocus = true;
             this.button2.Name = "button2";
             this.button2.UseUnderline = true;
             // Container child button2.Gtk.Container+ContainerChild
-            Gtk.Alignment w31 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w33 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w32 = new Gtk.HBox();
-            w32.Spacing = 2;
+            Gtk.HBox w34 = new Gtk.HBox();
+            w34.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w33 = new Gtk.Image();
-            w33.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
-            w32.Add(w33);
+            Gtk.Image w35 = new Gtk.Image();
+            w35.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
+            w34.Add(w35);
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w35 = new Gtk.Label();
-            w35.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
-            w35.UseUnderline = true;
-            w32.Add(w35);
-            w31.Add(w32);
-            this.button2.Add(w31);
+            Gtk.Label w37 = new Gtk.Label();
+            w37.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
+            w37.UseUnderline = true;
+            w34.Add(w37);
+            w33.Add(w34);
+            this.button2.Add(w33);
             this.hbox4.Add(this.button2);
-            Gtk.Box.BoxChild w39 = ((Gtk.Box.BoxChild)(this.hbox4[this.button2]));
-            w39.Position = 2;
-            w39.Expand = false;
-            w39.Fill = false;
+            Gtk.Box.BoxChild w41 = ((Gtk.Box.BoxChild)(this.hbox4[this.button2]));
+            w41.Position = 2;
+            w41.Expand = false;
+            w41.Fill = false;
             this.vbox1.Add(this.hbox4);
-            Gtk.Box.BoxChild w40 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox4]));
-            w40.Position = 4;
-            w40.Expand = false;
-            w40.Fill = false;
+            Gtk.Box.BoxChild w42 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox4]));
+            w42.Position = 4;
+            w42.Expand = false;
+            w42.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

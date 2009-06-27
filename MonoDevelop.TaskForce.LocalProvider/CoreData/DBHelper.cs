@@ -103,7 +103,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			{
 				c.TaskId = TaskID;
 				SqliteCommand cmd1 = new SqliteCommand(conn);
-				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}', {4})", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
+				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
 				LogQuery(cmd1);
 			}
 			return 0; //TODO: Return taskid
@@ -142,6 +142,33 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 				return null;
 			}
 			
+			// now, extract the comments.
+			SqliteCommand cmd = new SqliteCommand(conn);
+			
+			cmd.CommandText = String.Format("SELECT * FROM Comments WHERE (TaskId = {0});", task.Id);
+			
+			SqliteDataReader commentCursor = cmd.ExecuteReader();
+			
+			while(commentCursor.Read())
+			{
+				CommentData comment = new CommentData();
+				
+				try
+				{
+				comment.Id = cursor.GetInt32(cursor.GetOrdinal("CommentID"));
+				comment.TaskId = cursor.GetInt32(cursor.GetOrdinal("TaskId"));
+				comment.Title = cursor.GetString(cursor.GetOrdinal("Subject"));
+				comment.Author = cursor.GetString(cursor.GetOrdinal("Author"));
+				comment.Content = cursor.GetString(cursor.GetOrdinal("Message"));
+				comment.PostDate = cursor.GetDateTime(cursor.GetOrdinal("PostDate"));
+				}
+				catch
+				{
+					log.ERROR("Something went wrong while retrieving comment");
+					return null;
+				}
+				task.Comments.Add(comment);
+			}
 			log.DEBUG("Extracted task as : " + task.ToString());
 			return task;
 		}

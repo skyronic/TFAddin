@@ -29,6 +29,7 @@ using Gtk;
 using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.LocalProvider.CoreData;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.TaskForce.Gui.Components;
 namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 {
 	
@@ -73,6 +74,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			
 				this.dueDateCal.Date = core.DueDate;
 				this.prioritySpin.Value = core.Priority;
+				
+				// add the comments view and populate it
+				
+				CommentWidget commentWidget = new CommentWidget(core.Comments);
+				commentWidget.Show();
+				commentFrame.Add(commentWidget);
 			}
 		}
 	}
