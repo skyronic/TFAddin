@@ -36,42 +36,41 @@ using MonoDevelop.TaskForce.Gui.Components;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
-	
+
 	public class DBHelper
 	{
-		public static void LogQuery(SqliteCommand cmd)
+		public static void LogQuery (SqliteCommand cmd)
 		{
-			log.INFO("SQL Query:" + cmd.CommandText);
-			cmd.ExecuteNonQuery();
+			log.INFO ("SQL Query:" + cmd.CommandText);
+			cmd.ExecuteNonQuery ();
 		}
 		public static SqliteConnection conn;
 		public static bool initialized = false;
 		private static LogUtil log;
 		public const string DateFormat = "yyyy-MM-dd";
-		
+
 		/// <summary>
 		/// Creates the tables. Called only once
 		/// </summary>
-		public static void CreateTables()
+		public static void CreateTables ()
 		{
-			CheckInitialize();
-			SqliteCommand cmd = new SqliteCommand(conn);
-			cmd.CommandText = "CREATE TABLE Tasks(TaskID integer PRIMARY KEY AUTOINCREMENT , Name varchar (100), Priority integer ,Description varchar (5000), CreateDate datetime, DueDate datetime, Depends integer)" ;
-			LogQuery(cmd);
+			CheckInitialize ();
+			SqliteCommand cmd = new SqliteCommand (conn);
+			cmd.CommandText = "CREATE TABLE Tasks(TaskID integer PRIMARY KEY AUTOINCREMENT , Name varchar (100), Priority integer ,Description varchar (5000), CreateDate datetime, DueDate datetime, Depends integer)";
+			LogQuery (cmd);
 			cmd.CommandText = "CREATE TABLE Comments(CommentID integer primary key, TaskId integer, Author varchar(100), Subject varchar(100), Message varchar(5000), PostDate datetime)";
-			LogQuery(cmd);
+			LogQuery (cmd);
 		}
 		/// <summary>
 		/// Checks if the database is intialized and initializes if it isn't already.
 		/// </summary>
-		public static void CheckInitialize()
+		public static void CheckInitialize ()
 		{
-			if(!initialized)
-			{
-				Initialize();
+			if (!initialized) {
+				Initialize ();
 			}
 		}
-		
+
 		/// <summary>
 		/// Adds a task and all the comments into the database
 		/// </summary>
@@ -81,34 +80,74 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <returns>
 		/// A <see cref="System.Int32"/> - the task ID
 		/// </returns>
-		public static int AddTask(TaskCore input)
+		public static int AddTask (TaskCore input)
 		{
-			SqliteCommand cmd = new SqliteCommand(conn);
-			cmd.CommandText = String.Format("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString(DateFormat), input.DueDate.ToString(DateFormat), input.Depends.ToString());			
-			LogQuery(cmd);
-			
+			SqliteCommand cmd = new SqliteCommand (conn);
+			cmd.CommandText = String.Format ("INSERT INTO Tasks (Name, Priority, Description, CreateDate, DueDate, Depends) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', {5})", input.Title, input.Priority, input.Description, input.CreateDate.ToString (DateFormat), input.DueDate.ToString (DateFormat), input.Depends.ToString ());
+			LogQuery (cmd);
+
 			// execute a query to find the new taskID of the newly created task
-			cmd.CommandText = String.Format("Select TaskID FROM Tasks WHERE(Name=\"{0}\");", input.Title);
-			SqliteDataReader cursor = cmd.ExecuteReader();
-			
+			cmd.CommandText = String.Format ("Select TaskID FROM Tasks WHERE(Name=\"{0}\");", input.Title);
+			SqliteDataReader cursor = cmd.ExecuteReader ();
+
 			int TaskID = -1;
-			if(cursor.Read())
-			{
+			if (cursor.Read ()) {
 				// This HAS to execute once because theoretically
 				// there is only one row in the database that will be selected
-				TaskID = cursor.GetInt32(cursor.GetOrdinal("TaskID"));
+				TaskID = cursor.GetInt32 (cursor.GetOrdinal ("TaskID"));
 			}
-			
-			foreach(CommentData c in input.Comments)
-			{
+
+			foreach (CommentData c in input.Comments) {
 				c.TaskId = TaskID;
-				SqliteCommand cmd1 = new SqliteCommand(conn);
-				cmd1.CommandText = String.Format("INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString(DateFormat));
-				LogQuery(cmd1);
+				SqliteCommand cmd1 = new SqliteCommand (conn);
+				cmd1.CommandText = String.Format ("INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", c.TaskId, c.Title, c.Author, c.Content, c.PostDate.ToString (DateFormat));
+				LogQuery (cmd1);
 			}
-			return 0; //TODO: Return taskid
+			return 0;
+			//TODO: Return taskid
 		}
 		
+		/// <summary>
+		/// Updates the task data
+		/// 
+		/// NOTE: This does NOT update the comments too.
+		/// you have to call DBHelper.AddComment() for that.
+		/// </summary>
+		/// <param name="input">
+		/// A <see cref="TaskCore"/>
+		/// </param>
+		public static void UpdateTask(TaskCore input)
+		{
+			// We're assuming that the task has the Task ID valid
+			SqliteCommand cmd = conn.CreateCommand();
+			cmd.CommandText = "UPDATE Tasks SET Name = @name, Priority = @priority, Description = @description, CreateDate = @createdate, DueDate = @duedate, Depends = @depends WHERE TaskID = @taskid";
+			cmd.Parameters.AddWithValue("@name", input.Title);
+			cmd.Parameters.AddWithValue("@priority", input.Priority);
+			cmd.Parameters.AddWithValue("@description", input.Description);
+			cmd.Parameters.AddWithValue("@createdate", input.CreateDate.ToString(DateFormat));
+		}
+
+		/// <summary>
+		/// Adds a new comment to the database. Does not affect the task
+		/// </summary>
+		/// <param name="task">
+		/// A <see cref="TaskCore"/>
+		/// </param>
+		/// <param name="comment">
+		/// A <see cref="CommentData"/>
+		/// </param>
+		public static void AddComment (TaskCore task, CommentData comment)
+		{
+			SqliteCommand cmd = conn.CreateCommand ();
+			cmd.CommandText = "INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES (@taskid, @subject, @author, @message, @postdate);";
+			cmd.Parameters.AddWithValue ("@taskid", comment.TaskId);
+			cmd.Parameters.AddWithValue ("@subject", comment.Title);
+			cmd.Parameters.AddWithValue ("@author", comment.Author);
+			cmd.Parameters.AddWithValue ("@message", comment.Content);
+			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate);
+			cmd.ExecuteNonQuery();
+		}
+
 		/// <summary>
 		/// Gets the taskcore object from the sqlite cursor
 		/// </summary>
@@ -120,61 +159,55 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// A <see cref="TaskCore"/> - allocated and re-created
 		/// Returns null if reading failed
 		/// </returns>
-		public static TaskCore GetTaskCoreFromCursor(SqliteDataReader cursor)
+		public static TaskCore GetTaskCoreFromCursor (SqliteDataReader cursor)
 		{
 			// this assumes a single task exists
-			
+
 			// the task to be extracted from the cursor
-			TaskCore task = new TaskCore();
-			
-			try{
-			task.Id = cursor.GetInt32(cursor.GetOrdinal("TaskId"));
-			task.Depends = cursor.GetInt32(cursor.GetOrdinal("Depends"));
-			task.Title = cursor.GetString(cursor.GetOrdinal("Name"));
-			task.Description = cursor.GetString(cursor.GetOrdinal("Description"));
-			task.Priority = cursor.GetInt32(cursor.GetOrdinal("Priority"));
-				task.DueDate = cursor.GetDateTime(cursor.GetOrdinal("DueDate"));
-				task.CreateDate = cursor.GetDateTime(cursor.GetOrdinal("CreateDate"));
-			}
-			catch
-			{
-				log.ERROR("Reading from cursor failed");
+			TaskCore task = new TaskCore ();
+
+			try {
+				task.Id = cursor.GetInt32 (cursor.GetOrdinal ("TaskId"));
+				task.Depends = cursor.GetInt32 (cursor.GetOrdinal ("Depends"));
+				task.Title = cursor.GetString (cursor.GetOrdinal ("Name"));
+				task.Description = cursor.GetString (cursor.GetOrdinal ("Description"));
+				task.Priority = cursor.GetInt32 (cursor.GetOrdinal ("Priority"));
+				task.DueDate = cursor.GetDateTime (cursor.GetOrdinal ("DueDate"));
+				task.CreateDate = cursor.GetDateTime (cursor.GetOrdinal ("CreateDate"));
+			} catch {
+				log.ERROR ("Reading from cursor failed");
 				return null;
 			}
-			
+
 			// now, extract the comments.
-			SqliteCommand cmd = new SqliteCommand(conn);
-			
-			cmd.CommandText = String.Format("SELECT * FROM Comments WHERE (TaskId = {0});", task.Id);
-			log.WARN("Trying to read comments with query - " + cmd.CommandText);
-			
-			SqliteDataReader commentCursor = cmd.ExecuteReader();
-			
-			while(commentCursor.Read())
-			{
-				CommentData comment = new CommentData();
-				
-				try
-				{
-				comment.Id = commentCursor.GetInt32(commentCursor.GetOrdinal("CommentID"));
-				comment.TaskId = commentCursor.GetInt32(commentCursor.GetOrdinal("TaskId"));
-				comment.Title = commentCursor.GetString(commentCursor.GetOrdinal("Subject"));
-				comment.Author = commentCursor.GetString(commentCursor.GetOrdinal("Author"));
-				comment.Content = commentCursor.GetString(commentCursor.GetOrdinal("Message"));
-				comment.PostDate = commentCursor.GetDateTime(commentCursor.GetOrdinal("PostDate"));
-					log.DEBUG("Extracted comment - " + comment.ToString());
-				}
-				catch
-				{
-					log.ERROR("Something went wrong while retrieving comment");
+			SqliteCommand cmd = new SqliteCommand (conn);
+
+			cmd.CommandText = String.Format ("SELECT * FROM Comments WHERE (TaskId = {0});", task.Id);
+			log.WARN ("Trying to read comments with query - " + cmd.CommandText);
+
+			SqliteDataReader commentCursor = cmd.ExecuteReader ();
+
+			while (commentCursor.Read ()) {
+				CommentData comment = new CommentData ();
+
+				try {
+					comment.Id = commentCursor.GetInt32 (commentCursor.GetOrdinal ("CommentID"));
+					comment.TaskId = commentCursor.GetInt32 (commentCursor.GetOrdinal ("TaskId"));
+					comment.Title = commentCursor.GetString (commentCursor.GetOrdinal ("Subject"));
+					comment.Author = commentCursor.GetString (commentCursor.GetOrdinal ("Author"));
+					comment.Content = commentCursor.GetString (commentCursor.GetOrdinal ("Message"));
+					comment.PostDate = commentCursor.GetDateTime (commentCursor.GetOrdinal ("PostDate"));
+					log.DEBUG ("Extracted comment - " + comment.ToString ());
+				} catch {
+					log.ERROR ("Something went wrong while retrieving comment");
 					return null;
 				}
-				task.Comments.Add(comment);
+				task.Comments.Add (comment);
 			}
-			log.DEBUG("Extracted task as : " + task.ToString());
+			log.DEBUG ("Extracted task as : " + task.ToString ());
 			return task;
 		}
-		
+
 		/// <summary>
 		/// Traverses a sqlitedatareader to return an arryalist of tasks
 		/// </summary>
@@ -185,23 +218,21 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <returns>
 		/// A <see cref="ArrayList"/> containing the resultant tasks
 		/// </returns>
-		public static List<TaskCore> GetTasksFromCursor(SqliteDataReader cursor)
+		public static List<TaskCore> GetTasksFromCursor (SqliteDataReader cursor)
 		{
-			List<TaskCore> tasks = new List<TaskCore>();
-			while(cursor.Read())
-			{
-				TaskCore task = GetTaskCoreFromCursor(cursor);
-				if(task!=null)
-				{
-					log.INFO("Task added");
-					tasks.Add(task);
+			List<TaskCore> tasks = new List<TaskCore> ();
+			while (cursor.Read ()) {
+				TaskCore task = GetTaskCoreFromCursor (cursor);
+				if (task != null) {
+					log.INFO ("Task added");
+					tasks.Add (task);
 				}
 			}
-			
+
 			return tasks;
 		}
-		
-		
+
+
 		/// <summary>
 		/// The basic query which will fetch all the tasks from the database
 		/// 
@@ -210,35 +241,32 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <returns>
 		/// A <see cref="ArrayList"/> containing all the resultant tasks
 		/// </returns>
-		public static List<TaskCore> GetAllTasks()
+		public static List<TaskCore> GetAllTasks ()
 		{
-			SqliteCommand cmd = new SqliteCommand(conn);
+			SqliteCommand cmd = new SqliteCommand (conn);
 			cmd.CommandText = "SELECT * FROM Tasks";
-			SqliteDataReader reader = cmd.ExecuteReader();
-			
-			return GetTasksFromCursor(reader);
+			SqliteDataReader reader = cmd.ExecuteReader ();
+
+			return GetTasksFromCursor (reader);
 		}
-		
-		public static void Initialize()
+
+		public static void Initialize ()
 		{
 			initialized = true;
-			conn = new SqliteConnection();
-			log = new LogUtil("DBHelper");
-			
-			if(System.IO.File.Exists("tasks.db"))
-			{
+			conn = new SqliteConnection ();
+			log = new LogUtil ("DBHelper");
+
+			if (System.IO.File.Exists ("tasks.db")) {
 				conn.ConnectionString = "Data Source=tasks.db;Synchronous=Off";
-				log.INFO("Opening connection");
-				conn.Open();
-			}
-			else
-			{
-				log.WARN("Creating new database");
+				log.INFO ("Opening connection");
+				conn.Open ();
+			} else {
+				log.WARN ("Creating new database");
 				conn.ConnectionString = "Data Source=tasks.db;New=True;Synchronous=Off";
-				conn.Open();
-				CreateTables();
+				conn.Open ();
+				CreateTables ();
 			}
 		}
-		
+
 	}
 }
