@@ -491,6 +491,7 @@
                 <property name="Icon">stock:gtk-revert-to-saved Menu</property>
                 <property name="Label" translatable="yes">Reset</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnResetButtonClicked" />
               </widget>
               <packing>
                 <property name="Position">1</property>

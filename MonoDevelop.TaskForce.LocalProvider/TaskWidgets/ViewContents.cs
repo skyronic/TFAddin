@@ -175,8 +175,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			widget = new EditTaskWidget();
 			widget.ProviderNode = providerNode;
 			widget.ViewContent = this;
-			widget.dataSeed = seedTask;
-			widget.PopulateValuesWithSeed();
+			widget.EditTarget = seedTask;
+			widget.PopulateForm();
 			
 			
 			widget.ShowAll();

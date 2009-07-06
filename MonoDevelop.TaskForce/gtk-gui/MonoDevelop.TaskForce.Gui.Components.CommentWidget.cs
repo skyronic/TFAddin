@@ -66,7 +66,6 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             w4.Position = 1;
             // Container child hbox1.Gtk.Box+BoxChild
             this.vbox1 = new Gtk.VBox();
-            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.replyButton = new Gtk.Button();

@@ -50,23 +50,25 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		public EditTaskWidget()
 		{
 			this.Build();
-			dataSeed = null;
+			EditTarget = null;
 		}
 		
-		public TaskData dataSeed
+		public TaskData EditTarget
 		{get;set;}
 		
-		public void PopulateValuesWithSeed()
+		
+		
+		public void PopulateForm()
 		{
 			// Check if the viewcontent has set the required data
-			if(dataSeed == null)
+			if(EditTarget == null)
 			{
 				throw new ArgumentNullException("The Data seed is null");
 			}
 			else
 			{
 				// get the core data
-				TaskCore core = dataSeed.CoreDataObject as TaskCore;
+				TaskCore core = EditTarget.CoreDataObject as TaskCore;
 				
 				// Populate the GUI's data with this information
 				this.taskNameEntry.Text = core.Title;
@@ -79,6 +81,22 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 				commentWidget.Initialize(core.Comments);
 				
 			}
+		}
+		
+		/// <summary>
+		/// Triggered when the Reset button is clicked
+		/// 
+		/// Ignores all the changes and re-sets it to the existing edit target object
+		/// </summary>
+		/// <param name="sender">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="e">
+		/// A <see cref="System.EventArgs"/>
+		/// </param>
+		protected virtual void OnResetButtonClicked (object sender, System.EventArgs e)
+		{
+			PopulateForm();
 		}
 	}
 }

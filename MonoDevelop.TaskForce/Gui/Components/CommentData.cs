@@ -39,46 +39,28 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	{
 		// the Id of the comment
 		public int Id
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		// the task that this comment is associated with
 		public int TaskId
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		// the Title of the comment
 		public string Title
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		// The author of the comment.
 		public string Author
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		// the content/message
 		public string Content
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		// the time at which the comment was posted
 		public DateTime PostDate
-		{
-			get;
-			set;
-		}
-		
+		{	get;
+			set;}
 		
 		/// <summary>
 		/// A simple way to generate placeholder comments for testing
@@ -119,7 +101,8 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		
 		public override string ToString ()
 		{
-			return string.Format("[CommentData: Id={0}, TaskId={1}, Title={2}, Author={3}, Content={4}, PostDate={5}]", Id, TaskId, Title, Author, Content, PostDate);
+			return string.Format("[CommentData: Id={0}, TaskId={1}, Title={2}, Author={3}, Content={4}, PostDate={5}]",
+			                     Id, TaskId, Title, Author, Content, PostDate);
 		}
 
 	}

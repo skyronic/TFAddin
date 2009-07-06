@@ -34,14 +34,19 @@
 //------------------------------------------------------------------------------
 
 using System;
+using Gtk;
+using System.Collections.Generic;
+using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.TaskForce.Gui.Components;
+
 
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
 	
-	
 	public class QueryNodeBuilder
 	{
+		
 		
 		public QueryNodeBuilder()
 		{
