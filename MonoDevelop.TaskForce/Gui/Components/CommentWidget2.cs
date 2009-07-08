@@ -166,9 +166,14 @@ namespace MonoDevelop.TaskForce.Gui.Components
 
 		void AddCommentButtonClicked (object sender, EventArgs e)
 		{
-			CommentData comment;
+			CommentData comment = new CommentData();
 			
 			// Re-create all the comment information
+			comment.Title = subjectEntry.Text;
+			comment.Author = "Me"; // TODO TODO TODO - change this
+			
+			comment.Content = commentTextView.Buffer.Text;
+			comment.PostDate = DateTime.Now;
 		}
 		
 		public void Initialize(List<CommentData> _comments)
