@@ -78,7 +78,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 				this.prioritySpin.Value = core.Priority;
 				
 				// add the comments view and populate it
-				commentWidget.Initialize(core.Comments);
+				commentWidget2.Initialize(core.Comments);
 				
 			}
 		}

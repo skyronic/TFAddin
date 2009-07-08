@@ -6,8 +6,8 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" ctype="Workbench">
     <Files>
       <File FileName="GUIBootStrap/MainWindow.cs" Line="12" Column="2" />
-      <File FileName="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" Line="91" Column="30" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="38" Column="47" />
+      <File FileName="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" Line="156" Column="4" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="66" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

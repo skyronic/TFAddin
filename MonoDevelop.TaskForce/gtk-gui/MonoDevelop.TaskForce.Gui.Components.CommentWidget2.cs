@@ -17,6 +17,20 @@ namespace MonoDevelop.TaskForce.Gui.Components {
         
         private Gtk.VBox commentVBox;
         
+        private Gtk.HBox hbox1;
+        
+        private Gtk.VBox vbox2;
+        
+        private Gtk.HBox hbox2;
+        
+        private Gtk.Entry subjectEntry;
+        
+        private Gtk.Button addCommentButton;
+        
+        private Gtk.ScrolledWindow GtkScrolledWindow;
+        
+        private Gtk.TextView commentTextView;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget MonoDevelop.TaskForce.Gui.Components.CommentWidget2
@@ -24,6 +38,7 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             this.Name = "MonoDevelop.TaskForce.Gui.Components.CommentWidget2";
             // Container child MonoDevelop.TaskForce.Gui.Components.CommentWidget2.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.commentVBox = new Gtk.VBox();
@@ -32,6 +47,77 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             this.vbox1.Add(this.commentVBox);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox1[this.commentVBox]));
             w1.Position = 0;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.hbox1 = new Gtk.HBox();
+            this.hbox1.Name = "hbox1";
+            this.hbox1.Spacing = 6;
+            // Container child hbox1.Gtk.Box+BoxChild
+            this.vbox2 = new Gtk.VBox();
+            this.vbox2.Name = "vbox2";
+            this.vbox2.Spacing = 6;
+            // Container child vbox2.Gtk.Box+BoxChild
+            this.hbox2 = new Gtk.HBox();
+            this.hbox2.Name = "hbox2";
+            this.hbox2.Spacing = 6;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.subjectEntry = new Gtk.Entry();
+            this.subjectEntry.CanFocus = true;
+            this.subjectEntry.Name = "subjectEntry";
+            this.subjectEntry.IsEditable = true;
+            this.subjectEntry.InvisibleChar = '●';
+            this.hbox2.Add(this.subjectEntry);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox2[this.subjectEntry]));
+            w2.Position = 0;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.addCommentButton = new Gtk.Button();
+            this.addCommentButton.CanFocus = true;
+            this.addCommentButton.Name = "addCommentButton";
+            this.addCommentButton.UseUnderline = true;
+            // Container child addCommentButton.Gtk.Container+ContainerChild
+            Gtk.Alignment w3 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            Gtk.HBox w4 = new Gtk.HBox();
+            w4.Spacing = 2;
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Image w5 = new Gtk.Image();
+            w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.SmallToolbar, 18);
+            w4.Add(w5);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w7 = new Gtk.Label();
+            w7.LabelProp = Mono.Unix.Catalog.GetString("Add Comment");
+            w7.UseUnderline = true;
+            w4.Add(w7);
+            w3.Add(w4);
+            this.addCommentButton.Add(w3);
+            this.hbox2.Add(this.addCommentButton);
+            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.hbox2[this.addCommentButton]));
+            w11.Position = 1;
+            w11.Expand = false;
+            w11.Fill = false;
+            this.vbox2.Add(this.hbox2);
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox2[this.hbox2]));
+            w12.Position = 0;
+            w12.Expand = false;
+            w12.Fill = false;
+            // Container child vbox2.Gtk.Box+BoxChild
+            this.GtkScrolledWindow = new Gtk.ScrolledWindow();
+            this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+            this.GtkScrolledWindow.ShadowType = ((Gtk.ShadowType)(1));
+            // Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+            this.commentTextView = new Gtk.TextView();
+            this.commentTextView.HeightRequest = 70;
+            this.commentTextView.CanFocus = true;
+            this.commentTextView.Name = "commentTextView";
+            this.GtkScrolledWindow.Add(this.commentTextView);
+            this.vbox2.Add(this.GtkScrolledWindow);
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.vbox2[this.GtkScrolledWindow]));
+            w14.Position = 1;
+            this.hbox1.Add(this.vbox2);
+            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbox2]));
+            w15.Position = 0;
+            this.vbox1.Add(this.hbox1);
+            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
+            w16.Position = 1;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

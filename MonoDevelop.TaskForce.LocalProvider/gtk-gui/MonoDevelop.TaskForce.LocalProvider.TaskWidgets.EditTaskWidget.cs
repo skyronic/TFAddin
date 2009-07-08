@@ -39,9 +39,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
         
         private Gtk.Calendar dueDateCal;
         
-        private MonoDevelop.TaskForce.Gui.Components.CommentWidget commentWidget;
+        private MonoDevelop.TaskForce.Gui.Components.CommentWidget2 commentWidget2;
         
-        private Gtk.HBox hbox5;
+        private Gtk.HBox hbox6;
         
         private Gtk.Button applyButton;
         
@@ -56,6 +56,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             this.Name = "MonoDevelop.TaskForce.LocalProvider.TaskWidgets.EditTaskWidget";
             // Container child MonoDevelop.TaskForce.LocalProvider.TaskWidgets.EditTaskWidget.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
@@ -164,17 +165,19 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w12.Expand = false;
             w12.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.commentWidget = new MonoDevelop.TaskForce.Gui.Components.CommentWidget();
-            this.commentWidget.Events = ((Gdk.EventMask)(256));
-            this.commentWidget.Name = "commentWidget";
-            this.vbox1.Add(this.commentWidget);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.commentWidget]));
+            this.commentWidget2 = new MonoDevelop.TaskForce.Gui.Components.CommentWidget2();
+            this.commentWidget2.Events = ((Gdk.EventMask)(256));
+            this.commentWidget2.Name = "commentWidget2";
+            this.vbox1.Add(this.commentWidget2);
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.commentWidget2]));
             w13.Position = 3;
+            w13.Expand = false;
+            w13.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.hbox5 = new Gtk.HBox();
-            this.hbox5.Name = "hbox5";
-            this.hbox5.Spacing = 6;
-            // Container child hbox5.Gtk.Box+BoxChild
+            this.hbox6 = new Gtk.HBox();
+            this.hbox6.Name = "hbox6";
+            this.hbox6.Spacing = 6;
+            // Container child hbox6.Gtk.Box+BoxChild
             this.applyButton = new Gtk.Button();
             this.applyButton.CanFocus = true;
             this.applyButton.Name = "applyButton";
@@ -195,12 +198,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w15.Add(w18);
             w14.Add(w15);
             this.applyButton.Add(w14);
-            this.hbox5.Add(this.applyButton);
-            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.hbox5[this.applyButton]));
+            this.hbox6.Add(this.applyButton);
+            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.hbox6[this.applyButton]));
             w22.Position = 0;
             w22.Expand = false;
             w22.Fill = false;
-            // Container child hbox5.Gtk.Box+BoxChild
+            // Container child hbox6.Gtk.Box+BoxChild
             this.button1 = new Gtk.Button();
             this.button1.CanFocus = true;
             this.button1.Name = "button1";
@@ -221,12 +224,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w24.Add(w27);
             w23.Add(w24);
             this.button1.Add(w23);
-            this.hbox5.Add(this.button1);
-            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.hbox5[this.button1]));
+            this.hbox6.Add(this.button1);
+            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.hbox6[this.button1]));
             w31.Position = 1;
             w31.Expand = false;
             w31.Fill = false;
-            // Container child hbox5.Gtk.Box+BoxChild
+            // Container child hbox6.Gtk.Box+BoxChild
             this.button2 = new Gtk.Button();
             this.button2.CanFocus = true;
             this.button2.Name = "button2";
@@ -247,13 +250,13 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w33.Add(w36);
             w32.Add(w33);
             this.button2.Add(w32);
-            this.hbox5.Add(this.button2);
-            Gtk.Box.BoxChild w40 = ((Gtk.Box.BoxChild)(this.hbox5[this.button2]));
+            this.hbox6.Add(this.button2);
+            Gtk.Box.BoxChild w40 = ((Gtk.Box.BoxChild)(this.hbox6[this.button2]));
             w40.Position = 2;
             w40.Expand = false;
             w40.Fill = false;
-            this.vbox1.Add(this.hbox5);
-            Gtk.Box.BoxChild w41 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox5]));
+            this.vbox1.Add(this.hbox6);
+            Gtk.Box.BoxChild w41 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox6]));
             w41.Position = 4;
             w41.Expand = false;
             w41.Fill = false;

@@ -39,44 +39,106 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	{
 		protected List<CommentData> Comments
 		{get;set;}
-		
-		protected void AddCommentToGui(CommentData comment)
+		protected LogUtil log;		
+		/*protected void AddCommentToGui(CommentData comment)
 		{
 			// create the expander which will contain this
 			Expander container = new Gtk.Expander(comment.Author);
 			
 			// Create a HBox which will contain the comment entry and buttons
-			HBox entryContainer = new HBox();
+			VBox entryContainer = new VBox();
 			
 			// Create a VBox for the subject and comment body
-			VBox vbox1 = new VBox();
+			VBox commentVBox = new VBox();
 			Label subjectLabel = new Label("Subject: " + comment.Title);
-			TextView commentView = new TextView();
+		 TextView commentView = new TextView();
 			commentView.Buffer.Text = comment.Content;
 			
-			// pack the subject and comment into it
-			vbox1.PackStart(subjectLabel, true, false, 0);
-			vbox1.PackStart(commentView, true, true, 0);
+			// Make sure that the comment view content is sufficiently large
+			commentView.SetSizeRequest(1,100);
+			HBox hbox_1 = new HBox();
 			
-			// Create a vbox that contains the reply options
-			VBox vbox2 = new VBox();
 			Button quoteButton = new Button("Quote");
 			Button replyButton = new Button("Reply");
-			vbox2.PackStart(quoteButton, true, false, 0);
-			vbox2.PackStart(replyButton, true, false, 0);
+			
+			// Subject | Quote | Reply
+			hbox_1.PackStart(subjectLabel, true, false, 0);
+			hbox_1.PackStart(quoteButton, true, false, 0);
+			hbox_1.PackStart(replyButton, true, false, 0);
+			
+			// pack the subject and comment into it
+			commentVBox.PackStart(hbox_1, false, true, 0);
+			commentVBox.PackStart(commentView, true, true, 0);
+			
+
+			
 			
 			// Pack both the boxes togetherin the entryContainer			
-			entryContainer.PackStart(vbox1, true, true, 0);
-			entryContainer.PackStart(vbox2, true, false, 0);
+			entryContainer.PackStart(commentVBox, true, false, 0);
 			
 			// Add the entry container to the main expander widget
 			container.Add(entryContainer);
 			
 			// Add the main expander to the comment vbox
-			commentVBox.PackStart(container, false, false, 0);
-			
+			// commentVBox.PackStart(container, false, false, 0); //WTF?
 			// hook into the Expand event so that we can resize the widget
 			container.Activated += ContainerActivated;
+		}*/
+		
+		protected void AddCommentToGui(CommentData comment)
+		{
+			// Create a new HBox to hold the subject line and the reply buttons, content, etc
+			Label subjectLabel = new Label(comment.Title);
+			Button quoteButton = new Button("Quote");
+			Button replyButton = new Button("Reply");
+			
+			quoteButton.Clicked += delegate(object sender, EventArgs e) {
+				// Push the comment with little ">"s to the reply window
+				this.AddCommentQuote(comment);
+			};
+			
+			replyButton.Clicked += delegate(object sender, EventArgs e) {
+				this.AddCommentQuote(comment);
+				// set the reply title as "Re:" 
+				subjectEntry.Text = "Re: " + comment.Title;
+			};
+			
+			HBox subjectHBox = new HBox();
+			subjectHBox.PackStart(subjectLabel, true, true, 0);
+			subjectHBox.PackStart(quoteButton, false, false, 0);
+			subjectHBox.PackStart(replyButton, false, false, 0);
+			
+			// Create the entry and the VBox to hold the comment together
+			TextView iterCommentView = new TextView();
+			iterCommentView.Buffer.Text = comment.Content;
+			iterCommentView.HeightRequest = 100;
+			iterCommentView.Editable = false;
+			
+			VBox iterVBox = new VBox();
+			iterVBox.PackStart(subjectHBox, false, false,0);
+			iterVBox.PackStart(iterCommentView, true, true, 0);
+			
+			// Create an expander
+			Expander iterContainer = new Expander(comment.Author);
+			
+			iterContainer.Add(iterVBox);
+			iterContainer.Activated += ContainerActivated;
+			
+			commentVBox.PackEnd(iterContainer, true, true, 0);
+		}
+		
+		protected void AddCommentQuote(CommentData comment)
+		{
+			// Don't erase the existing comment no matter what.
+			// construct a "quoted" reply from the comment
+			string quoteString = "\n";
+			quoteString += "On " + comment.PostDate.ToString() + ", " + comment.Author + " wrote:";
+			string[] commentLines = comment.Content.Split('\n');
+			foreach(string commentLine in commentLines)
+			{
+				quoteString += "> " + commentLine + "\n";
+			}			
+			commentTextView.Buffer.Text += quoteString;
 		}
 
 		void ContainerActivated (object sender, EventArgs e)
@@ -95,6 +157,18 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		public CommentWidget2 ()
 		{
 			this.Build ();
+			log = new LogUtil("CommentWidget2");
+			
+			log.SetHash(this);
+			
+			addCommentButton.Clicked += AddCommentButtonClicked;
+		}
+
+		void AddCommentButtonClicked (object sender, EventArgs e)
+		{
+			CommentData comment;
+			
+			// Re-create all the comment information
 		}
 		
 		public void Initialize(List<CommentData> _comments)
@@ -105,6 +179,16 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			{
 				this.AddCommentToGui(comment);
 			}
+			
+			int somevalue = 10;
+			for(int i = 0; i<10; i++)
+			{
+				somevalue = i + 10;
+				Button x = new Button("Button number " + somevalue.ToString());
+				x.Clicked += delegate(object sender, EventArgs e) {
+					Console.WriteLine(somevalue.ToString() + "Was clicked");
+				};
+			}				
 		}
 	}
 }
