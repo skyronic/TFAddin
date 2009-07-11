@@ -33,7 +33,6 @@ using MonoDevelop.TaskForce.Utilities;
 namespace MonoDevelop.TaskForce.Gui.Components
 {
 
-
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class CommentWidget2 : Gtk.Bin
 	{
@@ -126,6 +125,8 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			
 			commentVBox.PackEnd(iterContainer, true, true, 0);
 		}
+	
+		public event EventHandler<CommentAddedEventArgs> NewCommentAdded;
 		
 		protected void AddCommentQuote(CommentData comment)
 		{
@@ -174,6 +175,11 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			
 			comment.Content = commentTextView.Buffer.Text;
 			comment.PostDate = DateTime.Now;
+			
+			CommentAddedEventArgs args = new CommentAddedEventArgs();
+			args.newComment = comment;
+			
+			this.NewCommentAdded(this, args);
 		}
 		
 		public void Initialize(List<CommentData> _comments)
@@ -194,6 +200,19 @@ namespace MonoDevelop.TaskForce.Gui.Components
 					Console.WriteLine(somevalue.ToString() + "Was clicked");
 				};
 			}				
+		}
+	}
+	
+	
+	[Serializable]
+	public sealed class CommentAddedEventArgs : EventArgs
+	{
+		public CommentData newComment{
+			get;set;
+		}
+		public CommentAddedEventArgs ()
+		{
+			
 		}
 	}
 }

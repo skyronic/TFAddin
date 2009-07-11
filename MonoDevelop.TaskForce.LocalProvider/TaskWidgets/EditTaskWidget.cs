@@ -80,6 +80,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 				// add the comments view and populate it
 				commentWidget2.Initialize(core.Comments);
 				
+				// hook into the "new comment" event
+				
+				
 			}
 		}
 		
@@ -97,6 +100,53 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		protected virtual void OnResetButtonClicked (object sender, System.EventArgs e)
 		{
 			PopulateForm();
+		}
+		
+		/// <summary>
+		/// Triggered when a new comment is added. Called by the event
+		/// fired by CommentWidget or CommentWidget2
+		/// </summary>
+		/// <param name="sender">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="args">
+		/// A <see cref="CommentAddedEventArgs"/>
+		/// </param>
+		protected virtual void OnNewCommentAdded(object sender, CommentAddedEventArgs args)
+		{
+			// get the new comment
+			CommentData comment = args.newComment;
+			
+			TaskCore core = EditTarget.CoreDataObject as TaskCore;
+			
+			// update the database
+			DBHelper.AddComment(core, comment);
+			log.INFO("Added a new comment to the database");
+		}
+
+		/// <summary>
+		/// Updates the TaskCore and the edit target
+		/// </summary>
+		/// <param name="sender">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="e">
+		/// A <see cref="System.EventArgs"/>
+		/// </param>
+		protected virtual void OnApplyButtonClicked (object sender, System.EventArgs e)
+		{
+			// get the core data
+				TaskCore core = EditTarget.CoreDataObject as TaskCore;
+				
+				// Populate the GUI's data with this information
+				core.Title = taskNameEntry.Text;
+				core.Description = taskDescText.Buffer.Text;
+			
+				core.DueDate = dueDateCal.Date;
+				core.Priority = (int)prioritySpin.Value;
+			
+			log.INFO("updating taskcore as: " + core.ToString());
+			DBHelper.UpdateTask(core);
 		}
 	}
 }

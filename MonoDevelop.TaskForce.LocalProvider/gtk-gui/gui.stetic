@@ -477,6 +477,7 @@
                 <property name="Icon">stock:gtk-apply Menu</property>
                 <property name="Label" translatable="yes">Apply</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnApplyButtonClicked" />
               </widget>
               <packing>
                 <property name="Position">0</property>
