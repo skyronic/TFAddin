@@ -32,6 +32,8 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
+	
+	public delegate void CommentAddedDelegate(CommentAddedEventArgs args);
 
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class CommentWidget2 : Gtk.Bin
@@ -126,7 +128,8 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			commentVBox.PackEnd(iterContainer, true, true, 0);
 		}
 	
-		public event EventHandler<CommentAddedEventArgs> NewCommentAdded;
+		//public event EventHandler<CommentAddedEventArgs> NewCommentAdded;
+		public event CommentAddedDelegate NewCommentAdded;
 		
 		protected void AddCommentQuote(CommentData comment)
 		{
@@ -179,7 +182,14 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			CommentAddedEventArgs args = new CommentAddedEventArgs();
 			args.newComment = comment;
 			
-			this.NewCommentAdded(this, args);
+			NewCommentAdded(args);
+			
+			// now add the comment to the GUI
+			AddCommentToGui(comment);
+			
+			// Clear out the reply window
+			this.commentTextView.Buffer.Text = "";
+			this.subjectEntry.Text = "";
 		}
 		
 		public void Initialize(List<CommentData> _comments)
@@ -191,15 +201,6 @@ namespace MonoDevelop.TaskForce.Gui.Components
 				this.AddCommentToGui(comment);
 			}
 			
-			int somevalue = 10;
-			for(int i = 0; i<10; i++)
-			{
-				somevalue = i + 10;
-				Button x = new Button("Button number " + somevalue.ToString());
-				x.Clicked += delegate(object sender, EventArgs e) {
-					Console.WriteLine(somevalue.ToString() + "Was clicked");
-				};
-			}				
 		}
 	}
 	

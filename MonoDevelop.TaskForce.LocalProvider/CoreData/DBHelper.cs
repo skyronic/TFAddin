@@ -187,7 +187,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			cmd.Parameters.AddWithValue ("@author", comment.Author);
 			cmd.Parameters.AddWithValue ("@message", comment.Content);
 			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate);
-			cmd.ExecuteNonQuery();
+			
+			LogQuery(cmd);
 		}
 
 		/// <summary>

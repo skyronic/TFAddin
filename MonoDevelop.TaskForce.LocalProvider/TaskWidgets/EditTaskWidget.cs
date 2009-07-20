@@ -83,6 +83,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 				commentWidget2.Initialize(core.Comments);
 				
 				// hook into the "new comment" event
+				commentWidget2.NewCommentAdded += OnNewCommentAdded;
 				
 				
 			}
@@ -114,7 +115,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// <param name="args">
 		/// A <see cref="CommentAddedEventArgs"/>
 		/// </param>
-		protected virtual void OnNewCommentAdded(object sender, CommentAddedEventArgs args)
+		protected virtual void OnNewCommentAdded(CommentAddedEventArgs args)
 		{
 			// get the new comment
 			CommentData comment = args.newComment;
@@ -123,7 +124,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			
 			// update the database
 			DBHelper.AddComment(core, comment);
-			log.INFO("Added a new comment to the database");
+			
+			// add the comment to the comment object
+			core.Comments.Add(comment);
 		}
 
 		/// <summary>
