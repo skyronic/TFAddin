@@ -161,6 +161,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			cmd.Parameters.AddWithValue("@priority", input.Priority);
 			cmd.Parameters.AddWithValue("@description", input.Description);
 			cmd.Parameters.AddWithValue("@createdate", input.CreateDate.ToString(DateFormat));
+			cmd.Parameters.AddWithValue("@duedate", input.DueDate.ToString(DateFormat));
+			cmd.Parameters.AddWithValue("@depends", input.Depends);
+			cmd.Parameters.AddWithValue("@taskid", input.Id);
+			
+			
+			LogQuery(cmd);
 		}
 
 		/// <summary>

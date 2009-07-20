@@ -32,9 +32,6 @@
     <Reference Include="System" />
     <Reference Include="Mono.Posix" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Package>mono-addins-0.2</Package>
-    </Reference>
     <Reference Include="MonoDevelop.Components, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\main\build\bin\MonoDevelop.Components.dll</HintPath>
@@ -65,6 +62,7 @@
       <HintPath>..\..\..\main\build\bin\MonoDevelop.Projects.Gui.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gui\" />

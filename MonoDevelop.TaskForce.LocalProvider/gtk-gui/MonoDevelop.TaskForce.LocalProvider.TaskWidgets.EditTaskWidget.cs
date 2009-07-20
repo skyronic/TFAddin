@@ -184,14 +184,14 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             this.applyButton.UseUnderline = true;
             // Container child applyButton.Gtk.Container+ContainerChild
             Gtk.Alignment w14 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w15 = new Gtk.HBox();
             w15.Spacing = 2;
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w16 = new Gtk.Image();
             w16.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-apply", Gtk.IconSize.Menu, 16);
             w15.Add(w16);
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w18 = new Gtk.Label();
             w18.LabelProp = Mono.Unix.Catalog.GetString("Apply");
             w18.UseUnderline = true;
@@ -210,14 +210,14 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             this.button1.UseUnderline = true;
             // Container child button1.Gtk.Container+ContainerChild
             Gtk.Alignment w23 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment2.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w24 = new Gtk.HBox();
             w24.Spacing = 2;
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w25 = new Gtk.Image();
             w25.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-revert-to-saved", Gtk.IconSize.Menu, 16);
             w24.Add(w25);
-            // Container child GtkHBox2.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w27 = new Gtk.Label();
             w27.LabelProp = Mono.Unix.Catalog.GetString("Reset");
             w27.UseUnderline = true;
@@ -236,14 +236,14 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             this.button2.UseUnderline = true;
             // Container child button2.Gtk.Container+ContainerChild
             Gtk.Alignment w32 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment3.Gtk.Container+ContainerChild
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w33 = new Gtk.HBox();
             w33.Spacing = 2;
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w34 = new Gtk.Image();
             w34.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
             w33.Add(w34);
-            // Container child GtkHBox3.Gtk.Container+ContainerChild
+            // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w36 = new Gtk.Label();
             w36.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
             w36.UseUnderline = true;

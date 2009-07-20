@@ -49,6 +49,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		protected LogUtil log;
 		public EditTaskWidget()
 		{
+			log = new LogUtil("LogUtil");
+			
 			this.Build();
 			EditTarget = null;
 		}

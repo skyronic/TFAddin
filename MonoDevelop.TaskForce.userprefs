@@ -3,24 +3,26 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" ctype="Workbench">
     <Files>
-      <File FileName="GUIBootStrap/MainWindow.cs" Line="12" Column="2" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="40" Column="5" />
+      <File FileName="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="38" Column="47" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="GUIBootStrap" expanded="True" />
           <Node name="MonoDevelop.TaskForce" expanded="True">
+            <Node name="References" expanded="True" />
             <Node name="Gui" expanded="True">
-              <Node name="Components" expanded="True" />
+              <Node name="Components" expanded="True">
+                <Node name="CommentWidget2.cs" selected="True" />
+              </Node>
+              <Node name="TaskPad" expanded="True" />
             </Node>
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
-            <Node name="TaskWidgets" expanded="True">
-              <Node name="EditTaskWidget.cs" selected="True" />
-            </Node>
+            <Node name="TaskWidgets" expanded="True" />
           </Node>
         </State>
       </Pad>
