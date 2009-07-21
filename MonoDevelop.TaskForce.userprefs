@@ -6,7 +6,8 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" ctype="Workbench">
     <Files>
       <File FileName="MonoDevelop.TaskForce/Gui/Components/CommentWidget2.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="38" Column="47" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="129" Column="31" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/CoreData/DBHelper.cs" Line="134" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,6 +23,7 @@
             </Node>
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
+            <Node name="CoreData" expanded="True" />
             <Node name="TaskWidgets" expanded="True" />
           </Node>
         </State>

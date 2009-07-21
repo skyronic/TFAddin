@@ -180,13 +180,14 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// </param>
 		public static void AddComment (TaskCore task, CommentData comment)
 		{
+			
 			SqliteCommand cmd = conn.CreateCommand ();
 			cmd.CommandText = "INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES (@taskid, @subject, @author, @message, @postdate);";
-			cmd.Parameters.AddWithValue ("@taskid", comment.TaskId);
+			cmd.Parameters.AddWithValue ("@taskid", task.Id.ToString());
 			cmd.Parameters.AddWithValue ("@subject", comment.Title);
 			cmd.Parameters.AddWithValue ("@author", comment.Author);
 			cmd.Parameters.AddWithValue ("@message", comment.Content);
-			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate);
+			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate.ToString(DateFormat));
 			
 			LogQuery(cmd);
 		}

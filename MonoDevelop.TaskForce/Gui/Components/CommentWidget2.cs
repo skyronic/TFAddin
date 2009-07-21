@@ -125,7 +125,9 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			iterContainer.Add(iterVBox);
 			iterContainer.Activated += ContainerActivated;
 			
-			commentVBox.PackEnd(iterContainer, true, true, 0);
+			iterContainer.ShowAll();
+			
+			commentVBox.PackStart(iterContainer, true, true, 0);
 		}
 	
 		//public event EventHandler<CommentAddedEventArgs> NewCommentAdded;
