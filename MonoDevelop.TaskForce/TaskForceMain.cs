@@ -29,117 +29,117 @@ using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.Utilities;
 namespace MonoDevelop.TaskForce
 {
-	public delegate void TaskChangedDelegate(ActiveTaskChangedEventArgs args);
-	
-	
+	public delegate void TaskChangedDelegate (ActiveTaskChangedEventArgs args);
+
+
 	/// <summary>
 	/// Singleton class to access all the main classes
 	/// </summary>
-	public sealed class TaskForceMain		
+	public sealed class TaskForceMain
 	{
 		/// <summary>
 		/// Allocate ourselves as the constructor is private
 		/// </summary>
-		static readonly TaskForceMain instance = new TaskForceMain();
-		
+		static readonly TaskForceMain instance = new TaskForceMain ();
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public static TaskForceMain Instance
-		{
+		public static TaskForceMain Instance {
 			/// <summary>
 			/// TODO: thread-safety locking
 			/// </summary>
-			get{
-				return instance;
-			}
+			get { return instance; }
 		}
-		
-		
-		public TaskData ActiveTask
-		{get;set;}
-		
-		public bool IsTaskActive
-		{get;set;}
-		
+
+
+		public TaskData ActiveTask {
+			get;
+			set;
+		}
+
+		public bool IsTaskActive {
+			get;
+			set;
+		}
+
 		// Event fired when a task has been activated [post]
 		public event TaskChangedDelegate TaskActivated;
-		
+
 		// event fired when a task is deactivated [post]
 		public event TaskChangedDelegate TaskDeactivated;
-		
+
 		LogUtil log;
-		
+
 		/// <summary>
 		/// Activate a task. If a task is currently active it's deactivated
 		/// </summary>
 		/// <param name="_task">
 		/// A <see cref="TaskData"/>
 		/// </param>
-		public void ActivateTask(TaskData _task)
+		public void ActivateTask (TaskData _task)
 		{
-			log.DEBUG("Activating task: " + _task.Label);
+			log.DEBUG ("Activating task: " + _task.Label);
 			// Is a task running right now
-			if(IsTaskActive)
-			{
+			if (IsTaskActive) {
 				// Deactivate it
-				DeactivateCurrentTask();
+				DeactivateCurrentTask ();
 			}
-			
+
 			// previous task didn't close properly
-			if(IsTaskActive)
-			{
-				throw new ApplicationException("Task didn't get deactivated");
+			if (IsTaskActive) {
+				throw new ApplicationException ("Task didn't get deactivated");
 			}
-			
+
 			ActiveTask = _task;
 			IsTaskActive = true;
-			
+
 			// Execute the activated task hook
-			ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs();
-			
+			ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs ();
+
 			// Why are we even doing this?
 			args.CurrentTask = ActiveTask;
-			
-			TaskActivated(args);
-			
+
+			TaskActivated (args);
+
 		}
-		
-		public void DeactivateCurrentTask()
+
+		public void DeactivateCurrentTask ()
 		{
-			if(ActiveTask != null)
-			{
-			if(IsTaskActive)
-			{
-			log.DEBUG("Deactivating task: " + ActiveTask.Label);
-				ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs();
-				args.CurrentTask = ActiveTask;
-				
-				ActiveTask = null;
-				IsTaskActive = false;
-				
-				TaskDeactivated(args);
-			}
+			if (ActiveTask != null) {
+				if (IsTaskActive) {
+					log.DEBUG ("Deactivating task: " + ActiveTask.Label);
+					ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs ();
+					args.CurrentTask = ActiveTask;
+
+					ActiveTask = null;
+					IsTaskActive = false;
+
+					TaskDeactivated (args);
+				}
 			}
 		}
-				
-		private TaskForceMain()
+
+		private TaskForceMain ()
 		{
 			IsTaskActive = false;
-			log = new LogUtil("TaskForceMain");
+			log = new LogUtil ("TaskForceMain");
 		}
 	}
-	
-	
-	[Serializable]
+
+
+	[Serializable()]
 	public sealed class ActiveTaskChangedEventArgs : EventArgs
 	{
-		
-		public TaskData CurrentTask{get;set;}
-		
+
+		public TaskData CurrentTask {
+			get;
+			set;
+		}
+
 		public ActiveTaskChangedEventArgs ()
 		{
-			
+
 		}
 	}
 }
