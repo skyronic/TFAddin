@@ -165,7 +165,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets {
             w12.Expand = false;
             w12.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.commentWidget2 = null;
+            this.commentWidget2 = new MonoDevelop.TaskForce.Gui.Components.CommentWidget2();
+            this.commentWidget2.Events = ((Gdk.EventMask)(256));
+            this.commentWidget2.Name = "commentWidget2";
             this.vbox1.Add(this.commentWidget2);
             Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.commentWidget2]));
             w13.Position = 3;

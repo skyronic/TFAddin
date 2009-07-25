@@ -62,17 +62,13 @@ namespace MonoDevelop.TaskForce
 		public bool IsTaskActive
 		{get;set;}
 		
-		private TFMain ()
-		{
-			IsTaskActive = false;
-		}
-		
 		// Event fired when a task has been activated [post]
 		public event TaskChangedDelegate TaskActivated;
 		
 		// event fired when a task is deactivated [post]
 		public event TaskChangedDelegate TaskDeactivated;
 		
+		LogUtil log;
 		
 		/// <summary>
 		/// Activate a task. If a task is currently active it's deactivated
@@ -82,6 +78,7 @@ namespace MonoDevelop.TaskForce
 		/// </param>
 		public void ActivateTask(TaskData _task)
 		{
+			log.DEBUG("Activating task: " + _task.Label);
 			// Is a task running right now
 			if(IsTaskActive)
 			{
@@ -93,7 +90,6 @@ namespace MonoDevelop.TaskForce
 			if(IsTaskActive)
 			{
 				throw new ApplicationException("Task didn't get deactivated");
-				return;
 			}
 			
 			ActiveTask = _task;
@@ -111,8 +107,11 @@ namespace MonoDevelop.TaskForce
 		
 		public void DeactivateCurrentTask()
 		{
-			if(!IsTaskActive)
+			if(ActiveTask != null)
 			{
+			if(IsTaskActive)
+			{
+			log.DEBUG("Deactivating task: " + ActiveTask.Label);
 				ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs();
 				args.CurrentTask = ActiveTask;
 				
@@ -121,6 +120,13 @@ namespace MonoDevelop.TaskForce
 				
 				TaskDeactivated(args);
 			}
+			}
+		}
+				
+		private TaskForceMain()
+		{
+			IsTaskActive = false;
+			log = new LogUtil("TaskForceMain");
 		}
 	}
 	

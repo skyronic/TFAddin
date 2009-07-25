@@ -170,6 +170,33 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			}	
 		}
 		
+		[CommandHandler(ContextMenuCommands.ActivateTask)]
+		public void ActivateTask()
+		{
+			// Get the current task
+			TaskData self = this.CurrentNode.DataItem as TaskData;
+			
+			if(self!=null)
+			{
+				TaskForceMain tfMain = TaskForceMain.Instance;
+				tfMain.ActivateTask(self);
+			}
+		}
+		
+		[CommandHandler(ContextMenuCommands.DeactivateTask)]
+		public void DeactivateTask()
+		{
+			TaskData self = this.CurrentNode.DataItem as TaskData;
+			if(self!=null)
+			{
+				TaskForceMain tfMain = TaskForceMain.Instance;
+				if(tfMain.ActiveTask == self)
+				{
+					tfMain.DeactivateCurrentTask();
+				}
+			}
+		}		
+		
 		public override void ActivateItem ()
 		{
 			base.ActivateItem ();
