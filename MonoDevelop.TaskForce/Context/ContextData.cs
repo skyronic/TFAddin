@@ -26,6 +26,8 @@
 
 
 using System;
+using MonoDevelop.TaskForce.Data;
+using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Context
 {
@@ -40,18 +42,32 @@ namespace MonoDevelop.TaskForce.Context
 	/// </summary>
 	public class ContextData
 	{
+		private TaskData parentTask;
+		private LogUtil log;
+		
+		
 		public void TaskActivated()
 		{
-			
+			log.DEBUG("Starting context watch");
 		}
 		
 		public void TaskDeactivated()
 		{
-			
-		}	
+			log.DEBUG("Stopping context watch");
+		}
 		
+		
+		public void Initialize(TaskData _taskData)
+		{
+			parentTask = _taskData;
+			
+			// any more intialization
+		}
 		public ContextData ()
 		{
+			log = new LogUtil("ContextData");
+			log.SetHash(this);
+			
 			
 		}
 	}

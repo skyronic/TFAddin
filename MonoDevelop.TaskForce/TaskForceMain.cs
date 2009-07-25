@@ -99,6 +99,9 @@ namespace MonoDevelop.TaskForce
 
 			// Why are we even doing this?
 			args.CurrentTask = ActiveTask;
+			
+			// Call the task activation hook which informs the context.
+			ActiveTask.OnTaskActivated();
 
 			TaskActivated (args);
 
@@ -110,6 +113,10 @@ namespace MonoDevelop.TaskForce
 				if (IsTaskActive) {
 					log.DEBUG ("Deactivating task: " + ActiveTask.Label);
 					ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs ();
+					
+					// Call the task deactivated hook
+					ActiveTask.OnTaskDeactivated();
+					
 					args.CurrentTask = ActiveTask;
 
 					ActiveTask = null;

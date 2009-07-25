@@ -36,6 +36,8 @@
 using System;
 using System.Collections;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.TaskForce.Context;
+
 
 namespace MonoDevelop.TaskForce.Data
 {
@@ -49,11 +51,16 @@ namespace MonoDevelop.TaskForce.Data
 				return NodeType.Task;
 			}
 		}
+		
+		// The core data object which contains the provider specific data
 		public object CoreDataObject
 		{get;set;}
+		
+		public ContextData TaskContext{get; private set;}		
+		
 		public TaskData() : base()
 		{
-			
+			TaskContext = new ContextData();			
 		}
 		
 		public override bool CanMakeChild (NodeData childData)
@@ -70,7 +77,22 @@ namespace MonoDevelop.TaskForce.Data
 			
 			return false;
 		}
-
+		
+		/// <summary>
+		/// to be fired by TaskForceMain only
+		/// </summary>
+		public void OnTaskActivated()
+		{
+			TaskContext.TaskActivated();
+		}
+		
+		/// <summary>
+		/// To be fired by TaskForceMain only 
+		/// </summary>
+		public void OnTaskDeactivated()
+		{
+			TaskContext.TaskDeactivated();
+		}
 		
 	}
 }
