@@ -62,7 +62,9 @@
       <HintPath>..\..\..\main\build\bin\MonoDevelop.Projects.Gui.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <Package>mono-addins-0.2</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gui\" />
@@ -71,6 +73,7 @@
     <Folder Include="Utilities\" />
     <Folder Include="Providers\" />
     <Folder Include="Gui\Components\" />
+    <Folder Include="Context\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gui\TaskPad\TaskSolutionPad.cs" />
@@ -98,6 +101,8 @@
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.CommentWidget.cs" />
     <Compile Include="Gui\Components\CommentWidget2.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.CommentWidget2.cs" />
+    <Compile Include="Context\ContextData.cs" />
+    <Compile Include="TaskForceMain.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
