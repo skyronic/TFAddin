@@ -40,6 +40,8 @@ namespace MonoDevelop.TaskForce.Context
 	/// </summary>
 	public class DocumentMemento
 	{
+		LogUtil log;
+		
 		public string FileName
 		{
 			get;set;
@@ -57,10 +59,11 @@ namespace MonoDevelop.TaskForce.Context
 		
 		public void CaptureMemento(Document document)
 		{
+			
 			FileName = document.FileName; // File name
 			CursorLine = document.TextEditor.CursorLine;
 			CursorColumn = document.TextEditor.CursorColumn;
-			
+			log.INFO(String.Format("Captured Memento - {0} - {1}:{2}", FileName, CursorLine, CursorColumn));
 			document.Close();
 		}
 		
@@ -80,13 +83,32 @@ namespace MonoDevelop.TaskForce.Context
 		/// </returns>		
 		public static bool CanCaptureDocument(Document document)
 		{
+			LogUtil log = new LogUtil("CanCaptureDocument");
+			if(document == null)
+			{
+				log.ERROR("Document is null");
+				return false;
+			}
+			
+			if(document.FileName == null)
+			{
+				log.ERROR("Filename is null");
+				return false;
+			}
+			log.INFO(String.Format("Document - {0}/{1} {2}", document.Name, document.FileName.FullPath, document.IsFile));
 			if(document.HasProject && document.IsFile && document.TextEditor!=null)
 			{
+				log.INFO("Capture possible");
 				return true;
 			}
+			
+			log.DEBUG("Capture not possible");
+			return false;
 		}
 		public DocumentMemento ()
 		{
+			log = new LogUtil("DocumentMemento");
+			log.SetHash(this);
 		}
 	}
 }

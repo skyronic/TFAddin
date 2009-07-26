@@ -48,27 +48,16 @@ namespace MonoDevelop.TaskForce.Context
 		private TaskData parentTask;
 		private LogUtil log;
 		
+		private DocumentStore documentStore;
 		
 		public void TaskActivated()
 		{
-			log.DEBUG("Starting context watch");
+			documentStore.RestoreMemento();
 		}
 		
 		public void TaskDeactivated()
 		{
-			log.DEBUG("Stopping context watch");
-			ReadOnlyCollection<Document> documents = IdeApp.Workbench.Documents;
-			foreach(Document doc in documents)
-			{
-				log.INFO("Filename: " + doc.FileName);
-				log.INFO("Name: " + doc.Name);
-				if(doc.TextEditor != null)
-				{
-				log.INFO("Line: " + doc.TextEditor.CursorLine);
-				}
-				
-				log.INFO("String: " + doc.ToString());
-			}
+			documentStore.CaptureMemento();
 		}
 		
 		
@@ -83,6 +72,7 @@ namespace MonoDevelop.TaskForce.Context
 			log = new LogUtil("ContextData");
 			log.SetHash(this);
 			
+			documentStore = new DocumentStore();
 			
 		}
 	}

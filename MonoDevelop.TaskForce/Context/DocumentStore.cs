@@ -43,9 +43,12 @@ namespace MonoDevelop.TaskForce.Context
 		/// <summary>
 		/// Captures the mementoes and closes all the documents as well
 		/// </summary>
-		public CaptureMemento()
+		public void CaptureMemento()
 		{
-			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;
+			// TODO: sanity check before clearing current context
+			Documents.Clear();
+			
+			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;			
 			
 			foreach(Document doc in openDocuments)
 			{
@@ -55,7 +58,7 @@ namespace MonoDevelop.TaskForce.Context
 					DocumentMemento dm = new DocumentMemento();
 					dm.CaptureMemento(doc);
 					
-					Documents.Add(doc);
+					Documents.Add(dm);
 				}
 			}
 		}
@@ -63,7 +66,7 @@ namespace MonoDevelop.TaskForce.Context
 		/// <summary>
 		/// Restore all the documents associated with this task
 		/// </summary>
-		public RestoreMemento()
+		public void RestoreMemento()
 		{
 			foreach(DocumentMemento dm in Documents)
 			{
