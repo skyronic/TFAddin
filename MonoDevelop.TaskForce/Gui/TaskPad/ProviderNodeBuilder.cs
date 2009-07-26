@@ -43,7 +43,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		public ProviderNodeBuilder() : base()
 		{
 			log = new MonoDevelop.TaskForce.Utilities.LogUtil("ProviderNodeBuilder");
-	}
+		}
 		
         public override Type CommandHandlerType
         {

@@ -103,6 +103,8 @@
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.CommentWidget2.cs" />
     <Compile Include="Context\ContextData.cs" />
     <Compile Include="TaskForceMain.cs" />
+    <Compile Include="Context\DocumentMemento.cs" />
+    <Compile Include="Context\DocumentStore.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
