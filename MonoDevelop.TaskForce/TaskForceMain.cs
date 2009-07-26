@@ -79,7 +79,6 @@ namespace MonoDevelop.TaskForce
 		/// </param>
 		public void ActivateTask (TaskData _task)
 		{
-			log.DEBUG ("Activating task: " + _task.Label);
 			// Is a task running right now
 			if (IsTaskActive) {
 				// Deactivate it
@@ -99,11 +98,12 @@ namespace MonoDevelop.TaskForce
 
 			// Why are we even doing this?
 			args.CurrentTask = ActiveTask;
-			
+			log.DEBUG ("Activating task: " + _task.Label);
+
 			// Call the task activation hook which informs the context.
 			ActiveTask.OnTaskActivated();
 
-			TaskActivated (args);
+			// TaskActivated (args);TODO: Why am I getting an exception here?
 
 		}
 
@@ -122,7 +122,7 @@ namespace MonoDevelop.TaskForce
 					ActiveTask = null;
 					IsTaskActive = false;
 
-					TaskDeactivated (args);
+					//TaskDeactivated (args);
 				}
 			}
 		}

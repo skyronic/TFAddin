@@ -1,0 +1,27 @@
+[INFO][TaskForce][ContextData][#-384152448#]Filename: 
+[INFO][TaskForce][ContextData][#-384152448#]Name: Welcome
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/Diagnostic.cs
+[INFO][TaskForce][ContextData][#-384152448#]Name: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/Diagnostic.cs
+[INFO][TaskForce][ContextData][#-384152448#]Line: 21
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/Main.cs
+[INFO][TaskForce][ContextData][#-384152448#]Name: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/Main.cs
+[INFO][TaskForce][ContextData][#-384152448#]Line: 1
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/AssemblyInfo.cs
+[INFO][TaskForce][ContextData][#-384152448#]Name: /home/anirudhs/Projects/DiagnosisHelper/DiagRunner/AssemblyInfo.cs
+[INFO][TaskForce][ContextData][#-384152448#]Line: 1
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: /home/anirudhs/Projects/DiagnosisHelper/DiagnosisHelper/Main.cs
+[INFO][TaskForce][ContextData][#-384152448#]Name: /home/anirudhs/Projects/DiagnosisHelper/DiagnosisHelper/Main.cs
+[INFO][TaskForce][ContextData][#-384152448#]Line: 1
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: /home/anirudhs/Projects/DiagnosisHelper/DiagnosisHelper/AssemblyInfo.cs
+[INFO][TaskForce][ContextData][#-384152448#]Name: /home/anirudhs/Projects/DiagnosisHelper/DiagnosisHelper/AssemblyInfo.cs
+[INFO][TaskForce][ContextData][#-384152448#]Line: 1
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+[INFO][TaskForce][ContextData][#-384152448#]Filename: Assembly Browser
+[INFO][TaskForce][ContextData][#-384152448#]Name: Assembly Browser
+[INFO][TaskForce][ContextData][#-384152448#]String: MonoDevelop.Ide.Gui.Document
+

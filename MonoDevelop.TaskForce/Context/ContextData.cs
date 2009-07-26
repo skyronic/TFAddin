@@ -28,6 +28,9 @@
 using System;
 using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.Ide.Gui;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MonoDevelop.TaskForce.Context
 {
@@ -54,6 +57,18 @@ namespace MonoDevelop.TaskForce.Context
 		public void TaskDeactivated()
 		{
 			log.DEBUG("Stopping context watch");
+			ReadOnlyCollection<Document> documents = IdeApp.Workbench.Documents;
+			foreach(Document doc in documents)
+			{
+				log.INFO("Filename: " + doc.FileName);
+				log.INFO("Name: " + doc.Name);
+				if(doc.TextEditor != null)
+				{
+				log.INFO("Line: " + doc.TextEditor.CursorLine);
+				}
+				
+				log.INFO("String: " + doc.ToString());
+			}
 		}
 		
 		
