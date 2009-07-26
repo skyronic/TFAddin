@@ -39,44 +39,41 @@ namespace MonoDevelop.TaskForce.Context
 	public class DocumentStore
 	{
 		List<DocumentMemento> Documents;
-		
+
 		/// <summary>
 		/// Captures the mementoes and closes all the documents as well
 		/// </summary>
-		public void CaptureMemento()
+		public void CaptureMemento ()
 		{
 			// TODO: sanity check before clearing current context
-			Documents.Clear();
-			
-			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;			
-			
-			foreach(Document doc in openDocuments)
-			{
-				if(DocumentMemento.CanCaptureDocument(doc))
-				{
+			Documents.Clear ();
+
+			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;
+
+			foreach (Document doc in openDocuments) {
+				if (DocumentMemento.CanCaptureDocument (doc)) {
 					// Capture the memento and close it
-					DocumentMemento dm = new DocumentMemento();
-					dm.CaptureMemento(doc);
-					
-					Documents.Add(dm);
+					DocumentMemento dm = new DocumentMemento ();
+					dm.CaptureMemento (doc);
+
+					Documents.Add (dm);
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// Restore all the documents associated with this task
 		/// </summary>
-		public void RestoreMemento()
+		public void RestoreMemento ()
 		{
-			foreach(DocumentMemento dm in Documents)
-			{
-				dm.RestoreMemento();
+			foreach (DocumentMemento dm in Documents) {
+				dm.RestoreMemento ();
 			}
 		}
-		
+
 		public DocumentStore ()
 		{
-			Documents = new List<DocumentMemento>();
+			Documents = new List<DocumentMemento> ();
 		}
 	}
 }

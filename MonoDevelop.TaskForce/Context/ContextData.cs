@@ -47,33 +47,33 @@ namespace MonoDevelop.TaskForce.Context
 	{
 		private TaskData parentTask;
 		private LogUtil log;
-		
+
 		private DocumentStore documentStore;
-		
-		public void TaskActivated()
+
+		public void TaskActivated ()
 		{
-			documentStore.RestoreMemento();
+			documentStore.RestoreMemento ();
 		}
-		
-		public void TaskDeactivated()
+
+		public void TaskDeactivated ()
 		{
-			documentStore.CaptureMemento();
+			documentStore.CaptureMemento ();
 		}
-		
-		
-		public void Initialize(TaskData _taskData)
+
+
+		public void Initialize (TaskData _taskData)
 		{
 			parentTask = _taskData;
-			
+
 			// any more intialization
 		}
 		public ContextData ()
 		{
-			log = new LogUtil("ContextData");
-			log.SetHash(this);
-			
-			documentStore = new DocumentStore();
-			
+			log = new LogUtil ("ContextData");
+			log.SetHash (this);
+
+			documentStore = new DocumentStore ();
+
 		}
 	}
 }
