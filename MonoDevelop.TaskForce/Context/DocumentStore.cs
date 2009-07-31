@@ -49,6 +49,7 @@ namespace MonoDevelop.TaskForce.Context
 			Documents.Clear ();
 
 			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;
+			List<Document> toBeKilled = new List<Document>();
 
 			foreach (Document doc in openDocuments) {
 				if (DocumentMemento.CanCaptureDocument (doc)) {
@@ -57,7 +58,15 @@ namespace MonoDevelop.TaskForce.Context
 					dm.CaptureMemento (doc);
 
 					Documents.Add (dm);
+					
+					// Add the document into the list to be closed
+					toBeKilled.Add(doc);
 				}
+			}
+			
+			foreach(Document doc in toBeKilled)
+			{
+				doc.Close();
 			}
 		}
 

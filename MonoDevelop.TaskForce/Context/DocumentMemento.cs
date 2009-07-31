@@ -65,7 +65,7 @@ namespace MonoDevelop.TaskForce.Context
 			CursorLine = document.TextEditor.CursorLine;
 			CursorColumn = document.TextEditor.CursorColumn;
 			log.INFO (String.Format ("Captured Memento - {0} - {1}:{2}", FileName, CursorLine, CursorColumn));
-			document.Close ();
+			//document.Close ();
 		}
 
 		public void RestoreMemento ()
@@ -94,7 +94,7 @@ namespace MonoDevelop.TaskForce.Context
 				log.ERROR ("Filename is null");
 				return false;
 			}
-			log.INFO (String.Format ("Document - {0}/{1} {2}", document.Name, document.FileName.FullPath, document.IsFile));
+			log.INFO (String.Format ("Document - {0} + {1} + {2}", document.Name, document.IsFile, document.TextEditor != null));
 			if (document.HasProject && document.IsFile && document.TextEditor != null) {
 				log.INFO ("Capture possible");
 				return true;
