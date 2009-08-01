@@ -167,7 +167,13 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		[CommandHandler(ContextMenuCommands.Trigger1)]
 		public void OnTrigger1Clicked()
 		{
-			
+			if(this.CurrentNode.DataItem is ProviderData)
+			{
+				LogUtil log = new LogUtil("OnTrigger1Clicked");
+				log.INFO("Attempting to serialize provider");
+				ProviderData self = this.CurrentNode.DataItem as ProviderData;
+				self.SerializeData();
+			}
 		}
 		
 		public override void OnNodeChange ()

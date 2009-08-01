@@ -51,9 +51,7 @@ namespace MonoDevelop.TaskForce.Data
 		}
 		
 		// The core data object which contains the provider specific data
-		[ItemProperty]
-		public object CoreDataObject
-		{get;set;}
+		
 		
 		[ItemProperty]
 		public ContextData TaskContext{get; private set;}		

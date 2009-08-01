@@ -32,6 +32,7 @@ using System.Text;
 using MonoDevelop.TaskForce.Providers;
 using System.Collections.Generic;
 using MonoDevelop.Core.Serialization;
+using System.Xml;
 
 namespace MonoDevelop.TaskForce.Data
 {
