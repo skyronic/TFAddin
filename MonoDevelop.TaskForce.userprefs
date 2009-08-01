@@ -3,12 +3,12 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Context/ContextData.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/TaskPad/ProviderNodeBuilder.cs" ctype="Workbench">
     <Files>
       <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="32" Column="40" />
-      <File FileName="MonoDevelop.TaskForce/Context/ContextData.cs" Line="72" Column="2" />
-      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/ProviderNodeBuilder.cs" Line="125" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/TaskNodeBuilder.cs" Line="194" Column="6" />
+      <File FileName="MonoDevelop.TaskForce/Context/ContextData.cs" Line="49" Column="3" />
+      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/ProviderNodeBuilder.cs" Line="118" Column="18" />
+      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/TaskNodeBuilder.cs" Line="182" Column="23" />
       <File FileName="MonoDevelop.TaskForce/TaskForceMain.cs" Line="75" Column="35" />
       <File FileName="MonoDevelop.TaskForce/Data/TaskData.cs" Line="85" Column="1" />
     </Files>
@@ -17,13 +17,13 @@
         <State expanded="True">
           <Node name="MonoDevelop.TaskForce" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="Context" expanded="True">
-              <Node name="ContextData.cs" selected="True" />
-            </Node>
+            <Node name="Context" expanded="True" />
             <Node name="Data" expanded="True" />
             <Node name="Gui" expanded="True">
               <Node name="Components" expanded="True" />
-              <Node name="TaskPad" expanded="True" />
+              <Node name="TaskPad" expanded="True">
+                <Node name="ProviderNodeBuilder.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
@@ -35,6 +35,11 @@
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
+        <State expanded="True">
+          <Node name="Graduate_Title" selected="True" />
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

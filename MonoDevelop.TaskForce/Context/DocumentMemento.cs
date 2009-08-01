@@ -30,6 +30,7 @@ using MonoDevelop.TaskForce.Utilities;
 using MonoDevelop.Ide.Gui;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MonoDevelop.Core.Serialization;
 
 
 namespace MonoDevelop.TaskForce.Context
@@ -41,17 +42,20 @@ namespace MonoDevelop.TaskForce.Context
 	public class DocumentMemento
 	{
 		LogUtil log;
-
+		
+		[ItemProperty]
 		public string FileName {
 			get;
 			set;
 		}
 
+		[ItemProperty]
 		public int CursorLine {
 			get;
 			set;
 		}
 
+		[ItemProperty]
 		public int CursorColumn {
 			get;
 			set;

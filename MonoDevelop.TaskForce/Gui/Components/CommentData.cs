@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using MonoDevelop.Core.Serialization;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
@@ -38,26 +39,32 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	public class CommentData
 	{
 		// the Id of the comment
+		[ItemProperty]
 		public int Id
 		{	get;
 			set;}
 		// the task that this comment is associated with
+		[ItemProperty]
 		public int TaskId
 		{	get;
 			set;}
 		// the Title of the comment
+		[ItemProperty]
 		public string Title
 		{	get;
 			set;}
 		// The author of the comment.
+		[ItemProperty]
 		public string Author
 		{	get;
 			set;}
 		// the content/message
+		[ItemProperty]
 		public string Content
 		{	get;
 			set;}
 		// the time at which the comment was posted
+		[ItemProperty]
 		public DateTime PostDate
 		{	get;
 			set;}

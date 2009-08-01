@@ -31,6 +31,8 @@ using MonoDevelop.TaskForce.Utilities;
 using MonoDevelop.Ide.Gui;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MonoDevelop.Core.Serialization;
+
 
 namespace MonoDevelop.TaskForce.Context
 {
@@ -48,6 +50,7 @@ namespace MonoDevelop.TaskForce.Context
 		private TaskData parentTask;
 		private LogUtil log;
 
+		[ItemProperty]
 		private DocumentStore documentStore;
 
 		public void TaskActivated ()

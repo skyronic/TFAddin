@@ -43,6 +43,16 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="MonoDevelop.TaskForce, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\main\build\AddIns\MonoDevelop.TaskForce\MonoDevelop.TaskForce.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoDevelop.TaskForce.LocalProvider, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\main\build\AddIns\MonoDevelop.TaskForce\MonoDevelop.TaskForce.LocalProvider.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -55,16 +65,6 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MonoDevelop.TaskForce\MonoDevelop.TaskForce.csproj">
-      <Project>{55380290-808F-4E62-919F-A1D79ED734EB}</Project>
-      <Name>MonoDevelop.TaskForce</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonoDevelop.TaskForce.LocalProvider\MonoDevelop.TaskForce.LocalProvider.csproj">
-      <Project>{77C7CB25-E82F-417F-B8EB-40467DC5F892}</Project>
-      <Name>MonoDevelop.TaskForce.LocalProvider</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

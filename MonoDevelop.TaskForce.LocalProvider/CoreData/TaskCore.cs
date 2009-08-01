@@ -31,6 +31,7 @@ using System.Collections.Generic;
 
 // TODO: move the commenting arch somewher else
 using MonoDevelop.TaskForce.Gui.Components;
+using MonoDevelop.Core.Serialization;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
@@ -39,75 +40,38 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 	
 	public class TaskCore
 	{
-		int id;
+		
+		[ItemProperty]
 		public int Id
-		{get;set;
-		}
+		{get;set;}
 		
-		string title;
+		[ItemProperty]
 		public string Title
-		{
-			get
-			{
-				return title;
-			}
-			set
-			{
-				title = value;
-			}
-		}
+		{get;set;}
 		
-		int priority;
-		public int Priority;
+		[ItemProperty]
+		public int Priority
+		{get;set;}
 		
-		string description;
+		[ItemProperty]
 		public string Description
-		{
-			get
-			{
-				return description;
-			}
-			set
-			{
-				description = value;
-			}
-		}
+		{get;set;}
 		
-		DateTime createDate;
+		[ItemProperty]
 		public DateTime CreateDate
-		{
-			get
-			{
-				return createDate;
-			}
-			set
-			{
-				createDate = value;
-			}
-		}
+		{get;set;}
 		
-		DateTime dueDate;			
+		[ItemProperty]
 		public DateTime DueDate
-		{
-			get
-			{
-				return dueDate;
-			}
-			set
-			{
-				dueDate = value;
-			}
-		}
+		{get;set;}
 		
+		[ItemProperty]
 		public int Depends
-		{
-			get; set;
-		}
+		{get;set;}
 		
+		[ItemProperty]
 		public List<CommentData> Comments
-		{
-			get; set;
-		}
+		{get;set;}
 		
 		public void AddComment(CommentData c)
 		{

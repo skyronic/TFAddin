@@ -59,16 +59,6 @@
     <Compile Include="Bootstrap\CommentWidgetSandbox.cs" />
     <Compile Include="gtk-gui\TestBed.CommentWidgetSandbox.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MonoDevelop.TaskForce.LocalProvider\MonoDevelop.TaskForce.LocalProvider.csproj">
-      <Project>{77C7CB25-E82F-417F-B8EB-40467DC5F892}</Project>
-      <Name>MonoDevelop.TaskForce.LocalProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonoDevelop.TaskForce\MonoDevelop.TaskForce.csproj">
-      <Project>{55380290-808F-4E62-919F-A1D79ED734EB}</Project>
-      <Name>MonoDevelop.TaskForce</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Bootstrap\" />
@@ -77,5 +67,8 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="random.xml" />
   </ItemGroup>
 </Project>

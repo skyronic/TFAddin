@@ -30,6 +30,7 @@ using MonoDevelop.TaskForce.Utilities;
 using MonoDevelop.Ide.Gui;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MonoDevelop.Core.Serialization;
 
 
 namespace MonoDevelop.TaskForce.Context
@@ -38,7 +39,9 @@ namespace MonoDevelop.TaskForce.Context
 
 	public class DocumentStore
 	{
-		List<DocumentMemento> Documents;
+		[ItemProperty]
+		public List<DocumentMemento> Documents
+		{get;set;}
 
 		/// <summary>
 		/// Captures the mementoes and closes all the documents as well
