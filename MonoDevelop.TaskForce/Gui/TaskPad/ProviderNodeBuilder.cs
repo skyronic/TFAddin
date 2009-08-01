@@ -164,6 +164,11 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 				self.provider.CreateNewCategory();
 			}
 		}
+		[CommandHandler(ContextMenuCommands.Trigger1)]
+		public void OnTrigger1Clicked()
+		{
+			
+		}
 		
 		public override void OnNodeChange ()
 		{

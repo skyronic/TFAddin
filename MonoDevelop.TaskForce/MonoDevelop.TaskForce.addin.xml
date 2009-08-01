@@ -30,6 +30,8 @@
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.NewCategory" _label="New Category"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.ActivateTask" _label="Activate Task"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeactivateTask" _label="Deactivate Task"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger1" _label="Trigger Action 1"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger2" _label="Trigger Action 2"></Command>
 	</Extension>
 	
 	<ExtensionPoint path = "/MonoDevelop/TaskForce/TaskPad/ContextMenu" name = "Task pad context menu">
@@ -47,6 +49,8 @@
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.NewCategory"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.ActivateTask"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeactivateTask"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger1"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger2"></CommandItem>
 	
 	</Extension>
 	

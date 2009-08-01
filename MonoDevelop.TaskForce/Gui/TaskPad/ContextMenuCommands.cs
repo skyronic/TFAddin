@@ -48,5 +48,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		NewCategory,
 		ActivateTask,
 		DeactivateTask,
+		Trigger1,
+		Trigger2,
 	}
 }

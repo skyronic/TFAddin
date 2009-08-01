@@ -31,6 +31,7 @@ using System.Collections;
 using System.Text;
 using MonoDevelop.TaskForce.Providers;
 using System.Collections.Generic;
+using MonoDevelop.Core.Serialization;
 
 namespace MonoDevelop.TaskForce.Data
 {
@@ -40,9 +41,8 @@ namespace MonoDevelop.TaskForce.Data
 	{
 		
 		// The provider object (moved from providerdata to here)
+		[ItemProperty]
 		public IProvider provider;
-		
-		public string temp;
 		
 		public NodeData()
 		{
@@ -51,53 +51,29 @@ namespace MonoDevelop.TaskForce.Data
 			parent = null;
 		}
 		
-		string label;
+		[ItemProperty]
 		public string Label
-		{
-			get
-			{
-				return label;
-			}
-			set
-			{
-				label = value;
-			}
-		}		
+		{get;set;}
+		
+		[ItemProperty]
+		public object CoreDataObject
+		{get;set;}
 		
 		public abstract NodeType nodeType
 		{
 			get;
 		}
 		
-		Gdk.Pixbuf open_icon;
 		public Gdk.Pixbuf OpenIcon
-		{
-			get
-			{
-				return open_icon;
-			}
-			set
-			{
-				open_icon = value;
-			}
-		}
+		{get;set;}
 		
-		Gdk.Pixbuf closed_icon;
-		public Gdk.Pixbuf ClosedIcon
-		{
-			get
-			{
-				return closed_icon;
-			}
-			set
-			{
-				closed_icon = value;
-			}
-		}
+		Gdk.Pixbuf ClosedIcon
+		{get;set;}
 		
 		public NodeData parent;
 		
 		// The children of the current node.
+		[ItemProperty]
 		public List<NodeData> children;
 		
 		
@@ -184,7 +160,15 @@ namespace MonoDevelop.TaskForce.Data
 		public virtual void SerializeData()
 		{
 			//StringBuilder resultString;
+			DataContext c = new DataContext();
+			c.IncludeType(this.GetType());
+			
+			XmlDataSerializer ser = new XmlDataSerializer(c);
+			XmlTextWriter xtw = new XmlTextWriter(Console.Out);
+			
+			ser.Serialize(xtw,this);
 		}
+		
 	}
 	
 	public class NodeDataChangedEventArgs

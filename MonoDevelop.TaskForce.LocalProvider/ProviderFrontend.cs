@@ -52,6 +52,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		}
 		#endregion
 		
+		
 		/// <summary>
 		/// Shows the new task GUI and updates the providernode object when finished
 		/// </summary>
@@ -94,6 +95,9 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			{
 				log.ERROR("Provider is wrong!");
 			}
+			// Set the options for the provider
+			_providerNode.CoreDataObject = new ProviderCore();
+			
 			// initialize the database
 			DBHelper.Initialize();
 			
