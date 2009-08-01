@@ -27,6 +27,9 @@
 using System;
 using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.Utilities;
+using MonoDevelop.Core.Serialization;
+using System.IO;
+using MonoDevelop.TaskForce.Gui.TaskPad;
 namespace MonoDevelop.TaskForce
 {
 	public delegate void TaskChangedDelegate (ActiveTaskChangedEventArgs args);
@@ -59,6 +62,12 @@ namespace MonoDevelop.TaskForce
 		}
 
 		public bool IsTaskActive {
+			get;
+			set;
+		}
+		
+		public TaskSolutionPad TaskPad
+		{
 			get;
 			set;
 		}
@@ -125,6 +134,27 @@ namespace MonoDevelop.TaskForce
 					//TaskDeactivated (args);
 				}
 			}
+		}
+		
+		public void TempAddNewProvider(string serializedString)
+		{
+			DataContext c = new DataContext();
+			c.IncludeType(typeof(ProviderData));
+			
+			XmlDataSerializer ser = new XmlDataSerializer(c);
+			
+			TextReader serReader = new StringReader(serializedString);
+			
+			// Deserialize to get the new provider
+			log.INFO(" The deserialized component is: " + ser.Deserialize(serReader, typeof(ProviderData)).GetType().Name);
+			
+			//treeView.AddChild (providerData);
+			//providerData.provider.InitializeProvider (providerData);
+			//TaskPad.TreeView.AddChild(newProvider);
+			
+			// Try serializing the new provider again
+			//newProvider.SerializeData();
+			
 		}
 
 		private TaskForceMain ()

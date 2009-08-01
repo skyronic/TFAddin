@@ -66,5 +66,11 @@ namespace MonoDevelop.TaskForce.Data
 			return false;
 		}
 		
+		public override void PostSerializeHook ()
+		{
+			throw new System.NotImplementedException ();
+		}
+
+		
 	}
 }

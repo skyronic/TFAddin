@@ -45,6 +45,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		public TaskSolutionPad ()
 		{
 			log = new LogUtil ("TaskSolutionPad");
+			TaskForceMain.Instance.TaskPad = this;
 		}
 
 		public override void Initialize (MonoDevelop.Ide.Gui.Components.NodeBuilder[] builders, MonoDevelop.Ide.Gui.Components.TreePadOption[] options, string contextMenuPath)

@@ -33,6 +33,7 @@ using MonoDevelop.TaskForce.Providers;
 using System.Collections.Generic;
 using MonoDevelop.Core.Serialization;
 using System.Xml;
+using System.IO;
 
 namespace MonoDevelop.TaskForce.Data
 {
@@ -72,6 +73,8 @@ namespace MonoDevelop.TaskForce.Data
 		{get;set;}
 		
 		public NodeData parent;
+		
+		public string serializedString;
 		
 		// The children of the current node.
 		[ItemProperty]
@@ -164,10 +167,32 @@ namespace MonoDevelop.TaskForce.Data
 			DataContext c = new DataContext();
 			c.IncludeType(this.GetType());
 			
-			XmlDataSerializer ser = new XmlDataSerializer(c);
-			XmlTextWriter xtw = new XmlTextWriter(Console.Out);
+			XmlDataSerializer ser = new XmlDataSerializer(c);			
+			//XmlTextWriter xtw = new XmlTextWriter(Console.Out);
+			TextWriter serWriter = new StringWriter();
+			XmlTextWriter xtw = new XmlTextWriter(serWriter);
+			
 			
 			ser.Serialize(xtw,this);
+			serializedString =  serWriter.ToString();
+			//serializedString = serReader.ReadToEnd();
+			
+			log.INFO("The serialized string is - " + serializedString);
+			
+		}
+		
+		public abstract void PostSerializeHook();
+		
+		public virtual void DeserializeData()
+		{
+			DataContext c = new DataContext();
+			c.IncludeType(this.GetType());
+			
+			XmlDataSerializer ser = new XmlDataSerializer(c);
+			
+			TextReader serReader = new StringReader(serializedString);
+			ser.Deserialize(serReader, this.GetType());			
+			
 		}
 		
 	}

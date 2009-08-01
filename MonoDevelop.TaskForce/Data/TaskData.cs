@@ -102,5 +102,11 @@ namespace MonoDevelop.TaskForce.Data
 			ser.Serialize(xtw,this);
 		}
 		
+		public override void PostSerializeHook ()
+		{
+			throw new System.NotImplementedException ();
+		}
+
+		
 	}
 }
