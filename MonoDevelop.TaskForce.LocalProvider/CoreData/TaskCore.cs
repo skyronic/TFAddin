@@ -32,13 +32,14 @@ using System.Collections.Generic;
 // TODO: move the commenting arch somewher else
 using MonoDevelop.TaskForce.Gui.Components;
 using MonoDevelop.Core.Serialization;
+using MonoDevelop.TaskForce.Data;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
 	
 	
 	
-	public class TaskCore
+	public class TaskCore : ICoreData
 	{
 		
 		[ItemProperty]
@@ -133,6 +134,20 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		{
 			SeedTaskCore(seedString, seedInt);
 		}
+
+		#region ICoreData implementation
+		public string SerializeToXML ()
+		{
+			// Get the serialized object and return the string
+			return Utilities.Util.SerializeObjectToString(this);
+		}
+		
+		public void DeSerialize (string serializedString)
+		{
+			throw new System.NotImplementedException();
+		}
+		#endregion
+
 
 	}
 }

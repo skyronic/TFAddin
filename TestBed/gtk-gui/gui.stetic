@@ -7,8 +7,6 @@
   <import>
     <widget-library name="../../../../main/build/bin/MonoDevelop.Components.dll" />
     <widget-library name="../../../../main/build/bin/MonoDevelop.Ide.dll" />
-    <widget-library name="../../../../main/build/AddIns/MonoDevelop.TaskForce/MonoDevelop.TaskForce.LocalProvider.dll" />
-    <widget-library name="../../../../main/build/AddIns/MonoDevelop.TaskForce/MonoDevelop.TaskForce.dll" />
     <widget-library name="../bin/Debug/TestBed.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="TestBed.CommentWidgetSandbox" design-size="400 300">

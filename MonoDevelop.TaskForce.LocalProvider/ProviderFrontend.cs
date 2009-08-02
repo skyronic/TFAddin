@@ -161,6 +161,20 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		}
 		
 		
+		#region Serialization stuff
+		public string SerializeToXML ()
+		{
+			// Get the serialized object and return the string
+			return Utilities.Util.SerializeObjectToString(this);
+		}
+		
+		public void DeSerialize (string serializedString)
+		{
+			
+		}
+		
+		#endregion
+		
 		
 	}
 }

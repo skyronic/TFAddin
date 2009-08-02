@@ -26,18 +26,31 @@
 
 using System;
 using MonoDevelop.Core.Serialization;
+using MonoDevelop.TaskForce.Data;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
 
 
-	public class ProviderCore
+	public class ProviderCore : ICoreData
 	{
 		
 		// Just to test the serialization
 		[ItemProperty]
 		public int AnswerToLife
 			{get;set;}
+
+		#region ICoreData implementation
+		public void DeSerialize (string serializedString)
+		{
+		}
+		
+		public string SerializeToXML ()
+		{
+			return Utilities.Util.SerializeObjectToString(this);
+		}
+		#endregion
+
 		public ProviderCore ()
 		{
 			AnswerToLife = 42;

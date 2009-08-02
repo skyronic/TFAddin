@@ -138,23 +138,9 @@ namespace MonoDevelop.TaskForce
 		
 		public void TempAddNewProvider(string serializedString)
 		{
-			DataContext c = new DataContext();
-			c.IncludeType(typeof(ProviderData));
-			
-			XmlDataSerializer ser = new XmlDataSerializer(c);
-			
-			TextReader serReader = new StringReader(serializedString);
-			
-			// Deserialize to get the new provider
-			log.INFO(" The deserialized component is: " + ser.Deserialize(serReader, typeof(ProviderData)).GetType().Name);
-			
-			//treeView.AddChild (providerData);
-			//providerData.provider.InitializeProvider (providerData);
-			//TaskPad.TreeView.AddChild(newProvider);
-			
-			// Try serializing the new provider again
-			//newProvider.SerializeData();
-			
+			// deserialize the string into a ProviderData
+			object o1 = Util.DeserializeString(serializedString, typeof(ProviderData));
+			log.INFO("The type of the object is - " + o1.GetType().Name);
 		}
 
 		private TaskForceMain ()

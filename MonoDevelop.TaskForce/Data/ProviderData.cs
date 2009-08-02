@@ -81,7 +81,10 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public override void PostSerializeHook ()
 		{
-			throw new System.NotImplementedException ();
+			// Do any post-serialization work here
+			
+			
+			base.PostSerializeHook();
 		}
 
 	}

@@ -51,14 +51,18 @@ namespace MonoDevelop.TaskForce.Data
 			children = new List<NodeData>();
 			data = new Hashtable();
 			parent = null;
+			log = new LogUtil("NodeData");
 		}
 		
 		[ItemProperty]
 		public string Label
 		{get;set;}
 		
+		public ICoreData CoreDataObject
+		{get;set;}
+		
 		[ItemProperty]
-		public object CoreDataObject
+		public string CoreDataSerializationString
 		{get;set;}
 		
 		public abstract NodeType nodeType
@@ -163,35 +167,43 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public virtual void SerializeData()
 		{
-			//StringBuilder resultString;
-			DataContext c = new DataContext();
-			c.IncludeType(this.GetType());
+			PreSerializeHook();
 			
-			XmlDataSerializer ser = new XmlDataSerializer(c);			
-			//XmlTextWriter xtw = new XmlTextWriter(Console.Out);
-			TextWriter serWriter = new StringWriter();
-			XmlTextWriter xtw = new XmlTextWriter(serWriter);
-			
-			
-			ser.Serialize(xtw,this);
-			serializedString =  serWriter.ToString();
-			//serializedString = serReader.ReadToEnd();
-			
-			log.INFO("The serialized string is - " + serializedString);
+			// Serialize the current object
+			serializedString = Util.SerializeObjectToString(this);
 			
 		}
 		
-		public abstract void PostSerializeHook();
+		
+		/// <summary>
+		/// this does any generic NodeData post serialization 
+		/// </summary>
+		public virtual void PostSerializeHook()
+		{
+			
+		}
+		
+		
+		/// <summary>
+		/// Here, we will do all the actions required before serialization
+		/// is to take place. 
+		/// </summary>
+		public virtual void PreSerializeHook()		
+		{			
+			log.LOG("Performing pre serialization hook");
+			// First, serialize the CoreData into a string
+			CoreDataSerializationString = CoreDataObject.SerializeToXML();
+			
+			// call the Pre serialization hooks for all it's children so that they 
+			// make sure to do their required parts
+			foreach(NodeData node in children)
+			{
+				node.PreSerializeHook();
+			}
+		}
 		
 		public virtual void DeserializeData()
 		{
-			DataContext c = new DataContext();
-			c.IncludeType(this.GetType());
-			
-			XmlDataSerializer ser = new XmlDataSerializer(c);
-			
-			TextReader serReader = new StringReader(serializedString);
-			ser.Deserialize(serReader, this.GetType());			
 			
 		}
 		

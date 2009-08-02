@@ -21,25 +21,17 @@
             <Node name="Data" expanded="True" />
             <Node name="Gui" expanded="True">
               <Node name="Components" expanded="True" />
-              <Node name="TaskPad" expanded="True">
-                <Node name="ProviderNodeBuilder.cs" selected="True" />
-              </Node>
+              <Node name="TaskPad" expanded="True" />
             </Node>
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
             <Node name="CoreData" expanded="True" />
             <Node name="TaskWidgets" expanded="True" />
           </Node>
-          <Node name="TestBed" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
-      </Pad>
-      <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
-        <State expanded="True">
-          <Node name="Graduate_Title" selected="True" />
-        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

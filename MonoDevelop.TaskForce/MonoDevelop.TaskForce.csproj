@@ -106,6 +106,7 @@
     <Compile Include="TaskForceMain.cs" />
     <Compile Include="Context\DocumentMemento.cs" />
     <Compile Include="Context\DocumentStore.cs" />
+    <Compile Include="Utilities\Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
