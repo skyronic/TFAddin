@@ -3,14 +3,16 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/TaskPad/ProviderNodeBuilder.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Utilities/Util.cs" ctype="Workbench">
     <Files>
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="32" Column="40" />
-      <File FileName="MonoDevelop.TaskForce/Context/ContextData.cs" Line="49" Column="3" />
-      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/ProviderNodeBuilder.cs" Line="118" Column="18" />
-      <File FileName="MonoDevelop.TaskForce/Gui/TaskPad/TaskNodeBuilder.cs" Line="182" Column="23" />
-      <File FileName="MonoDevelop.TaskForce/TaskForceMain.cs" Line="75" Column="35" />
-      <File FileName="MonoDevelop.TaskForce/Data/TaskData.cs" Line="85" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/TaskWidgets/EditTaskWidget.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce/Providers/IProvider.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce/Data/NodeData.cs" Line="195" Column="38" />
+      <File FileName="MonoDevelop.TaskForce/Data/TaskData.cs" Line="57" Column="13" />
+      <File FileName="MonoDevelop.TaskForce/Data/ProviderData.cs" Line="51" Column="4" />
+      <File FileName="MonoDevelop.TaskForce/Context/ContextData.cs" Line="48" Column="2" />
+      <File FileName="MonoDevelop.TaskForce/Utilities/Util.cs" Line="61" Column="38" />
+      <File FileName="MonoDevelop.TaskForce/TaskForceMain.cs" Line="169" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,6 +24,10 @@
             <Node name="Gui" expanded="True">
               <Node name="Components" expanded="True" />
               <Node name="TaskPad" expanded="True" />
+            </Node>
+            <Node name="Providers" expanded="True" />
+            <Node name="Utilities" expanded="True">
+              <Node name="Util.cs" selected="True" />
             </Node>
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">

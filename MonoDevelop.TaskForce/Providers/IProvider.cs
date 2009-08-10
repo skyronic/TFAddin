@@ -52,5 +52,8 @@ namespace MonoDevelop.TaskForce.Providers
 		void AddChildCategory(NodeData parent);
 		string SerializeToXML();
 		void DeSerialize(string serializedString);
+		void RegisterTypes();
+		void ReConstructProvider(ProviderData _providerNode);
+
 	}
 }

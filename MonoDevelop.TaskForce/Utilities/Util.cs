@@ -35,15 +35,21 @@ namespace MonoDevelop.TaskForce.Utilities
 
 	public static class Util
 	{
+		public static DataContext context = new DataContext();
+		
+		public static void AddTypeToContext(Type t)
+		{
+			context.IncludeType(t);
+		}
+		
 		public static string SerializeObjectToString(object o)
 		{
 			LogUtil log = new LogUtil("Util.Serialization");
-			log.DEBUG("Serializing - " + o.ToString());
+			// log.DEBUG("Serializing - " + o.ToString());
 			//StringBuilder resultString;
-			DataContext c = new DataContext();
-			c.IncludeType(o.GetType());
+			context.IncludeType(o.GetType());
 			
-			XmlDataSerializer ser = new XmlDataSerializer(c);			
+			XmlDataSerializer ser = new XmlDataSerializer(context);			
 			//XmlTextWriter xtw = new XmlTextWriter(Console.Out);
 			TextWriter serWriter = new StringWriter();
 			XmlTextWriter xtw = new XmlTextWriter(serWriter);
@@ -53,17 +59,16 @@ namespace MonoDevelop.TaskForce.Utilities
 			string serializedString =  serWriter.ToString();
 			//serializedString = serReader.ReadToEnd();
 			
-			log.DEBUG("The serialized string is - " + serializedString);
+			//log.DEBUG("The serialized string is - " + serializedString);
 			
 			return serializedString;
 		}
 		
 		public static object DeserializeString(string XMLString, Type serType)
 		{
-			DataContext c = new DataContext();
-			c.IncludeType(serType);
+			context.IncludeType(serType);
 			
-			XmlDataSerializer ser = new XmlDataSerializer(c);
+			XmlDataSerializer ser = new XmlDataSerializer(context);
 			
 			TextReader serReader = new StringReader(XMLString);
 			return ser.Deserialize(serReader, serType);

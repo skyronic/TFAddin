@@ -108,6 +108,12 @@ namespace MonoDevelop.TaskForce.Data
 			
 			base.PostSerializeHook();
 		}
+		
+		public override void PostDeserializeHook ()
+		{
+			base.PostDeserializeHook ();
+		}
+
 
 		
 	}

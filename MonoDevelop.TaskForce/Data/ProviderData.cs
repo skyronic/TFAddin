@@ -86,6 +86,16 @@ namespace MonoDevelop.TaskForce.Data
 			
 			base.PostSerializeHook();
 		}
+		
+		
+		/// <summary>
+		/// To be exectued after deserialization, to clean up any mess that might've been created 
+		/// </summary>
+		public override void PostDeserializeHook ()
+		{
+			base.PostDeserializeHook ();
+		}
+
 
 	}
 }

@@ -49,6 +49,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		public string DoSomething ()
 		{
 			return "Hello there!";
+			
 		}
 		#endregion
 		
@@ -106,7 +107,6 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			
 			// get an arraylist of all the taskcores
 			List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
-			log.INFO("Tasks - Count - " + tasks.Count.ToString());
 			foreach(TaskCore core in tasks)
 			{
 				log.INFO("The core object is: " + core);
@@ -123,10 +123,32 @@ namespace MonoDevelop.TaskForce.LocalProvider
 				providerNode.AddChildSilent(taskNode);
 				
 			}
-			
+
 			// trigger changes in the gui
 			providerNode.TriggerUpdate();
 		}
+		
+					
+		public void ReConstructProvider(ProviderData _providerNode)
+		{
+			providerNode = _providerNode;
+			
+			log = new LogUtil("LOCAL PROVIDER");
+			
+			if(providerNode == null)
+			{
+				log.ERROR("Provider is wrong!");
+			}
+			
+			// initialize the database
+			DBHelper.Initialize();
+			
+			// set any required details about the provider
+			providerNode.Label = "Local Provider2";
+			
+			
+		}
+			
 		
 		/// <summary>
 		/// Creates a new category and appends it to the provider node builder
@@ -173,6 +195,13 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			
 		}
 		
+		public void RegisterTypes()
+		{
+			
+			Util.AddTypeToContext(typeof(ProviderFrontend));
+			Util.AddTypeToContext(typeof(TaskCore));
+			Util.AddTypeToContext(typeof(ProviderCore));
+		}
 		#endregion
 		
 		

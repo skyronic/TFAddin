@@ -30,6 +30,7 @@ using MonoDevelop.TaskForce.Utilities;
 using MonoDevelop.Core.Serialization;
 using System.IO;
 using MonoDevelop.TaskForce.Gui.TaskPad;
+using MonoDevelop.Ide.Gui.Components;
 namespace MonoDevelop.TaskForce
 {
 	public delegate void TaskChangedDelegate (ActiveTaskChangedEventArgs args);
@@ -53,6 +54,11 @@ namespace MonoDevelop.TaskForce
 			/// TODO: thread-safety locking
 			/// </summary>
 			get { return instance; }
+		}
+		
+		public ExtensibleTreeView TreeView
+		{get;
+			set;
 		}
 
 
@@ -138,9 +144,19 @@ namespace MonoDevelop.TaskForce
 		
 		public void TempAddNewProvider(string serializedString)
 		{
-			// deserialize the string into a ProviderData
+			log.INFO("The serialized string is - " + serializedString);
+			
+			// deserialize the string into a ProviderData			
 			object o1 = Util.DeserializeString(serializedString, typeof(ProviderData));
-			log.INFO("The type of the object is - " + o1.GetType().Name);
+			
+			ProviderData tempProv = o1 as ProviderData;
+			tempProv.SerializeData();
+			log.INFO("The freshly serialized data is:" + tempProv.serializedString);
+			
+			tempProv.provider.ReConstructProvider(tempProv);
+			
+			// add the provider data node to the treeview, and pray it works
+			this.TreeView.AddChild(tempProv);
 		}
 
 		private TaskForceMain ()

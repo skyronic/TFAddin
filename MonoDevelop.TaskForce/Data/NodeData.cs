@@ -58,10 +58,11 @@ namespace MonoDevelop.TaskForce.Data
 		public string Label
 		{get;set;}
 		
+		
+		[ItemProperty]
 		public ICoreData CoreDataObject
 		{get;set;}
 		
-		[ItemProperty]
 		public string CoreDataSerializationString
 		{get;set;}
 		
@@ -183,6 +184,37 @@ namespace MonoDevelop.TaskForce.Data
 			
 		}
 		
+		public virtual void PostDeserializeHook()
+		{
+			// Re-enable anything that needs to be done in a constructor normally
+			log = new LogUtil("NodeData");
+			
+			// Deserialize the CoreDataString into the CoreDataObject
+			//CoreDataObject.DeSerialize(CoreDataSerializationString);
+			
+			// Free up the memory contained in the CoreDataSerializedString
+			//CoreDataSerializationString = null;
+			
+			
+			// if there are no children available, make sure that there's a new object for children
+			if(children == null)
+			{
+				children = new List<NodeData>();
+			}
+			else
+			{
+				foreach(NodeData child in children)
+				{
+					child.parent = this;
+					
+					// IMPORTANT: this assumes that the provider has been set already
+					child.provider = this.provider;
+					
+					child.PostDeserializeHook();
+				}
+			}
+		}
+		
 		
 		/// <summary>
 		/// Here, we will do all the actions required before serialization
@@ -192,7 +224,7 @@ namespace MonoDevelop.TaskForce.Data
 		{			
 			log.LOG("Performing pre serialization hook");
 			// First, serialize the CoreData into a string
-			CoreDataSerializationString = CoreDataObject.SerializeToXML();
+			//CoreDataSerializationString = CoreDataObject.SerializeToXML();
 			
 			// call the Pre serialization hooks for all it's children so that they 
 			// make sure to do their required parts
