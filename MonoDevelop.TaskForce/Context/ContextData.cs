@@ -55,12 +55,16 @@ namespace MonoDevelop.TaskForce.Context
 
 		public void TaskActivated ()
 		{
-			documentStore.RestoreMemento ();
+			documentStore.RestoreMemento ();		
 		}
 
 		public void TaskDeactivated ()
 		{
 			documentStore.CaptureMemento ();
+			
+			
+			// Store the task information by triggering an update
+			TaskForceMain.Instance.StartTFStoreUpdate();
 		}
 
 

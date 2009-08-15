@@ -122,19 +122,21 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// </param>
 		protected virtual void OnNewCommentAdded (CommentAddedEventArgs args)
 		{
-			/*
-			 * TODO: Not required after moving to new serialization backend
+			
+			// TODO: Not required after moving to new serialization backend
 			// get the new comment
 			CommentData comment = args.newComment;
 
 			TaskCore core = EditTarget.CoreDataObject as TaskCore;
 
-			// update the database
-			DBHelper.AddComment (core, comment);
+			// update the database DEPRECATED
+			// DBHelper.AddComment (core, comment);
 
 			// add the comment to the comment object
 			core.Comments.Add (comment);
-			*/
+			
+			// Trigger an update.
+			TaskForceMain.Instance.StartTFStoreUpdate();
 		}
 
 		/// <summary>
@@ -162,6 +164,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			
 			// TODO: DB is deprecated
 			// DBHelper.UpdateTask (core);
+			
+			// Tell the store to start the update
+			TaskForceMain.Instance.StartTFStoreUpdate();
 		}
 	}
 }
