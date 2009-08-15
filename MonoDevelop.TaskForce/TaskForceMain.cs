@@ -34,6 +34,7 @@ using MonoDevelop.Ide.Gui.Components;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 using MonoDevelop.Core;
+using System.Collections.Generic;
 namespace MonoDevelop.TaskForce
 {
 	public delegate void TaskChangedDelegate (ActiveTaskChangedEventArgs args);
@@ -188,6 +189,7 @@ namespace MonoDevelop.TaskForce
 			// Subscribe to the solution opened event.
 			IdeApp.Workspace.SolutionLoaded += IdeAppWorkspaceSolutionLoaded;
 			
+			this.RegisterAllTypes();
 		}
 
 		void IdeAppWorkspaceSolutionLoaded (object sender, SolutionEventArgs e)
@@ -197,12 +199,23 @@ namespace MonoDevelop.TaskForce
 			
 			if(File.Exists(targetFileName))
 			{
+				log.INFO("Deserializing TFStore from file");
+				// Read from the file
+				Store = Util.DeserializeString(File.ReadAllText(targetFileName), typeof(TFStore)) as TFStore;
+				if(Store == null)
+				{
+					log.ERROR("unable to deserialize taskforce store");
+					return;
+				}
+				Store.TargetFile = targetFileName;
+				Store.TreeView = this.TreeView;
 				
+				Store.PostDeserializeHook();
 			}
 			else
 			{
 				// Create the directory				
-				FileService.CreateDirectory(".taskforce");
+				FileService.CreateDirectory(ActiveSolution.BaseDirectory.Combine(".taskforce").FullPath);
 				Store = new TFStore();
 				
 				Store.TargetFile = targetFileName;
@@ -210,7 +223,36 @@ namespace MonoDevelop.TaskForce
 				Store.CreateNewLocalProvider(ActiveSolution);
 				
 			}
+		}
+		
+		
+		/// <summary>
+		/// Registers all the types with the serialization engine
+		/// </summary>
+		public void RegisterAllTypes()
+		{
+			// Register all the provider types with the data context of the serializer
+			ProviderData.RegisterProviderTypes();
 			
+			// make a list of all the types here
+			List<Type> typeList = new List<Type>();
+			
+			typeList.Add(typeof(TaskData));
+			typeList.Add(typeof(TFStore));
+			typeList.Add(typeof(NodeData));
+			typeList.Add(typeof(ProviderData));
+			typeList.Add(typeof(MonoDevelop.TaskForce.Gui.Components.CommentData));
+			// typeList.Add(typeof(TaskData));
+			
+			foreach(Type t in typeList)
+			{
+				Util.context.IncludeType(t);
+			}
+		}
+		
+		public void StartTFStoreUpdate()
+		{
+			Store.UpdateFile();
 		}
 	}
 

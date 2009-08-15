@@ -122,6 +122,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// </param>
 		protected virtual void OnNewCommentAdded (CommentAddedEventArgs args)
 		{
+			/*
+			 * TODO: Not required after moving to new serialization backend
 			// get the new comment
 			CommentData comment = args.newComment;
 
@@ -132,6 +134,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 
 			// add the comment to the comment object
 			core.Comments.Add (comment);
+			*/
 		}
 
 		/// <summary>
@@ -156,7 +159,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			core.Priority = (int)prioritySpin.Value;
 
 			log.INFO ("updating taskcore as: " + core.ToString ());
-			DBHelper.UpdateTask (core);
+			
+			// TODO: DB is deprecated
+			// DBHelper.UpdateTask (core);
 		}
 	}
 }

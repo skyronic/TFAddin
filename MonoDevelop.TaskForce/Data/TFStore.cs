@@ -116,6 +116,22 @@ namespace MonoDevelop.TaskForce.Data
 			FileService.RenameFile(TargetFile.FullPath + ".temp", TargetFile.FullPath);	
 		}
 		
+		/// <summary>
+		/// Restore an object's state after the serialization system returned all the data
+		/// </summary>
+		public void PostDeserializeHook()
+		{
+			log.DEBUG("PostDeserializeHook()");
+			foreach(ProviderData providerData in SolutionProviders)
+			{				
+				// execute the post deserialization hook for all the providers
+				providerData.PostDeserializeHook();
+				
+				log.DEBUG("Activating a provider");
+				TreeView.AddChild(providerData);
+			}
+		}
+		
 		
 		public TFStore ()
 		{

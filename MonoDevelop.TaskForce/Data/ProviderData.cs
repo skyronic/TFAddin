@@ -53,6 +53,23 @@ namespace MonoDevelop.TaskForce.Data
 			
 		}
 		
+		public static void RegisterProviderTypes()
+		{
+			// TODO: This is temporary
+			ExtensionNodeList nodes = AddinManager.GetExtensionNodes("/MonoDevelop/TaskForce/Providers");
+			
+			// take nodes[0] by default
+			foreach(ProviderExtensionNode node in nodes)
+			{
+				
+				//ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
+				
+				
+				IProvider tempProvider = (IProvider) Activator.CreateInstance(node.Class);
+				tempProvider.RegisterTypes();
+			}
+		}
+		
 		public override NodeType nodeType {
 		get {
 				return NodeType.Provider;
