@@ -90,7 +90,6 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		{
 			providerNode = _providerNode;
 			
-			log = new LogUtil("LOCAL PROVIDER");
 			
 			if(providerNode == null)
 			{
@@ -129,7 +128,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		}
 		
 					
-		public void ReConstructProvider(ProviderData _providerNode)
+		public void ConstructBasicProvider(ProviderData _providerNode)
 		{
 			providerNode = _providerNode;
 			
@@ -138,16 +137,10 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			if(providerNode == null)
 			{
 				log.ERROR("Provider is wrong!");
-			}
-			
-			// initialize the database
-			DBHelper.Initialize();
-			
-			// set any required details about the provider
-			providerNode.Label = "Local Provider2";
-			
-			
+			}		
 		}
+		
+		
 			
 		
 		/// <summary>
@@ -164,7 +157,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 	
 		public ProviderFrontend()
 		{
-			
+			log = new LogUtil("LOCAL PROVIDER");
 		}
 		
 		/// <summary>
@@ -205,5 +198,47 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		#endregion
 		
 		
+		public void SeedDataForTesting (string seedString)
+		{
+			providerNode.CoreDataObject = new ProviderCore();
+			
+			// initialize the database
+			// DBHelper.Initialize();
+			
+			// get an arraylist of all the taskcores
+			// TODO: Phasing out the database model
+			/* List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
+			foreach(TaskCore core in tasks)
+			{
+				log.INFO("The core object is: " + core);
+				// create a new task node
+				TaskData taskNode = new TaskData();
+				
+				// set the core data object
+				taskNode.CoreDataObject = core;
+				
+				// set the label and icon
+				taskNode.Label = core.Title;
+				
+				// update the tree without updating gui				
+				providerNode.AddChildSilent(taskNode);
+				
+			}*/		
+			
+			// create a few random taskcore items
+			for(int i = 0; i < 3; i++)
+			{
+				// create a core data object and seed it
+				TaskCore core = new TaskCore();
+				core.SeedTaskCore(seedString, i);
+				
+				TaskData taskNode = new TaskData();
+				taskNode.CoreDataObject = core;
+				
+				taskNode.Label = core.Title;
+				
+				providerNode.AddChildSilent(taskNode);
+			}
+		}		
 	}
 }

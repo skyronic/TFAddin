@@ -207,6 +207,8 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	}
 	
 	
+	
+	
 	[Serializable]
 	public sealed class CommentAddedEventArgs : EventArgs
 	{

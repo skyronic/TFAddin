@@ -70,6 +70,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		public int Depends
 		{get;set;}
 		
+		
+		
+		
 		[ItemProperty]
 		public List<CommentData> Comments
 		{get;set;}

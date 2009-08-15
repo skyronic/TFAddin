@@ -94,7 +94,6 @@ namespace MonoDevelop.TaskForce.Data
 		
 		public virtual void AddChild(NodeData childData)
 		{
-			log.DEBUG("AddChild");
 			// Check if this node can have this as a child
 			if(CanMakeChild(childData))
 			{
@@ -116,7 +115,6 @@ namespace MonoDevelop.TaskForce.Data
 				if(oldParent!=null)
 					oldParent.TriggerUpdate();
 				
-				log.DEBUG("Added a new child:" + childData.ToString());
 			}
 		}
 		
@@ -131,7 +129,6 @@ namespace MonoDevelop.TaskForce.Data
 		/// </param>
 		public virtual void AddChildSilent(NodeData childData)
 		{
-			log.DEBUG("AddChild");
 			// Check if this node can have this as a child
 			if(CanMakeChild(childData))
 			{
@@ -148,7 +145,7 @@ namespace MonoDevelop.TaskForce.Data
 				this.children.Add(childData);
 				
 				// Inform both classes about the updates
-				this.TriggerUpdate();
+				//this.TriggerUpdate();
 				
 			}
 		}

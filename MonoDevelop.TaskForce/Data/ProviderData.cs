@@ -46,6 +46,7 @@ namespace MonoDevelop.TaskForce.Data
 			// TODO: This is temporary
 			ExtensionNodeList nodes = AddinManager.GetExtensionNodes("/MonoDevelop/TaskForce/Providers");
 			
+			
 			// take nodes[0] by default
 			ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
 			provider = (IProvider) Activator.CreateInstance(node.Class);
@@ -57,6 +58,8 @@ namespace MonoDevelop.TaskForce.Data
 				return NodeType.Provider;
 			}
 		}
+		
+		
 		
 		
 		public override bool CanMakeChild (NodeData childData)
@@ -94,6 +97,17 @@ namespace MonoDevelop.TaskForce.Data
 		public override void PostDeserializeHook ()
 		{
 			base.PostDeserializeHook ();
+		}
+		
+		
+		/// <summary>
+		/// TODO: What's the point of this? 
+		/// </summary>
+		public void CreateEmptyProvider()
+		{
+			// Creates the provider and seeds it with minimum possible information
+			provider.ConstructBasicProvider(this);
+			
 		}
 
 

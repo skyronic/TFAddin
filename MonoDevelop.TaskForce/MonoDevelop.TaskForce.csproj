@@ -75,6 +75,8 @@
     <Folder Include="Providers\" />
     <Folder Include="Gui\Components\" />
     <Folder Include="Context\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Data\Serialization\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gui\TaskPad\TaskSolutionPad.cs" />
@@ -107,6 +109,11 @@
     <Compile Include="Context\DocumentMemento.cs" />
     <Compile Include="Context\DocumentStore.cs" />
     <Compile Include="Utilities\Util.cs" />
+    <Compile Include="Commands\TaskForceStartupHandler.cs" />
+    <Compile Include="Data\TFStore.cs" />
+    <Compile Include="TFStore.Instance.LoadFromSolution.cs" />
+    <Compile Include="Data\Serialization\ISerializationHooks.cs" />
+    <Compile Include="Commands\CommandList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

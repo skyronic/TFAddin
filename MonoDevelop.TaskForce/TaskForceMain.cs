@@ -31,6 +31,9 @@ using MonoDevelop.Core.Serialization;
 using System.IO;
 using MonoDevelop.TaskForce.Gui.TaskPad;
 using MonoDevelop.Ide.Gui.Components;
+using MonoDevelop.Ide.Gui;
+using MonoDevelop.Projects;
+using MonoDevelop.Core;
 namespace MonoDevelop.TaskForce
 {
 	public delegate void TaskChangedDelegate (ActiveTaskChangedEventArgs args);
@@ -60,7 +63,12 @@ namespace MonoDevelop.TaskForce
 		{get;
 			set;
 		}
-
+		
+		public TFStore Store
+		{
+			get;
+			set;
+		}
 
 		public TaskData ActiveTask {
 			get;
@@ -153,7 +161,7 @@ namespace MonoDevelop.TaskForce
 			tempProv.SerializeData();
 			log.INFO("The freshly serialized data is:" + tempProv.serializedString);
 			
-			tempProv.provider.ReConstructProvider(tempProv);
+			tempProv.provider.ConstructBasicProvider(tempProv);
 			
 			// add the provider data node to the treeview, and pray it works
 			this.TreeView.AddChild(tempProv);
@@ -163,6 +171,46 @@ namespace MonoDevelop.TaskForce
 		{
 			IsTaskActive = false;
 			log = new LogUtil ("TaskForceMain");
+		}
+		
+		
+		
+		
+		/// <summary>
+		/// The main function that will be executed on the startup of the application
+		/// 
+		/// Teh Entry point
+		/// </summary>
+		public void Main()
+		{
+			log.INFO("TaskForce started");
+			
+			// Subscribe to the solution opened event.
+			IdeApp.Workspace.SolutionLoaded += IdeAppWorkspaceSolutionLoaded;
+			
+		}
+
+		void IdeAppWorkspaceSolutionLoaded (object sender, SolutionEventArgs e)
+		{
+			Solution ActiveSolution = e.Solution;
+			string targetFileName = ActiveSolution.BaseDirectory.Combine(".taskforce/taskforce.xml").FullPath;
+			
+			if(File.Exists(targetFileName))
+			{
+				
+			}
+			else
+			{
+				// Create the directory				
+				FileService.CreateDirectory(".taskforce");
+				Store = new TFStore();
+				
+				Store.TargetFile = targetFileName;
+				Store.TreeView = this.TreeView;
+				Store.CreateNewLocalProvider(ActiveSolution);
+				
+			}
+			
 		}
 	}
 

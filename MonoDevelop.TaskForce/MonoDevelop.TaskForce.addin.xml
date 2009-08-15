@@ -32,6 +32,7 @@
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeactivateTask" _label="Deactivate Task"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger1" _label="Trigger Action 1"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger2" _label="Trigger Action 2"></Command>
+	
 	</Extension>
 	
 	<ExtensionPoint path = "/MonoDevelop/TaskForce/TaskPad/ContextMenu" name = "Task pad context menu">
@@ -58,4 +59,10 @@
 	<Description>Must implement iprovider and be a static</Description>
 	<ExtensionNode name="Provider" type="MonoDevelop.TaskForce.Providers.ProviderExtensionNode"></ExtensionNode>
 	</ExtensionPoint>
+	
+	
+	<Extension path="/MonoDevelop/Ide/StartupHandlers">
+		<!--<CommandItem id="MonoDevelop.TaskForce.Commands.CommandList.TaskForceStartupHandler"></CommandItem>-->
+		<Class class="MonoDevelop.TaskForce.Commands.TaskForceStartupHandler"></Class>
+	</Extension>
 </Addin>

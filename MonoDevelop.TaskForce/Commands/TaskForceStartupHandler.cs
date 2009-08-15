@@ -1,5 +1,5 @@
 // 
-// TaskSolutionPad.cs
+// TaskForceStartupHandler.cs
 //  
 // Author:
 //       Anirudh Sanjeev <anirudh@anirudhsanjeev.org>
@@ -25,42 +25,30 @@
 // THE SOFTWARE.
 
 using System;
-using MonoDevelop.Ide.Gui.Pads;
-using MonoDevelop.TaskForce.Utilities;
-using MonoDevelop.TaskForce.Data;
 
-
-
-
-
-namespace MonoDevelop.TaskForce.Gui.TaskPad
+namespace MonoDevelop.TaskForce.Commands
 {
 
-	/// <summary>
-	/// Container class for the task solution pad
-	/// </summary>
-	public class TaskSolutionPad : TreeViewPad
+
+	public class TaskForceStartupHandler : MonoDevelop.Components.Commands.CommandHandler
 	{
-		LogUtil log;
-		public TaskSolutionPad ()
+
+		protected override void Run (object dataItem)
 		{
-			log = new LogUtil ("TaskSolutionPad");
-			TaskForceMain.Instance.TaskPad = this;
+			TaskForceMain.Instance.Main();
+			base.Run(dataItem);
+		}
+		
+		public TaskForceStartupHandler ()
+		{
 		}
 
-		public override void Initialize (MonoDevelop.Ide.Gui.Components.NodeBuilder[] builders, MonoDevelop.Ide.Gui.Components.TreePadOption[] options, string contextMenuPath)
+		protected override void Run ()
 		{
-			// Create a temporary data provider
-			base.Initialize (builders, options, contextMenuPath);
-			TaskForceMain.Instance.TreeView = treeView;
-			
-			/*ProviderData providerData = new ProviderData ();
-			
-			TaskForceMain.Instance.TreeView = treeView;
-
-
-			treeView.AddChild (providerData);
-			providerData.provider.InitializeProvider (providerData);*/
+			// Start TaskForce
+			TaskForceMain.Instance.Main();
+			base.Run();
 		}
+		
 	}
 }

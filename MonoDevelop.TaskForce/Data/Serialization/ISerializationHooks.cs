@@ -1,5 +1,5 @@
 // 
-// TaskSolutionPad.cs
+// ISerializationHooks.cs
 //  
 // Author:
 //       Anirudh Sanjeev <anirudh@anirudhsanjeev.org>
@@ -25,42 +25,21 @@
 // THE SOFTWARE.
 
 using System;
-using MonoDevelop.Ide.Gui.Pads;
-using MonoDevelop.TaskForce.Utilities;
-using MonoDevelop.TaskForce.Data;
 
-
-
-
-
-namespace MonoDevelop.TaskForce.Gui.TaskPad
+namespace MonoDevelop.TaskForce.Data.Serialization
 {
 
 	/// <summary>
-	/// Container class for the task solution pad
+	/// The serialization hooks that are used to re-construct the state of the object 
+	/// after it has be deserialized.
+	/// 
+	/// Note to self: This eventually has to go in for all the classes, but right now, this is just
+	/// a guide
 	/// </summary>
-	public class TaskSolutionPad : TreeViewPad
+	public interface ISerializationHooks
 	{
-		LogUtil log;
-		public TaskSolutionPad ()
-		{
-			log = new LogUtil ("TaskSolutionPad");
-			TaskForceMain.Instance.TaskPad = this;
-		}
-
-		public override void Initialize (MonoDevelop.Ide.Gui.Components.NodeBuilder[] builders, MonoDevelop.Ide.Gui.Components.TreePadOption[] options, string contextMenuPath)
-		{
-			// Create a temporary data provider
-			base.Initialize (builders, options, contextMenuPath);
-			TaskForceMain.Instance.TreeView = treeView;
-			
-			/*ProviderData providerData = new ProviderData ();
-			
-			TaskForceMain.Instance.TreeView = treeView;
-
-
-			treeView.AddChild (providerData);
-			providerData.provider.InitializeProvider (providerData);*/
-		}
+		bool PreSerializationHook();
+		bool PostSerializationHook();
+		bool PostDeserializationHook();
 	}
 }

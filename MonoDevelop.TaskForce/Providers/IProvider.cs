@@ -53,7 +53,10 @@ namespace MonoDevelop.TaskForce.Providers
 		string SerializeToXML();
 		void DeSerialize(string serializedString);
 		void RegisterTypes();
-		void ReConstructProvider(ProviderData _providerNode);
+		void ConstructBasicProvider(ProviderData _providerNode);
+		
+		// TEMPORARY
+		void SeedDataForTesting(string seedString);
 
 	}
 }
