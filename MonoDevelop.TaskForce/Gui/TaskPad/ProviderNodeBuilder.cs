@@ -63,7 +63,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 
         public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
         {
-			log.DEBUG("building provider's child nodes");
+			
 			base.BuildChildNodes (treeBuilder, dataObject);
 			if (dataObject is ProviderData)
 			{
@@ -82,7 +82,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			// convert the data object to a nodedata
 			if (dataObject is ProviderData)
 			{
-				log.DEBUG("Building provider node");
+			
 				log.SetHash(dataObject);
 				ProviderData providerData = dataObject as ProviderData;
 				
@@ -147,7 +147,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			{
 				ProviderData self = this.CurrentNode.DataItem as ProviderData;				
 				
-				self.provider.NewTask(self);				
+				self.provider.NewTask(self);
 			}			
 		}
 		

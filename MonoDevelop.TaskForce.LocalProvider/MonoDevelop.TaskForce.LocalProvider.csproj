@@ -96,6 +96,9 @@
     <Compile Include="TaskWidgets\EditTaskWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.TaskWidgets.EditTaskWidget.cs" />
     <Compile Include="CoreData\ProviderCore.cs" />
+    <Compile Include="Gui\TaskView.cs" />
+    <Compile Include="Gui\TaskViewWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.LocalProvider.Gui.TaskViewWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -84,6 +84,7 @@ namespace MonoDevelop.TaskForce.Data
 		/// </summary>
 		public void UpdateFile()
 		{
+			log.INFO("Updating file!");
 			
 			// TODO: Create a lock here for potential threading bugs
 			if(File.Exists(TargetFile.FullPath + ".temp"))

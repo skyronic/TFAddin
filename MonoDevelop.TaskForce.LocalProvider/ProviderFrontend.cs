@@ -62,17 +62,27 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		/// </param>
 		public void NewTask(ProviderData _providerNode)
 		{
+			/* NewTaskView is Deprecated
 			NewTaskView newTab = new NewTaskView(providerNode);
 			
 			IdeApp.Workbench.OpenDocument(newTab, true);
+			*/
+			TaskView taskView = new TaskView();
+			taskView.NewTaskRole(_providerNode);
+			
+			IdeApp.Workbench.OpenDocument(taskView, true);
 		}
 		
 		public void EditTask(TaskData target)
 		{
 			// Right now, it's safe to assume that the parent will be the provider
-			EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
+			/*EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
 			
-			IdeApp.Workbench.OpenDocument(newTab, true);
+			IdeApp.Workbench.OpenDocument(newTab, true);*/
+			TaskView taskView = new TaskView();
+			taskView.EditTaskRole(providerNode, target);
+			
+			IdeApp.Workbench.OpenDocument(taskView, true);
 		}
 		
 		public void ViewTask(TaskData target)

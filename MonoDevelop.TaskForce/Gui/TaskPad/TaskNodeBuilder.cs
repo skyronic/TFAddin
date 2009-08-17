@@ -64,7 +64,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.BuildChildNodes (treeBuilder, dataObject);
 			
 			if (dataObject is TaskData)
-			{			log.DEBUG("Building child nodes");
+			{			
 
 				TaskData taskData = dataObject as TaskData;
 				
@@ -80,7 +80,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
         {
 			// convert the data object to a nodedata
 			if (dataObject is TaskData)
-			{log.DEBUG("Building a node");
+			{
 				TaskData taskData = dataObject as TaskData;
 				
 				label = taskData.Label;

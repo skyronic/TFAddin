@@ -137,6 +137,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			
 			// Trigger an update.
 			TaskForceMain.Instance.StartTFStoreUpdate();
+			
 		}
 
 		/// <summary>
