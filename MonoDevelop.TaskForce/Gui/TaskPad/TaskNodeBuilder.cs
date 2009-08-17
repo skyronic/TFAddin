@@ -200,7 +200,31 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		public override void ActivateItem ()
 		{
 			// just jump into the edit task menu
-			
+			EditTask();
+		}
+		
+		[CommandHandler(ContextMenuCommands.DeleteTask)]
+		public void DeleteTask()
+		{
+			TaskData self = this.CurrentNode.DataItem as TaskData;
+			if(self!=null)
+			{
+				// TODO: handle if it isn't a providerdata as well
+				if(self.parent is ProviderData)					
+				{
+					ProviderData providerNode = self.parent as ProviderData;
+					// Remove from the children list
+					providerNode.children.Remove(self);
+					self.Dispose();
+					self = null;
+					
+					// Force the treeview to update
+					providerNode.TriggerUpdate();
+					
+					// update on disk:
+					TaskForceMain.Instance.StartTFStoreUpdate();					
+				}
+			}
 		}
 		public override void OnNodeChange()
 		{

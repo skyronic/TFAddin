@@ -75,7 +75,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			providerNode = _providerNode;
 			targetTask = _target;
 			
-			taskViewWidget.PopulateFromTaskData(_target);			
+			taskViewWidget.PopulateFromTaskData(_target);
+			Role = CurrentRole.EditTask;
 		}
 		
 		public override void Save ()
@@ -90,9 +91,11 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			{
 				// the task is already hooked up to the provider
 				// just force an update of the TFStore for now
+				targetTask.Label = taskViewWidget.TargetCore.Title;
+				targetTask.TriggerUpdate();
 				TaskForceMain.Instance.StartTFStoreUpdate();
 			}
-			if(Role == CurrentRole.NewTask)
+			else if(Role == CurrentRole.NewTask)
 			{
 				// create a new task
 				TaskData data = new TaskData();
@@ -108,6 +111,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			IsDirty = false;
 		}
 		
+		
+		/// <summary>
+		/// WARNING - DEPRECATED
+		/// 
+		/// DO NOT USE THIS FUNCTION, only exists for reference functions
+		/// </summary>
+		/// <param name="fileName">
+		/// A <see cref="System.String"/>
+		/// </param>
 		public override void Save (string fileName)
 		{
 			log.WARN("Save () called with filename = " + fileName);

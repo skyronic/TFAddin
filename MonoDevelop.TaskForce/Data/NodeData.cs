@@ -39,7 +39,7 @@ namespace MonoDevelop.TaskForce.Data
 {
 	public delegate void NodeDataChangedHandler(NodeData source, NodeDataChangedEventArgs args);
 	
-	public abstract class NodeData
+	public abstract class NodeData : IDisposable
 	{
 		
 		// The provider object (moved from providerdata to here)
@@ -235,6 +235,12 @@ namespace MonoDevelop.TaskForce.Data
 		{
 			
 		}
+		
+		public void Dispose ()
+		{
+			// TODO: how?
+		}
+		
 		
 	}
 	
