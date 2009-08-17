@@ -40,6 +40,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		LogUtil log;
 		public TaskCore TargetCore
 		{get;set;}
+		
 
 		public TaskViewWidget ()
 		{
@@ -48,6 +49,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			TargetCore = new TaskCore();
 			
 			this.ShowAll();
+			nameEntry.Changed += FormContentChanged;
+			descriptionTextView.Buffer.Changed += FormContentChanged;
+			priorityCombo.Changed += FormContentChanged;
+		}
+
+		void FormContentChanged (object sender, EventArgs e)
+		{
+			// Fire the changed event.
+			this.Changed(this, new TaskGuiChangedEventArgs());
 		}
 		
 		public void PopulateFromTaskData(TaskData _data)
@@ -89,6 +99,18 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			TargetCore.Description = descriptionTextView.Buffer.Text;
 			TargetCore.Priority = priorityCombo.Active;
 			TargetCore.DueDate = DateTime.Now; // temporary
+		}
+		
+		public event EventHandler<TaskGuiChangedEventArgs> Changed;
+	}
+	
+	
+	[Serializable]
+	public sealed class TaskGuiChangedEventArgs : EventArgs
+	{
+		public TaskGuiChangedEventArgs ()
+		{
+			
 		}
 	}
 }

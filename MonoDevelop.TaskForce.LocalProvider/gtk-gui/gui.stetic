@@ -594,12 +594,6 @@
                       <placeholder />
                     </child>
                     <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
                       <widget class="MonoDevelop.TaskForce.Gui.Components.CommentWidget2" id="commentwidget21">
                         <property name="MemberName" />
                         <property name="Events">ButtonPressMask</property>
@@ -607,6 +601,29 @@
                       <packing>
                         <property name="TopAttach">4</property>
                         <property name="BottomAttach">5</property>
+                        <property name="LeftAttach">1</property>
+                        <property name="RightAttach">2</property>
+                        <property name="AutoSize">True</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Entry" id="dueDateEntry">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="IsEditable">True</property>
+                        <property name="InvisibleChar">•</property>
+                      </widget>
+                      <packing>
+                        <property name="TopAttach">3</property>
+                        <property name="BottomAttach">4</property>
                         <property name="LeftAttach">1</property>
                         <property name="RightAttach">2</property>
                         <property name="AutoSize">True</property>
@@ -652,9 +669,11 @@
                     <child>
                       <widget class="Gtk.Label" id="label1">
                         <property name="MemberName" />
-                        <property name="LabelProp" translatable="yes">Name</property>
+                        <property name="LabelProp" translatable="yes">label1</property>
                       </widget>
                       <packing>
+                        <property name="TopAttach">3</property>
+                        <property name="BottomAttach">4</property>
                         <property name="AutoSize">True</property>
                         <property name="XOptions">Fill</property>
                         <property name="YOptions">Fill</property>
@@ -714,6 +733,23 @@
                         <property name="TopAttach">4</property>
                         <property name="BottomAttach">5</property>
                         <property name="AutoSize">False</property>
+                        <property name="XOptions">Fill</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">False</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Label" id="label5">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">Name</property>
+                      </widget>
+                      <packing>
+                        <property name="AutoSize">True</property>
                         <property name="XOptions">Fill</property>
                         <property name="YOptions">Fill</property>
                         <property name="XExpand">False</property>

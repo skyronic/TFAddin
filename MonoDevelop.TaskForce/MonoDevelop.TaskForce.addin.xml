@@ -32,6 +32,7 @@
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeactivateTask" _label="Deactivate Task"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger1" _label="Trigger Action 1"></Command>
 	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger2" _label="Trigger Action 2"></Command>
+	<Command id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeleteTask" _label="Delete Task"></Command>
 	
 	</Extension>
 	
@@ -52,6 +53,7 @@
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeactivateTask"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger1"></CommandItem>
 	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.Trigger2"></CommandItem>
+	<CommandItem id="MonoDevelop.TaskForce.Gui.TaskPad.ContextMenuCommands.DeleteTask"></CommandItem>
 	
 	</Extension>
 	

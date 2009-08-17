@@ -50,5 +50,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		DeactivateTask,
 		Trigger1,
 		Trigger2,
+		DeleteTask,
 	}
 }

@@ -65,7 +65,6 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		public void NewTaskRole(ProviderData _providerNode)
 		{
 			providerNode = _providerNode;
-			taskViewWidget = new TaskViewWidget();
 			Role = CurrentRole.NewTask;
 			
 			this.IsDirty = true;			
@@ -76,7 +75,6 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			providerNode = _providerNode;
 			targetTask = _target;
 			
-			taskViewWidget = new TaskViewWidget();
 			taskViewWidget.PopulateFromTaskData(_target);			
 		}
 		
@@ -102,10 +100,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 				data.CoreDataObject = taskViewWidget.TargetCore;
 				data.Label = taskViewWidget.TargetCore.Title;
 				
-				providerNode.AddChild(data);				
+				providerNode.AddChild(data);
+				TaskForceMain.Instance.StartTFStoreUpdate();
 			}
 			
 			// Unset the IsDirry
+			IsDirty = false;
 		}
 		
 		public override void Save (string fileName)
@@ -121,6 +121,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 				// the task is already hooked up to the provider
 				// just force an update of the TFStore for now
 				TaskForceMain.Instance.StartTFStoreUpdate();
+				targetTask.Label = taskViewWidget.TargetCore.Title;
 			}
 			if(Role == CurrentRole.NewTask)
 			{
@@ -159,8 +160,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 
 		public TaskView ()
 		{
-			
+			taskViewWidget = new TaskViewWidget();
 			log = new LogUtil("TaskView");
+			
+			taskViewWidget.Changed += TaskViewWidgetChanged;
+		}
+
+		void TaskViewWidgetChanged (object sender, TaskGuiChangedEventArgs e)
+		{
+			this.IsDirty = true;
 		}
 	}
 }

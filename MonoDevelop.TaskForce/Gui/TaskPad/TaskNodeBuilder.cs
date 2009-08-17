@@ -199,10 +199,8 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		
 		public override void ActivateItem ()
 		{
-			base.ActivateItem ();
+			// just jump into the edit task menu
 			
-			// right now, a double click activates the task
-			ViewTask();
 		}
 		public override void OnNodeChange()
 		{
