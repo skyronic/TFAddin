@@ -19,7 +19,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
         
         private Gtk.HBox hbox3;
         
-        private Gtk.Button button1;
+        private Gtk.Button activateButton;
         
         private Gtk.Button button2;
         
@@ -73,11 +73,11 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             this.hbox3.Name = "hbox3";
             this.hbox3.Spacing = 6;
             // Container child hbox3.Gtk.Box+BoxChild
-            this.button1 = new Gtk.Button();
-            this.button1.CanFocus = true;
-            this.button1.Name = "button1";
-            this.button1.UseUnderline = true;
-            // Container child button1.Gtk.Container+ContainerChild
+            this.activateButton = new Gtk.Button();
+            this.activateButton.CanFocus = true;
+            this.activateButton.Name = "activateButton";
+            this.activateButton.UseUnderline = true;
+            // Container child activateButton.Gtk.Container+ContainerChild
             Gtk.Alignment w2 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w3 = new Gtk.HBox();
@@ -92,9 +92,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             w6.UseUnderline = true;
             w3.Add(w6);
             w2.Add(w3);
-            this.button1.Add(w2);
-            this.hbox3.Add(this.button1);
-            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.hbox3[this.button1]));
+            this.activateButton.Add(w2);
+            this.hbox3.Add(this.activateButton);
+            Gtk.Box.BoxChild w10 = ((Gtk.Box.BoxChild)(this.hbox3[this.activateButton]));
             w10.Position = 0;
             w10.Expand = false;
             w10.Fill = false;
@@ -114,7 +114,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             w12.Add(w13);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w15 = new Gtk.Label();
-            w15.LabelProp = Mono.Unix.Catalog.GetString("View Context");
+            w15.LabelProp = Mono.Unix.Catalog.GetString("View Context (Inactive)");
             w15.UseUnderline = true;
             w12.Add(w15);
             w11.Add(w12);
@@ -140,7 +140,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             w21.Add(w22);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w24 = new Gtk.Label();
-            w24.LabelProp = Mono.Unix.Catalog.GetString("Create Patch");
+            w24.LabelProp = Mono.Unix.Catalog.GetString("Create Patch (Inactive)");
             w24.UseUnderline = true;
             w21.Add(w24);
             w20.Add(w21);

@@ -31,6 +31,7 @@ using MonoDevelop.TaskForce.Data;
 using MonoDevelop.TaskForce.Gui.TaskPad;
 using MonoDevelop.TaskForce.Utilities;
 using Gtk;
+using MonoDevelop.Core.Gui;
 
 
 namespace MonoDevelop.TaskForce.LocalProvider.Gui
@@ -108,6 +109,11 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 				
 				providerNode.AddChild(data);
 				TaskForceMain.Instance.StartTFStoreUpdate();
+				
+				Role = CurrentRole.EditTask;
+				
+				// the new task now becomes the target
+				targetTask = data;
 			}
 			
 			// Unset the IsDirry
@@ -115,44 +121,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		}
 		
 		
-		/// <summary>
-		/// WARNING - DEPRECATED
-		/// 
-		/// DO NOT USE THIS FUNCTION, only exists for reference functions
-		/// </summary>
-		/// <param name="fileName">
-		/// A <see cref="System.String"/>
-		/// </param>
-		public override void Save (string fileName)
-		{
-			log.WARN("Save () called with filename = " + fileName);
-			
-			// re-construct the data from the widget
-			taskViewWidget.ConvertToTaskCore();
-			this.ContentName = taskViewWidget.TargetCore.Title;
-			
-			if(Role == CurrentRole.EditTask)
-			{
-				// the task is already hooked up to the provider
-				// just force an update of the TFStore for now
-				TaskForceMain.Instance.StartTFStoreUpdate();
-				targetTask.Label = taskViewWidget.TargetCore.Title;
-			}
-			if(Role == CurrentRole.NewTask)
-			{
-				// create a new task
-				TaskData data = new TaskData();
-				
-				data.CoreDataObject = taskViewWidget.TargetCore;
-				data.Label = taskViewWidget.TargetCore.Title;
-				
-				providerNode.AddChild(data);
-				TaskForceMain.Instance.StartTFStoreUpdate();
-			}
-			
-			// Unset the IsDirry
-			IsDirty = false;
-		}
+
 
 
 		public override void Load (string fileName)
@@ -176,9 +145,24 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		public TaskView ()
 		{
 			taskViewWidget = new TaskViewWidget();
+			taskViewWidget.TaskViewContent = this;
 			log = new LogUtil("TaskView");
 			
 			taskViewWidget.Changed += TaskViewWidgetChanged;
+		}
+		
+		public void ActivateCurrentTask()
+		{
+			// only if it's editable task
+			if(Role == CurrentRole.EditTask)
+			{
+				// activate the target task
+				TaskForceMain.Instance.ActivateTask(targetTask);				
+			}
+			else
+			{
+				MessageService.ShowMessage("Unable to activate task", "Please create the task first and save it for activation");
+			}
 		}
 
 		void TaskViewWidgetChanged (object sender, TaskGuiChangedEventArgs e)

@@ -60,6 +60,19 @@ namespace MonoDevelop.TaskForce.Data
 			get;set;
 		}
 		
+		/// <summary>
+		/// Executed on solution closed to clear out the providers
+		/// </summary>
+		public void SolutionClosed()
+		{
+			// If a task is currently running, deactivate it
+			TaskForceMain.Instance.DeactivateCurrentTask();
+			TreeView.Clear();
+			UpdateFile();
+			
+			SolutionProviders.Clear();				
+		}
+		
 		
 		
 		public void CreateNewLocalProvider(Solution ActiveSolution)

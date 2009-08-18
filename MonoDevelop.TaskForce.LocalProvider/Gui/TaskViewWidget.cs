@@ -41,6 +41,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		public TaskCore TargetCore
 		{get;set;}
 		
+		public TaskView TaskViewContent
+		{get;set;}
+		
 
 		public TaskViewWidget ()
 		{
@@ -52,6 +55,13 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			nameEntry.Changed += FormContentChanged;
 			descriptionTextView.Buffer.Changed += FormContentChanged;
 			priorityCombo.Changed += FormContentChanged;
+			activateButton.Clicked += ActivateCurrentTask;
+		}
+
+		void ActivateCurrentTask (object sender, EventArgs e)
+		{
+			// bubble event upwards
+			TaskViewContent.ActivateCurrentTask();
 		}
 
 		void FormContentChanged (object sender, EventArgs e)
@@ -103,8 +113,11 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			TargetCore.DueDate = DateTime.Now; // temporary
 		}
 
-		protected virtual void ActivateTaskButtonClicked (object sender, System.EventArgs e)
+		
+
+		protected virtual void ActivateButtonClicked (object sender, System.EventArgs e)
 		{
+			TaskViewContent.ActivateCurrentTask();
 		}
 		
 		public event EventHandler<TaskGuiChangedEventArgs> Changed;

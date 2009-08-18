@@ -551,7 +551,7 @@
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
-                      <widget class="Gtk.Button" id="button1">
+                      <widget class="Gtk.Button" id="activateButton">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Type">TextAndIcon</property>
@@ -572,7 +572,7 @@
                         <property name="CanFocus">True</property>
                         <property name="Type">TextAndIcon</property>
                         <property name="Icon">stock:gtk-convert Menu</property>
-                        <property name="Label" translatable="yes">View Context</property>
+                        <property name="Label" translatable="yes">View Context (Inactive)</property>
                         <property name="UseUnderline">True</property>
                       </widget>
                       <packing>
@@ -588,7 +588,7 @@
                         <property name="CanFocus">True</property>
                         <property name="Type">TextAndIcon</property>
                         <property name="Icon">stock:gtk-edit Menu</property>
-                        <property name="Label" translatable="yes">Create Patch</property>
+                        <property name="Label" translatable="yes">Create Patch (Inactive)</property>
                         <property name="UseUnderline">True</property>
                       </widget>
                       <packing>
