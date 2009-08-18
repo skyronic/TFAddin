@@ -90,16 +90,7 @@ namespace MonoDevelop.TaskForce.Data
 		public void OnTaskDeactivated()
 		{
 			TaskContext.TaskDeactivated();
-			
-			// Test out the serialization
-			
-			DataContext c = new DataContext();
-			c.IncludeType(this.GetType());
-			
-			XmlDataSerializer ser = new XmlDataSerializer(c);
-			XmlTextWriter xtw = new XmlTextWriter(Console.Out);
-			
-			ser.Serialize(xtw,this);
+		
 		}
 		
 		public override void PostSerializeHook ()

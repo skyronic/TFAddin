@@ -1,5 +1,5 @@
 // 
-// ContextData.cs
+// TaskSession.cs
 //  
 // Author:
 //       Anirudh Sanjeev <anirudh@anirudhsanjeev.org>
@@ -24,75 +24,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 using System;
-using MonoDevelop.TaskForce.Data;
-using MonoDevelop.TaskForce.Utilities;
-using MonoDevelop.Ide.Gui;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using MonoDevelop.Core.Serialization;
-
 
 namespace MonoDevelop.TaskForce.Context
 {
 
 	/// <summary>
-	/// Contains the data of the context which is attached to a task
-	/// 
-	/// Currently supports:
-	/// 1. Open documents and line numbers
-	/// 
-	/// TODO: Should this data type be task-agnostic?
+	/// Used to store all the sessions of the tasks. Contains the start time, end time and
+	/// can calculate the elapsed time.
 	/// </summary>
-	public class ContextData
+	public class TaskSession
 	{
-		private TaskData parentTask;
-		private LogUtil log;
-
 		[ItemProperty]
-		private DocumentStore documentStore;
+		public DateTime StartTime
+		{
+			get;set;
+		}
 		
 		[ItemProperty]
-		public List<TaskSession> Sessions
-		{get;set;}
+		public DateTime EndTime
+		{
+			get;set;
+		}
 		
-		private TaskSession activeSession;
-
-		public void TaskActivated ()
+		public TimeSpan GetLength()
 		{
-			activeSession = new TaskSession();
-			documentStore.RestoreMemento ();
+			return EndTime.Subtract(StartTime);
 		}
-
-		public void TaskDeactivated ()
+		
+		public TaskSession ()
 		{
-			documentStore.CaptureMemento ();
-			activeSession.EndTime = DateTime.Now;
-			Sessions.Add (activeSession);
-			
-			// move the item to a new session
-			activeSession = new TaskSession();
-			
-			// Store the task information by triggering an update
-			TaskForceMain.Instance.StartTFStoreUpdate();
-		}
-
-
-		public void Initialize (TaskData _taskData)
-		{
-			parentTask = _taskData;
-
-			// any more intialization
-		}
-		public ContextData ()
-		{
-			log = new LogUtil ("ContextData");
-			log.SetHash (this);
-
-			documentStore = new DocumentStore ();
-			Sessions = new List<TaskSession>();
-
+			// assume we're starting now by default
+			StartTime = DateTime.Now;
 		}
 	}
 }

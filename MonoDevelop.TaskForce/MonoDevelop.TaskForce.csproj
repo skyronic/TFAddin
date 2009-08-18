@@ -114,6 +114,9 @@
     <Compile Include="TFStore.Instance.LoadFromSolution.cs" />
     <Compile Include="Data\Serialization\ISerializationHooks.cs" />
     <Compile Include="Commands\CommandList.cs" />
+    <Compile Include="Context\TaskSession.cs" />
+    <Compile Include="Gui\Components\SessionDisplayWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

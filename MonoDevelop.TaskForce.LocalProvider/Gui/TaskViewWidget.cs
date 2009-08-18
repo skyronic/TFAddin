@@ -81,6 +81,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			}
 			
 			commentwidget21.NewCommentAdded += OnNewCommentAdded;
+			
+			this.sessiondisplaywidget1.SetTaskData(_data);
 		}
 
 		void OnNewCommentAdded (CommentAddedEventArgs args)

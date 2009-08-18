@@ -25,6 +25,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
         
         private MonoDevelop.TaskForce.Gui.Components.CommentWidget2 commentwidget21;
         
+        private Gtk.Entry dueDateEntry;
+        
         private Gtk.ScrolledWindow GtkScrolledWindow1;
         
         private Gtk.TextView descriptionTextView;
@@ -37,9 +39,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
         
         private Gtk.Label label4;
         
+        private Gtk.Label label5;
+        
+        private Gtk.Label label6;
+        
         private Gtk.Entry nameEntry;
         
         private Gtk.ComboBox priorityCombo;
+        
+        private MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget sessiondisplaywidget1;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -111,6 +119,20 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             w12.XOptions = ((Gtk.AttachOptions)(4));
             w12.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
+            this.dueDateEntry = new Gtk.Entry();
+            this.dueDateEntry.CanFocus = true;
+            this.dueDateEntry.Name = "dueDateEntry";
+            this.dueDateEntry.IsEditable = true;
+            this.dueDateEntry.InvisibleChar = '•';
+            this.table1.Add(this.dueDateEntry);
+            Gtk.Table.TableChild w13 = ((Gtk.Table.TableChild)(this.table1[this.dueDateEntry]));
+            w13.TopAttach = ((uint)(3));
+            w13.BottomAttach = ((uint)(4));
+            w13.LeftAttach = ((uint)(1));
+            w13.RightAttach = ((uint)(2));
+            w13.XOptions = ((Gtk.AttachOptions)(4));
+            w13.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
             this.GtkScrolledWindow1 = new Gtk.ScrolledWindow();
             this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
             this.GtkScrolledWindow1.ShadowType = ((Gtk.ShadowType)(1));
@@ -120,52 +142,72 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             this.descriptionTextView.Name = "descriptionTextView";
             this.GtkScrolledWindow1.Add(this.descriptionTextView);
             this.table1.Add(this.GtkScrolledWindow1);
-            Gtk.Table.TableChild w14 = ((Gtk.Table.TableChild)(this.table1[this.GtkScrolledWindow1]));
-            w14.TopAttach = ((uint)(1));
-            w14.BottomAttach = ((uint)(2));
-            w14.LeftAttach = ((uint)(1));
-            w14.RightAttach = ((uint)(2));
-            w14.XOptions = ((Gtk.AttachOptions)(4));
-            w14.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table1[this.GtkScrolledWindow1]));
+            w15.TopAttach = ((uint)(1));
+            w15.BottomAttach = ((uint)(2));
+            w15.LeftAttach = ((uint)(1));
+            w15.RightAttach = ((uint)(2));
+            w15.XOptions = ((Gtk.AttachOptions)(4));
+            w15.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Name");
+            this.label1.LabelProp = Mono.Unix.Catalog.GetString("label1");
             this.table1.Add(this.label1);
-            Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table1[this.label1]));
-            w15.XOptions = ((Gtk.AttachOptions)(4));
-            w15.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table1[this.label1]));
+            w16.TopAttach = ((uint)(5));
+            w16.BottomAttach = ((uint)(6));
+            w16.XOptions = ((Gtk.AttachOptions)(4));
+            w16.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
             this.label2.LabelProp = Mono.Unix.Catalog.GetString("Description");
             this.table1.Add(this.label2);
-            Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table1[this.label2]));
-            w16.TopAttach = ((uint)(1));
-            w16.BottomAttach = ((uint)(2));
-            w16.XOptions = ((Gtk.AttachOptions)(4));
-            w16.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table1[this.label2]));
+            w17.TopAttach = ((uint)(1));
+            w17.BottomAttach = ((uint)(2));
+            w17.XOptions = ((Gtk.AttachOptions)(4));
+            w17.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label3 = new Gtk.Label();
             this.label3.Name = "label3";
             this.label3.LabelProp = Mono.Unix.Catalog.GetString("Priority");
             this.table1.Add(this.label3);
-            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table1[this.label3]));
-            w17.TopAttach = ((uint)(2));
-            w17.BottomAttach = ((uint)(3));
-            w17.XOptions = ((Gtk.AttachOptions)(4));
-            w17.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table1[this.label3]));
+            w18.TopAttach = ((uint)(2));
+            w18.BottomAttach = ((uint)(3));
+            w18.XOptions = ((Gtk.AttachOptions)(4));
+            w18.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.label4 = new Gtk.Label();
             this.label4.Name = "label4";
             this.label4.Xpad = 35;
             this.label4.LabelProp = Mono.Unix.Catalog.GetString("Comments");
             this.table1.Add(this.label4);
-            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table1[this.label4]));
-            w18.TopAttach = ((uint)(4));
-            w18.BottomAttach = ((uint)(5));
-            w18.XOptions = ((Gtk.AttachOptions)(4));
-            w18.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w19 = ((Gtk.Table.TableChild)(this.table1[this.label4]));
+            w19.TopAttach = ((uint)(4));
+            w19.BottomAttach = ((uint)(5));
+            w19.XOptions = ((Gtk.AttachOptions)(4));
+            w19.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
+            this.label5 = new Gtk.Label();
+            this.label5.Name = "label5";
+            this.label5.LabelProp = Mono.Unix.Catalog.GetString("Name");
+            this.table1.Add(this.label5);
+            Gtk.Table.TableChild w20 = ((Gtk.Table.TableChild)(this.table1[this.label5]));
+            w20.XOptions = ((Gtk.AttachOptions)(4));
+            w20.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
+            this.label6 = new Gtk.Label();
+            this.label6.Name = "label6";
+            this.label6.LabelProp = Mono.Unix.Catalog.GetString("label1");
+            this.table1.Add(this.label6);
+            Gtk.Table.TableChild w21 = ((Gtk.Table.TableChild)(this.table1[this.label6]));
+            w21.TopAttach = ((uint)(3));
+            w21.BottomAttach = ((uint)(4));
+            w21.XOptions = ((Gtk.AttachOptions)(4));
+            w21.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.nameEntry = new Gtk.Entry();
             this.nameEntry.CanFocus = true;
@@ -173,11 +215,11 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             this.nameEntry.IsEditable = true;
             this.nameEntry.InvisibleChar = '•';
             this.table1.Add(this.nameEntry);
-            Gtk.Table.TableChild w19 = ((Gtk.Table.TableChild)(this.table1[this.nameEntry]));
-            w19.LeftAttach = ((uint)(1));
-            w19.RightAttach = ((uint)(2));
-            w19.XOptions = ((Gtk.AttachOptions)(4));
-            w19.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w22 = ((Gtk.Table.TableChild)(this.table1[this.nameEntry]));
+            w22.LeftAttach = ((uint)(1));
+            w22.RightAttach = ((uint)(2));
+            w22.XOptions = ((Gtk.AttachOptions)(4));
+            w22.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.priorityCombo = Gtk.ComboBox.NewText();
             this.priorityCombo.AppendText(Mono.Unix.Catalog.GetString("Minor"));
@@ -188,15 +230,29 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui {
             this.priorityCombo.AppendText("");
             this.priorityCombo.Name = "priorityCombo";
             this.table1.Add(this.priorityCombo);
-            Gtk.Table.TableChild w20 = ((Gtk.Table.TableChild)(this.table1[this.priorityCombo]));
-            w20.TopAttach = ((uint)(2));
-            w20.BottomAttach = ((uint)(3));
-            w20.LeftAttach = ((uint)(1));
-            w20.RightAttach = ((uint)(2));
-            w20.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w23 = ((Gtk.Table.TableChild)(this.table1[this.priorityCombo]));
+            w23.TopAttach = ((uint)(2));
+            w23.BottomAttach = ((uint)(3));
+            w23.LeftAttach = ((uint)(1));
+            w23.RightAttach = ((uint)(2));
+            w23.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
+            this.sessiondisplaywidget1 = new MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget();
+            this.sessiondisplaywidget1.Events = ((Gdk.EventMask)(256));
+            this.sessiondisplaywidget1.Name = "sessiondisplaywidget1";
+            this.table1.Add(this.sessiondisplaywidget1);
+            Gtk.Table.TableChild w24 = ((Gtk.Table.TableChild)(this.table1[this.sessiondisplaywidget1]));
+            w24.TopAttach = ((uint)(5));
+            w24.BottomAttach = ((uint)(6));
+            w24.LeftAttach = ((uint)(1));
+            w24.RightAttach = ((uint)(2));
+            w24.XOptions = ((Gtk.AttachOptions)(4));
+            w24.YOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table1);
-            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox1[this.table1]));
-            w21.Position = 1;
+            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.vbox1[this.table1]));
+            w25.Position = 1;
+            w25.Expand = false;
+            w25.Fill = false;
             w1.Add(this.vbox1);
             this.scrolledwindow1.Add(w1);
             this.Add(this.scrolledwindow1);
