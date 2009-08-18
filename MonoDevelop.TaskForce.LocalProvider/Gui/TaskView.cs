@@ -77,6 +77,8 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			
 			taskViewWidget.PopulateFromTaskData(_target);
 			Role = CurrentRole.EditTask;
+			
+			this.ContentName = _target.Label;
 		}
 		
 		public override void Save ()

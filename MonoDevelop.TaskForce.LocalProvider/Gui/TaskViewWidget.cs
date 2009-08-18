@@ -102,6 +102,10 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			TargetCore.Priority = priorityCombo.Active;
 			TargetCore.DueDate = DateTime.Now; // temporary
 		}
+
+		protected virtual void ActivateTaskButtonClicked (object sender, System.EventArgs e)
+		{
+		}
 		
 		public event EventHandler<TaskGuiChangedEventArgs> Changed;
 	}

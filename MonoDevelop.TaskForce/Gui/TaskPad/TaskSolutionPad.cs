@@ -53,6 +53,9 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			// Create a temporary data provider
 			base.Initialize (builders, options, contextMenuPath);
 			TaskForceMain.Instance.TreeView = treeView;
+			TaskForceMain.Instance.TaskPad = this;
+			
+			TaskForceMain.Instance.OnTaskPadLoaded();			
 			
 			/*ProviderData providerData = new ProviderData ();
 			

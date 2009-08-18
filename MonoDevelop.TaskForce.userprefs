@@ -3,17 +3,7 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Gui/Components/SessionDisplayWidget.cs" ctype="Workbench">
-    <Files>
-      <File FileName="MonoDevelop.TaskForce/Providers/IProvider.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/Context/ContextData.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/TaskForceMain.cs" Line="96" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/Data/ProviderData.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/ProviderFrontend.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/Data/NodeData.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce.LocalProvider/CoreData/TaskCore.cs" Line="1" Column="1" />
-      <File FileName="MonoDevelop.TaskForce/Gui/Components/SessionDisplayWidget.cs" Line="39" Column="18" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -23,9 +13,7 @@
             <Node name="Context" expanded="True" />
             <Node name="Data" expanded="True" />
             <Node name="Gui" expanded="True">
-              <Node name="Components" expanded="True">
-                <Node name="SessionDisplayWidget.cs" selected="True" />
-              </Node>
+              <Node name="Components" expanded="True" />
               <Node name="TaskPad" expanded="True" />
             </Node>
             <Node name="Providers" expanded="True" />
@@ -33,13 +21,20 @@
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
             <Node name="CoreData" expanded="True" />
-            <Node name="Gui" expanded="True" />
+            <Node name="Gui" expanded="True">
+              <Node name="TaskViewWidget.cs" selected="True" />
+            </Node>
             <Node name="TaskWidgets" expanded="True" />
           </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
+        <State expanded="True">
+          <Node name="Migrate startup code to TFMain" selected="True" />
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

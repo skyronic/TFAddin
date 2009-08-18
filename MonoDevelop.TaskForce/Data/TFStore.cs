@@ -70,7 +70,7 @@ namespace MonoDevelop.TaskForce.Data
 			defaultProvider.Label = "Tasks for " + ActiveSolution.Name;
 			
 			// Create some data in the provider first.
-			defaultProvider.provider.SeedDataForTesting("test_seed");
+			// defaultProvider.provider.SeedDataForTesting("test_seed");
 			SolutionProviders.Add(defaultProvider);
 			TreeView.AddChild(defaultProvider);
 			

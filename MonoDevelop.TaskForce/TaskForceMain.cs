@@ -187,15 +187,26 @@ namespace MonoDevelop.TaskForce
 			log.INFO("TaskForce started");
 			
 			// Subscribe to the solution opened event.
-			IdeApp.Workspace.SolutionLoaded += IdeAppWorkspaceSolutionLoaded;
+			IdeApp.Workspace.SolutionLoaded += OnSolutionLoaded;
 			
 			this.RegisterAllTypes();
 		}
-
-		void IdeAppWorkspaceSolutionLoaded (object sender, SolutionEventArgs e)
+		
+		
+		// We need both to be available for the population to take place.
+		bool padAvailable = false;
+		bool solutionAvailable = false;
+		
+		
+		/// <summary>
+		/// This function is called twice - once when the solution is loaded and once when the taskpad is loaded
+		/// this way, it works only on the second time. The user might not have the pad enabled for it to work.
+		/// </summary>
+		public void PopulateGui()
 		{
-			Solution ActiveSolution = e.Solution;
-			string targetFileName = ActiveSolution.BaseDirectory.Combine(".taskforce/taskforce.xml").FullPath;
+			if(padAvailable && solutionAvailable)
+			{
+			string targetFileName = activeSolution.BaseDirectory.Combine(".taskforce/taskforce.xml").FullPath;
 			
 			if(File.Exists(targetFileName))
 			{
@@ -215,14 +226,32 @@ namespace MonoDevelop.TaskForce
 			else
 			{
 				// Create the directory				
-				FileService.CreateDirectory(ActiveSolution.BaseDirectory.Combine(".taskforce").FullPath);
+				FileService.CreateDirectory(activeSolution.BaseDirectory.Combine(".taskforce").FullPath);
 				Store = new TFStore();
 				
 				Store.TargetFile = targetFileName;
 				Store.TreeView = this.TreeView;
-				Store.CreateNewLocalProvider(ActiveSolution);
+				Store.CreateNewLocalProvider(activeSolution);
 				
 			}
+			}
+		}
+		
+		Solution activeSolution;
+
+		void OnSolutionLoaded (object sender, SolutionEventArgs e)
+		{
+			activeSolution = e.Solution;
+			
+			// set the bit and call the PopulateGui method
+			solutionAvailable = true;
+			PopulateGui();			
+		}
+		
+		public void OnTaskPadLoaded()
+		{
+			padAvailable = true;
+			PopulateGui();
 		}
 		
 		
