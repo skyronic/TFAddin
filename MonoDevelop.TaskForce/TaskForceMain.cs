@@ -128,6 +128,9 @@ namespace MonoDevelop.TaskForce
 			ActiveTask.OnTaskActivated();
 
 			// TaskActivated (args);TODO: Why am I getting an exception here?
+			ActiveTask.Label = "*[A]*  " + ActiveTask.Label;
+			// Update the tree to reflect the change on the label
+			ActiveTask.TriggerUpdate();
 
 		}
 
@@ -140,6 +143,12 @@ namespace MonoDevelop.TaskForce
 					
 					// Call the task deactivated hook
 					ActiveTask.OnTaskDeactivated();
+					ActiveTask.Label = ActiveTask.Label.Remove(0, 7);
+					ActiveTask.TriggerUpdate();				
+					// Remove the "*[A]*  " string
+					//ActiveTask.Label.TrimStart("*[A]* ".ToCharArray());
+		
+					
 					
 					args.CurrentTask = ActiveTask;
 
