@@ -79,6 +79,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			Role = CurrentRole.EditTask;
 			
 			this.ContentName = _target.Label;
+			this.IsDirty = false;
 		}
 		
 		public override void Save ()

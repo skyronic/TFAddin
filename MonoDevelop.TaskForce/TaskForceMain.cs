@@ -188,8 +188,14 @@ namespace MonoDevelop.TaskForce
 			
 			// Subscribe to the solution opened event.
 			IdeApp.Workspace.SolutionLoaded += OnSolutionLoaded;
+			IdeApp.Workspace.SolutionUnloaded += OnSolutionUnloaded;
 			
 			this.RegisterAllTypes();
+		}
+
+		void OnSolutionUnloaded (object sender, SolutionEventArgs e)
+		{
+			
 		}
 		
 		

@@ -117,6 +117,7 @@
     <Compile Include="Context\TaskSession.cs" />
     <Compile Include="Gui\Components\SessionDisplayWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget.cs" />
+    <Compile Include="Utilities\NaturalDateParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

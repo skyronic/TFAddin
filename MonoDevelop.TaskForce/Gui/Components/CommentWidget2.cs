@@ -113,6 +113,7 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			TextView iterCommentView = new TextView();
 			iterCommentView.Buffer.Text = comment.Content;
 			iterCommentView.HeightRequest = 100;
+			iterCommentView.WrapMode = WrapMode.Word;
 			iterCommentView.Editable = false;
 			
 			VBox iterVBox = new VBox();
@@ -156,7 +157,9 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		{
 			int w, h;
 			this.GetSizeRequest(out w, out h);
-			this.SetSizeRequest(w, h);
+			//this.SetSizeRequest(w, h);
+			this.WidthRequest = w;
+			
 			return false;
 		}		
 		
