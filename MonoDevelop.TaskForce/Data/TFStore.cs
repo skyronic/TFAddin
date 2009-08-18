@@ -127,7 +127,8 @@ namespace MonoDevelop.TaskForce.Data
 			}
 			
 			// rename the ".temp" file to regular xml
-			FileService.RenameFile(TargetFile.FullPath + ".temp", TargetFile.FullPath);	
+			// FileService.RenameFile(TargetFile.FullPath + ".temp", TargetFile.FullPath);
+			FileService.SystemRename(TargetFile.FullPath + ".temp", TargetFile.FullPath);
 		}
 		
 		/// <summary>

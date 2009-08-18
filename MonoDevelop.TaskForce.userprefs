@@ -3,10 +3,7 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Code Metrics" ctype="Workbench">
-    <Files>
-      <File FileName="Code Metrics" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -14,7 +11,9 @@
             <Node name="References" expanded="True" />
             <Node name="Commands" expanded="True" />
             <Node name="Context" expanded="True" />
-            <Node name="Data" expanded="True" />
+            <Node name="Data" expanded="True">
+              <Node name="TaskData.cs" selected="True" />
+            </Node>
             <Node name="Gui" expanded="True">
               <Node name="Components" expanded="True" />
               <Node name="TaskPad" expanded="True" />
@@ -33,7 +32,9 @@
         <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Fix Multiple solution bugs" selected="True" />
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
