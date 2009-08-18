@@ -149,6 +149,9 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			log = new LogUtil("TaskView");
 			
 			taskViewWidget.Changed += TaskViewWidgetChanged;
+			
+			// not dirty by default
+			this.IsDirty = false;
 		}
 		
 		public void ActivateCurrentTask()

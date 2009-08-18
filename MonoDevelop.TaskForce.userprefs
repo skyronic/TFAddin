@@ -3,7 +3,10 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Code Metrics" ctype="Workbench">
+    <Files>
+      <File FileName="Code Metrics" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -21,9 +24,7 @@
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
             <Node name="CoreData" expanded="True" />
-            <Node name="Gui" expanded="True">
-              <Node name="TaskViewWidget.cs" selected="True" />
-            </Node>
+            <Node name="Gui" expanded="True" />
             <Node name="TaskWidgets" expanded="True" />
           </Node>
         </State>
@@ -32,9 +33,7 @@
         <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
-        <State expanded="True">
-          <Node name="Migrate startup code to TFMain" selected="True" />
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

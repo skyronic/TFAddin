@@ -111,7 +111,6 @@
     <Compile Include="Utilities\Util.cs" />
     <Compile Include="Commands\TaskForceStartupHandler.cs" />
     <Compile Include="Data\TFStore.cs" />
-    <Compile Include="TFStore.Instance.LoadFromSolution.cs" />
     <Compile Include="Data\Serialization\ISerializationHooks.cs" />
     <Compile Include="Commands\CommandList.cs" />
     <Compile Include="Context\TaskSession.cs" />
