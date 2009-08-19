@@ -289,7 +289,7 @@ namespace MonoDevelop.TaskForce.Utilities
 						itemDate = itemDate.AddDays (daynum - DateTime.Now.Day);
 						itemDate = itemDate.AddMonths (1);
 					}
-				// Case 2: month is specified
+					// Case 2: month is specified
 				} else {
 					// Case 2.1: MonthIndex is more than current year. probably in the near future
 					if (MonthIndex >= DateTime.Now.Month) {

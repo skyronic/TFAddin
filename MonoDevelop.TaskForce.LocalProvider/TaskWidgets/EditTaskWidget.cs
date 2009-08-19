@@ -122,7 +122,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// </param>
 		protected virtual void OnNewCommentAdded (CommentAddedEventArgs args)
 		{
-			
+
 			// TODO: Not required after moving to new serialization backend
 			// get the new comment
 			CommentData comment = args.newComment;
@@ -134,10 +134,10 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 
 			// add the comment to the comment object
 			core.Comments.Add (comment);
-			
+
 			// Trigger an update.
-			TaskForceMain.Instance.StartTFStoreUpdate();
-			
+			TaskForceMain.Instance.StartTFStoreUpdate ();
+
 		}
 
 		/// <summary>
@@ -162,12 +162,12 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			core.Priority = (int)prioritySpin.Value;
 
 			log.INFO ("updating taskcore as: " + core.ToString ());
-			
+
 			// TODO: DB is deprecated
 			// DBHelper.UpdateTask (core);
-			
+
 			// Tell the store to start the update
-			TaskForceMain.Instance.StartTFStoreUpdate();
+			TaskForceMain.Instance.StartTFStoreUpdate ();
 		}
 	}
 }

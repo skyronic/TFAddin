@@ -38,35 +38,28 @@ using Mono.Addins;
 
 namespace MonoDevelop.TaskForce.Providers
 {
-	
-	
+
+
 	public class ProviderExtensionNode : ExtensionNode
 	{
-		
-		public ProviderExtensionNode()
+
+		public ProviderExtensionNode ()
 		{
 		}
-		
-		[NodeAttribute ("class", true)]
+
+		[NodeAttribute("class", true)]
 		string typeName;
-		
-		[NodeAttribute ("_name", Required = true)]
+
+		[NodeAttribute("_name", Required = true)]
 		string name;
-		
-		public string Name
-		{
-			get{
-				return name;
-			}
+
+		public string Name {
+			get { return name; }
 		}
-		
-		public Type Class
-		{
-			get
-			{
-				return Addin.GetType (typeName, true);
-			}
+
+		public Type Class {
+			get { return Addin.GetType (typeName, true); }
 		}
-	
-	} 
+
+	}
 }

@@ -35,124 +35,112 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
-	
-	
+
+
 	public class CategoryNodeBuilder : TaskPadNodeBuilder
 	{
 		LogUtil log;
-		public CategoryNodeBuilder()
+		public CategoryNodeBuilder ()
 		{
-			log = new LogUtil("CategoryNodeBuilder");
-			log.SetHash(this);
-			
-			
+			log = new LogUtil ("CategoryNodeBuilder");
+			log.SetHash (this);
+
+
 		}
-		
-		
-		public override Type CommandHandlerType
-        {
-            get
-            {
-                return typeof(CategoryNodeCommandHandler);
-            }
-        }
 
-        public override Type NodeDataType
-        {
-            get
-            {
-                return typeof(CategoryData);
-            }
-        }
 
-        public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
-        {
+		public override Type CommandHandlerType {
+			get { return typeof(CategoryNodeCommandHandler); }
+		}
+
+		public override Type NodeDataType {
+			get { return typeof(CategoryData); }
+		}
+
+		public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
+		{
 			base.BuildChildNodes (treeBuilder, dataObject);
-			
-			if (dataObject is CategoryData)
-			{			log.DEBUG("Building child nodes");
+
+			if (dataObject is CategoryData) {
+				log.DEBUG ("Building child nodes");
 
 				CategoryData categoryData = dataObject as CategoryData;
-				
-				foreach (object child in categoryData.children)
-				{
+
+				foreach (object child in categoryData.children) {
 					treeBuilder.AddChild (child);
 				}
 			}
-        }
+		}
 
 
-        public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
-        {
+		public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
+		{
 			// convert the data object to a nodedata
-			if (dataObject is CategoryData)
-			{log.DEBUG("Building a node");
+			if (dataObject is CategoryData) {
+				log.DEBUG ("Building a node");
 				CategoryData categoryData = dataObject as CategoryData;
-				
+
 				label = categoryData.Label;
-				
+
 				// TODO: Change the silly icons
-				icon = Context.GetIcon(Gtk.Stock.Apply);
-				closedIcon = Context.GetIcon(Gtk.Stock.Clear);
+				icon = Context.GetIcon (Gtk.Stock.Apply);
+				closedIcon = Context.GetIcon (Gtk.Stock.Clear);
 			}
-			
-			
-			
-        }
+
+
+
+		}
 
 		public override void OnNodeDataChanged (NodeData source, NodeDataChangedEventArgs args)
 		{
-			if (source is CategoryData)
-			{
+			if (source is CategoryData) {
 				// get the tree builder
 				ITreeBuilder treeBuilder = Context.GetTreeBuilder (source);
 				treeBuilder.UpdateAll ();
 			}
 		}
 
-        public override void Dispose ()
-        {
-            base.Dispose();
-        }
+		public override void Dispose ()
+		{
+			base.Dispose ();
+		}
 
 
 
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
+		protected override void Initialize ()
+		{
+			base.Initialize ();
+		}
 
-        public override void DataTypeComparison(object dataObject)
-        {
-            throw new System.NotImplementedException();
-        }
+		public override void DataTypeComparison (object dataObject)
+		{
+			throw new System.NotImplementedException ();
+		}
 
-        public override string GetNodeName(ITreeNavigator thisNode, object dataObject)
-        {
-			if(dataObject is NodeData)
-			{
+		public override string GetNodeName (ITreeNavigator thisNode, object dataObject)
+		{
+			if (dataObject is NodeData) {
 				return (dataObject as NodeData).Label;
 			}
 			return "";
-        }
+		}
 	}
-	
+
 	public class CategoryNodeCommandHandler : TaskPadNodeCommandHandler
 	{
 		public override void OnNodeChange ()
 		{
 			throw new System.NotImplementedException ();
 		}
-		
+
 		[CommandHandler(ContextMenuCommands.NewCategory)]
 		public void OnNewCategoryContextMenu ()
 		{
-			if(this.CurrentNode.DataItem is CategoryData)
-			{
+			if (this.CurrentNode.DataItem is CategoryData) {
 				CategoryData self = this.CurrentNode.DataItem as CategoryData;
-				
+
 				// call the new category view
-				self.provider.AddChildCategory(self);
+				self.provider.AddChildCategory (self);
 			}
 		}
 	}

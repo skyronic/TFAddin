@@ -38,8 +38,8 @@ using System.Collections.Generic;
 
 namespace MonoDevelop.TaskForce.LocalProvider
 {
-	
-	
+
+
 	public class ProviderFrontend : IProvider
 	{
 		protected LogUtil log;
@@ -49,127 +49,125 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		public string DoSomething ()
 		{
 			return "Hello there!";
-			
+
 		}
 		#endregion
-		
-		
+
+
 		/// <summary>
 		/// Shows the new task GUI and updates the providernode object when finished
 		/// </summary>
 		/// <param name="providerNode">
 		/// A <see cref="ProviderData"/>
 		/// </param>
-		public void NewTask(ProviderData _providerNode)
+		public void NewTask (ProviderData _providerNode)
 		{
 			/* NewTaskView is Deprecated
 			NewTaskView newTab = new NewTaskView(providerNode);
 			
 			IdeApp.Workbench.OpenDocument(newTab, true);
 			*/
-			TaskView taskView = new TaskView();
-			taskView.NewTaskRole(_providerNode);
-			
-			IdeApp.Workbench.OpenDocument(taskView, true);
+			TaskView taskView = new TaskView ();
+			taskView.NewTaskRole (_providerNode);
+
+			IdeApp.Workbench.OpenDocument (taskView, true);
 		}
-		
-		public void EditTask(TaskData target)
+
+		public void EditTask (TaskData target)
 		{
 			// Right now, it's safe to assume that the parent will be the provider
-			/*EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
+						/*EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
 			
 			IdeApp.Workbench.OpenDocument(newTab, true);*/
-			TaskView taskView = new TaskView();
-			taskView.EditTaskRole(providerNode, target);
-			
-			IdeApp.Workbench.OpenDocument(taskView, true);
+TaskView taskView = new TaskView ();
+			taskView.EditTaskRole (providerNode, target);
+
+			IdeApp.Workbench.OpenDocument (taskView, true);
 		}
-		
-		public void ViewTask(TaskData target)
+
+		public void ViewTask (TaskData target)
 		{
-			
+
 		}
-		
+
 		/// <summary>
 		/// Initializes the provider and populates the node
 		/// </summary>
 		/// <param name="providerNode">
 		/// A <see cref="ProviderData"/>
 		/// </param>
-		public void InitializeProvider(ProviderData _providerNode)
+		public void InitializeProvider (ProviderData _providerNode)
 		{
 			providerNode = _providerNode;
-			
-			
-			if(providerNode == null)
-			{
-				log.ERROR("Provider is wrong!");
+
+
+			if (providerNode == null) {
+				log.ERROR ("Provider is wrong!");
 			}
 			// Set the options for the provider
-			_providerNode.CoreDataObject = new ProviderCore();
-			
+			_providerNode.CoreDataObject = new ProviderCore ();
+
 			// initialize the database
-			DBHelper.Initialize();
-			
+			DBHelper.Initialize ();
+
 			// set any required details about the provider
 			providerNode.Label = "Local Provider";
-			
+
 			// get an arraylist of all the taskcores
-			List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
-			foreach(TaskCore core in tasks)
-			{
-				log.INFO("The core object is: " + core);
+			List<TaskCore> tasks = DBHelper.GetAllTasks ();
+			// get all the coredata
+			foreach (TaskCore core in tasks) {
+				log.INFO ("The core object is: " + core);
 				// create a new task node
-				TaskData taskNode = new TaskData();
-				
+				TaskData taskNode = new TaskData ();
+
 				// set the core data object
 				taskNode.CoreDataObject = core;
-				
+
 				// set the label and icon
 				taskNode.Label = core.Title;
-				
+
 				// update the tree without updating gui				
-				providerNode.AddChildSilent(taskNode);
-				
+				providerNode.AddChildSilent (taskNode);
+
 			}
 
 			// trigger changes in the gui
-			providerNode.TriggerUpdate();
+			providerNode.TriggerUpdate ();
 		}
-		
-					
-		public void ConstructBasicProvider(ProviderData _providerNode)
+
+
+		public void ConstructBasicProvider (ProviderData _providerNode)
 		{
 			providerNode = _providerNode;
-			
-			log = new LogUtil("LOCAL PROVIDER");
-			
-			if(providerNode == null)
-			{
-				log.ERROR("Provider is wrong!");
-			}		
+
+			log = new LogUtil ("LOCAL PROVIDER");
+
+			if (providerNode == null) {
+				log.ERROR ("Provider is wrong!");
+			}
 		}
-		
-		
-			
-		
+
+
+
+
 		/// <summary>
 		/// Creates a new category and appends it to the provider node builder
 		/// YOU HAVE TO HAVE CALLED IntializeProvider() Before this
 		/// </summary>
-		public void CreateNewCategory()
+		public void CreateNewCategory ()
 		{
 			// URGENT: Change the name of newcategory into something else
-			NewCategory n = new NewCategory(providerNode);
-			log.INFO("Creating a new category");
-			n.ShowAll();
+			NewCategory n = new NewCategory (providerNode);
+			log.INFO ("Creating a new category");
+			n.ShowAll ();
 		}
-	
-		public ProviderFrontend()
+
+		public ProviderFrontend ()
 		{
-			log = new LogUtil("LOCAL PROVIDER");
+			log = new LogUtil ("LOCAL PROVIDER");
 		}
-		
+
 		/// <summary>
 		/// Used to nest categories.
 		/// 
@@ -178,46 +176,46 @@ namespace MonoDevelop.TaskForce.LocalProvider
 		/// <param name="parent">
 		/// A <see cref="NodeData"/>
 		/// </param>
-		public void AddChildCategory(NodeData parent)
+		public void AddChildCategory (NodeData parent)
 		{
-			NewCategory n = new NewCategory(parent);
-			log.INFO("Making new category with parent - " + parent.Label);
-			n.ShowAll();
+			NewCategory n = new NewCategory (parent);
+			log.INFO ("Making new category with parent - " + parent.Label);
+			n.ShowAll ();
 		}
-		
-		
+
+
 		#region Serialization stuff
 		public string SerializeToXML ()
 		{
 			// Get the serialized object and return the string
-			return Utilities.Util.SerializeObjectToString(this);
+			return Utilities.Util.SerializeObjectToString (this);
 		}
-		
+
 		public void DeSerialize (string serializedString)
 		{
-			
+
 		}
-		
-		public void RegisterTypes()
+
+		public void RegisterTypes ()
 		{
-			
-			Util.AddTypeToContext(typeof(ProviderFrontend));
-			Util.AddTypeToContext(typeof(TaskCore));
-			Util.AddTypeToContext(typeof(ProviderCore));
+
+			Util.AddTypeToContext (typeof(ProviderFrontend));
+			Util.AddTypeToContext (typeof(TaskCore));
+			Util.AddTypeToContext (typeof(ProviderCore));
 		}
 		#endregion
-		
-		
+
+
 		public void SeedDataForTesting (string seedString)
 		{
-			providerNode.CoreDataObject = new ProviderCore();
-			
+			providerNode.CoreDataObject = new ProviderCore ();
+
 			// initialize the database
 			// DBHelper.Initialize();
-			
+
 			// get an arraylist of all the taskcores
 			// TODO: Phasing out the database model
-			/* List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
+						/* List<TaskCore> tasks = DBHelper.GetAllTasks(); // get all the coredata
 			foreach(TaskCore core in tasks)
 			{
 				log.INFO("The core object is: " + core);
@@ -233,22 +231,21 @@ namespace MonoDevelop.TaskForce.LocalProvider
 				// update the tree without updating gui				
 				providerNode.AddChildSilent(taskNode);
 				
-			}*/		
-			
+			}*/
+
 			// create a few random taskcore items
-			for(int i = 0; i < 3; i++)
-			{
+for (int i = 0; i < 3; i++) {
 				// create a core data object and seed it
-				TaskCore core = new TaskCore();
-				core.SeedTaskCore(seedString, i);
-				
-				TaskData taskNode = new TaskData();
+				TaskCore core = new TaskCore ();
+				core.SeedTaskCore (seedString, i);
+
+				TaskData taskNode = new TaskData ();
 				taskNode.CoreDataObject = core;
-				
+
 				taskNode.Label = core.Title;
-				
-				providerNode.AddChildSilent(taskNode);
+
+				providerNode.AddChildSilent (taskNode);
 			}
-		}		
+		}
 	}
 }

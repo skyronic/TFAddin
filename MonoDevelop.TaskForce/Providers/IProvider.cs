@@ -38,25 +38,25 @@ using MonoDevelop.TaskForce.Data;
 
 namespace MonoDevelop.TaskForce.Providers
 {
-	
-	
+
+
 	public interface IProvider
 	{
-		string DoSomething();
+		string DoSomething ();
 		//void SetProviderNode(ProviderData providerNode);
-		void NewTask(ProviderData providerNode);
-		void EditTask(TaskData target);
-		void ViewTask(TaskData target);
-		void InitializeProvider(ProviderData providerNode);
-		void CreateNewCategory();
-		void AddChildCategory(NodeData parent);
-		string SerializeToXML();
-		void DeSerialize(string serializedString);
-		void RegisterTypes();
-		void ConstructBasicProvider(ProviderData _providerNode);
-		
+		void NewTask (ProviderData providerNode);
+		void EditTask (TaskData target);
+		void ViewTask (TaskData target);
+		void InitializeProvider (ProviderData providerNode);
+		void CreateNewCategory ();
+		void AddChildCategory (NodeData parent);
+		string SerializeToXML ();
+		void DeSerialize (string serializedString);
+		void RegisterTypes ();
+		void ConstructBasicProvider (ProviderData _providerNode);
+
 		// TEMPORARY
-		void SeedDataForTesting(string seedString);
+		void SeedDataForTesting (string seedString);
 
 	}
 }

@@ -42,118 +42,117 @@ namespace MonoDevelop.TaskForce.Data
 	public class TFStore
 	{
 		LogUtil log;
-		
-		[ItemProperty]
-		public List<ProviderData> SolutionProviders
-		{get;set;}
-		
+
+		[ItemProperty()]
+		public List<ProviderData> SolutionProviders {
+			get;
+			set;
+		}
+
 		/// <summary>
 		/// The path to the XML file. Usually set by the solution
 		/// </summary>
-		public FilePath TargetFile
-		{
-			get;set;
+		public FilePath TargetFile {
+			get;
+			set;
 		}
-		
-		public ExtensibleTreeView TreeView
-		{
-			get;set;
+
+		public ExtensibleTreeView TreeView {
+			get;
+			set;
 		}
-		
+
 		/// <summary>
 		/// Executed on solution closed to clear out the providers
 		/// </summary>
-		public void SolutionClosed()
+		public void SolutionClosed ()
 		{
 			// If a task is currently running, deactivate it
-			TaskForceMain.Instance.DeactivateCurrentTask();
-			TreeView.Clear();
-			UpdateFile();
-			
-			SolutionProviders.Clear();				
+			TaskForceMain.Instance.DeactivateCurrentTask ();
+			TreeView.Clear ();
+			UpdateFile ();
+
+			SolutionProviders.Clear ();
 		}
-		
-		
-		
-		public void CreateNewLocalProvider(Solution ActiveSolution)
+
+
+
+		public void CreateNewLocalProvider (Solution ActiveSolution)
 		{
-			ProviderData defaultProvider = new ProviderData();
-			
-			defaultProvider.provider.ConstructBasicProvider(defaultProvider);
+			ProviderData defaultProvider = new ProviderData ();
+
+			defaultProvider.provider.ConstructBasicProvider (defaultProvider);
 			defaultProvider.Label = "Tasks for " + ActiveSolution.Name;
-			
+
 			// Create some data in the provider first.
 			// defaultProvider.provider.SeedDataForTesting("test_seed");
-			SolutionProviders.Add(defaultProvider);
-			TreeView.AddChild(defaultProvider);
-			
+			SolutionProviders.Add (defaultProvider);
+			TreeView.AddChild (defaultProvider);
+
 			// update the file
-			this.UpdateFile();
+			this.UpdateFile ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// updates the xml file by making atomic changes
 		/// </summary>
-		public void UpdateFile()
+		public void UpdateFile ()
 		{
-			log.INFO("Updating file!");
-			
+			log.INFO ("Updating file!");
+
 			// TODO: Create a lock here for potential threading bugs
-			if(File.Exists(TargetFile.FullPath + ".temp"))
-			{
+			if (File.Exists (TargetFile.FullPath + ".temp")) {
 				// TODO: should we recover this?
-				FileService.DeleteFile(TargetFile.FullPath + ".temp");				
+				FileService.DeleteFile (TargetFile.FullPath + ".temp");
 			}
-			
-			FileStream tempFileStream = File.OpenWrite(TargetFile.FullPath + ".temp");
-			
+
+			FileStream tempFileStream = File.OpenWrite (TargetFile.FullPath + ".temp");
+
 			// serialize the object.
 			// TODO: make this thread safe
 			// TODO: make this write directly to the filestream rather than do it twice
-			string serializedString = Utilities.Util.SerializeObjectToString(this);
-			StreamWriter tempStreamWriter = new StreamWriter(tempFileStream);
-			tempStreamWriter.Write(serializedString);
-			
+			string serializedString = Utilities.Util.SerializeObjectToString (this);
+			StreamWriter tempStreamWriter = new StreamWriter (tempFileStream);
+			tempStreamWriter.Write (serializedString);
+
 			// clean up
-			tempStreamWriter.Close();
-			tempFileStream.Close();
+			tempStreamWriter.Close ();
+			tempFileStream.Close ();
 			serializedString = null;
-			
+
 			// delete the existing taskforce file
-			if(File.Exists(TargetFile.FullPath))
-			{
-				FileService.DeleteFile(TargetFile.FullPath);
+			if (File.Exists (TargetFile.FullPath)) {
+				FileService.DeleteFile (TargetFile.FullPath);
 			}
-			
+
 			// rename the ".temp" file to regular xml
 			// FileService.RenameFile(TargetFile.FullPath + ".temp", TargetFile.FullPath);
-			FileService.SystemRename(TargetFile.FullPath + ".temp", TargetFile.FullPath);
+			FileService.SystemRename (TargetFile.FullPath + ".temp", TargetFile.FullPath);
 		}
-		
+
 		/// <summary>
 		/// Restore an object's state after the serialization system returned all the data
 		/// </summary>
-		public void PostDeserializeHook()
+		public void PostDeserializeHook ()
 		{
-			log.DEBUG("PostDeserializeHook()");
-			foreach(ProviderData providerData in SolutionProviders)
-			{				
+			log.DEBUG ("PostDeserializeHook()");
+			foreach (ProviderData providerData in SolutionProviders) {
 				// execute the post deserialization hook for all the providers
-				providerData.PostDeserializeHook();
-				
-				log.DEBUG("Activating a provider");
-				TreeView.AddChild(providerData);
+				providerData.PostDeserializeHook ();
+
+				log.DEBUG ("Activating a provider");
+				TreeView.AddChild (providerData);
 			}
 		}
-		
-		
+
+
 		public TFStore ()
 		{
-			log = new LogUtil("TFStore");			
-			log.SetHash(this);
-			
-			SolutionProviders = new List<ProviderData>();
+			log = new LogUtil ("TFStore");
+			log.SetHash (this);
+
+			SolutionProviders = new List<ProviderData> ();
 		}
 	}
 }

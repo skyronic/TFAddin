@@ -35,43 +35,43 @@ namespace MonoDevelop.TaskForce.Utilities
 
 	public static class Util
 	{
-		public static DataContext context = new DataContext();
-		
-		public static void AddTypeToContext(Type t)
+		public static DataContext context = new DataContext ();
+
+		public static void AddTypeToContext (Type t)
 		{
-			context.IncludeType(t);
+			context.IncludeType (t);
 		}
-		
-		public static string SerializeObjectToString(object o)
+
+		public static string SerializeObjectToString (object o)
 		{
-			LogUtil log = new LogUtil("Util.Serialization");
+			LogUtil log = new LogUtil ("Util.Serialization");
 			// log.DEBUG("Serializing - " + o.ToString());
 			//StringBuilder resultString;
-			context.IncludeType(o.GetType());
-			
-			XmlDataSerializer ser = new XmlDataSerializer(context);			
+			context.IncludeType (o.GetType ());
+
+			XmlDataSerializer ser = new XmlDataSerializer (context);
 			//XmlTextWriter xtw = new XmlTextWriter(Console.Out);
-			TextWriter serWriter = new StringWriter();
-			XmlTextWriter xtw = new XmlTextWriter(serWriter);
-			
-			
-			ser.Serialize(xtw,o);
-			string serializedString =  serWriter.ToString();
+			TextWriter serWriter = new StringWriter ();
+			XmlTextWriter xtw = new XmlTextWriter (serWriter);
+
+
+			ser.Serialize (xtw, o);
+			string serializedString = serWriter.ToString ();
 			//serializedString = serReader.ReadToEnd();
-			
+
 			//log.DEBUG("The serialized string is - " + serializedString);
-			
+
 			return serializedString;
 		}
-		
-		public static object DeserializeString(string XMLString, Type serType)
+
+		public static object DeserializeString (string XMLString, Type serType)
 		{
-			context.IncludeType(serType);
-			
-			XmlDataSerializer ser = new XmlDataSerializer(context);
-			
-			TextReader serReader = new StringReader(XMLString);
-			return ser.Deserialize(serReader, serType);
+			context.IncludeType (serType);
+
+			XmlDataSerializer ser = new XmlDataSerializer (context);
+
+			TextReader serReader = new StringReader (XMLString);
+			return ser.Deserialize (serReader, serType);
 		}
 	}
 }

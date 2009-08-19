@@ -38,20 +38,24 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 	public partial class TaskViewWidget : Gtk.Bin
 	{
 		LogUtil log;
-		public TaskCore TargetCore
-		{get;set;}
-		
-		public TaskView TaskViewContent
-		{get;set;}
-		
+		public TaskCore TargetCore {
+			get;
+			set;
+		}
+
+		public TaskView TaskViewContent {
+			get;
+			set;
+		}
+
 
 		public TaskViewWidget ()
 		{
-			log = new LogUtil("TaskViewWidget");
+			log = new LogUtil ("TaskViewWidget");
 			this.Build ();
-			TargetCore = new TaskCore();
-			
-			this.ShowAll();
+			TargetCore = new TaskCore ();
+
+			this.ShowAll ();
 			nameEntry.Changed += FormContentChanged;
 			descriptionTextView.Buffer.Changed += FormContentChanged;
 			priorityCombo.Changed += FormContentChanged;
@@ -61,75 +65,73 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 		void ActivateCurrentTask (object sender, EventArgs e)
 		{
 			// bubble event upwards
-			TaskViewContent.ActivateCurrentTask();
+			TaskViewContent.ActivateCurrentTask ();
 		}
 
 		void FormContentChanged (object sender, EventArgs e)
 		{
 			// Fire the changed event.
-			this.Changed(this, new TaskGuiChangedEventArgs());
+			this.Changed (this, new TaskGuiChangedEventArgs ());
 		}
-		
-		public void PopulateFromTaskData(TaskData _data)
+
+		public void PopulateFromTaskData (TaskData _data)
 		{
 			// get the coredata
 			TargetCore = _data.CoreDataObject as TaskCore;
-			
+
 			// Initialize the comments
-			commentwidget21.Initialize(TargetCore.Comments);
-			
+			commentwidget21.Initialize (TargetCore.Comments);
+
 			// Populate the other fields
 			nameEntry.Text = TargetCore.Title;
 			descriptionTextView.Buffer.Text = TargetCore.Description;
-			try
-			{
+			try {
 				priorityCombo.Active = TargetCore.Priority;
+			} catch {
+				log.ERROR ("Priority wasn't loaded properly into the priority combo box");
 			}
-			catch
-			{
-				log.ERROR("Priority wasn't loaded properly into the priority combo box");
-			}
-			
+
 			commentwidget21.NewCommentAdded += OnNewCommentAdded;
-			
-			this.sessiondisplaywidget1.SetTaskData(_data);
+
+			this.sessiondisplaywidget1.SetTaskData (_data);
 		}
 
 		void OnNewCommentAdded (CommentAddedEventArgs args)
 		{
-			TargetCore.Comments.Add(args.newComment);
+			TargetCore.Comments.Add (args.newComment);
 			// TODO: Do we save here or what?			
 		}
-		
-		
+
+
 		/// <summary>
 		/// Call this function to rereate the taskcore from the GUI
 		/// </summary>
-		public void ConvertToTaskCore()
+		public void ConvertToTaskCore ()
 		{
 			TargetCore.Title = nameEntry.Text;
 			TargetCore.Description = descriptionTextView.Buffer.Text;
 			TargetCore.Priority = priorityCombo.Active;
-			TargetCore.DueDate = DateTime.Now; // temporary
+			TargetCore.DueDate = DateTime.Now;
+			// temporary
 		}
 
-		
+
 
 		protected virtual void ActivateButtonClicked (object sender, System.EventArgs e)
 		{
-			TaskViewContent.ActivateCurrentTask();
+			TaskViewContent.ActivateCurrentTask ();
 		}
-		
+
 		public event EventHandler<TaskGuiChangedEventArgs> Changed;
 	}
-	
-	
-	[Serializable]
+
+
+	[Serializable()]
 	public sealed class TaskGuiChangedEventArgs : EventArgs
 	{
 		public TaskGuiChangedEventArgs ()
 		{
-			
+
 		}
 	}
 }

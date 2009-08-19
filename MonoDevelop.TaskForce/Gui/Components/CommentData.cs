@@ -29,7 +29,7 @@ using MonoDevelop.Core.Serialization;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
-	
+
 	/// <summary>
 	/// Contains the comment structure that will be used by the comment
 	/// view widget.
@@ -39,36 +39,42 @@ namespace MonoDevelop.TaskForce.Gui.Components
 	public class CommentData
 	{
 		// the Id of the comment
-		[ItemProperty]
-		public int Id
-		{	get;
-			set;}
+		[ItemProperty()]
+		public int Id {
+			get;
+			set;
+		}
 		// the task that this comment is associated with
-		[ItemProperty]
-		public int TaskId
-		{	get;
-			set;}
+		[ItemProperty()]
+		public int TaskId {
+			get;
+			set;
+		}
 		// the Title of the comment
-		[ItemProperty]
-		public string Title
-		{	get;
-			set;}
+		[ItemProperty()]
+		public string Title {
+			get;
+			set;
+		}
 		// The author of the comment.
-		[ItemProperty]
-		public string Author
-		{	get;
-			set;}
+		[ItemProperty()]
+		public string Author {
+			get;
+			set;
+		}
 		// the content/message
-		[ItemProperty]
-		public string Content
-		{	get;
-			set;}
+		[ItemProperty()]
+		public string Content {
+			get;
+			set;
+		}
 		// the time at which the comment was posted
-		[ItemProperty]
-		public DateTime PostDate
-		{	get;
-			set;}
-		
+		[ItemProperty()]
+		public DateTime PostDate {
+			get;
+			set;
+		}
+
 		/// <summary>
 		/// A simple way to generate placeholder comments for testing
 		/// Making placeholders manually is frustruating.
@@ -85,31 +91,30 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		/// <param name="seedInt">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		public void SeedComment(string seedString, int seedInt)
+		public void SeedComment (string seedString, int seedInt)
 		{
 			this.Id = seedInt + 5;
 			this.TaskId = seedInt + 100;
-			
+
 			this.Title = seedString + "_Title";
 			this.Author = seedString + "_Author";
 			this.Content = seedString + "_Content";
-			
-			this.PostDate = DateTime.Now + TimeSpan.FromDays(seedInt);
+
+			this.PostDate = DateTime.Now + TimeSpan.FromDays (seedInt);
 		}
-		
-		public CommentData()
+
+		public CommentData ()
 		{
 		}
-		
-		public CommentData(string seedString, int seedInt)
+
+		public CommentData (string seedString, int seedInt)
 		{
-			SeedComment(seedString, seedInt);
+			SeedComment (seedString, seedInt);
 		}
-		
+
 		public override string ToString ()
 		{
-			return string.Format("[CommentData: Id={0}, TaskId={1}, Title={2}, Author={3}, Content={4}, PostDate={5}]",
-			                     Id, TaskId, Title, Author, Content, PostDate);
+			return string.Format ("[CommentData: Id={0}, TaskId={1}, Title={2}, Author={3}, Content={4}, PostDate={5}]", Id, TaskId, Title, Author, Content, PostDate);
 		}
 
 	}

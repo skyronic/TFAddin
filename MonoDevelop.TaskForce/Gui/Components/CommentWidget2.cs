@@ -32,15 +32,17 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
-	
-	public delegate void CommentAddedDelegate(CommentAddedEventArgs args);
+
+	public delegate void CommentAddedDelegate (CommentAddedEventArgs args);
 
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class CommentWidget2 : Gtk.Bin
 	{
-		protected List<CommentData> Comments
-		{get;set;}
-		protected LogUtil log;		
+		protected List<CommentData> Comments {
+			get;
+			set;
+		}
+		protected LogUtil log;
 		/*protected void AddCommentToGui(CommentData comment)
 		{
 			// create the expander which will contain this
@@ -85,142 +87,139 @@ namespace MonoDevelop.TaskForce.Gui.Components
 			// hook into the Expand event so that we can resize the widget
 			container.Activated += ContainerActivated;
 		}*/
-		
-		protected void AddCommentToGui(CommentData comment)
+
+		protected void AddCommentToGui (CommentData comment)
 		{
 			// Create a new HBox to hold the subject line and the reply buttons, content, etc
-			Label subjectLabel = new Label(comment.Title);
-			Button quoteButton = new Button("Quote");
-			Button replyButton = new Button("Reply");
-			
-			quoteButton.Clicked += delegate(object sender, EventArgs e) {
-				// Push the comment with little ">"s to the reply window
-				this.AddCommentQuote(comment);
-			};
-			
+			Label subjectLabel = new Label (comment.Title);
+			Button quoteButton = new Button ("Quote");
+			Button replyButton = new Button ("Reply");
+
+// Push the comment with little ">"s to the reply window
+			quoteButton.Clicked += delegate(object sender, EventArgs e) { this.AddCommentQuote (comment); };
+
 			replyButton.Clicked += delegate(object sender, EventArgs e) {
-				this.AddCommentQuote(comment);
+				this.AddCommentQuote (comment);
 				// set the reply title as "Re:" 
 				subjectEntry.Text = "Re: " + comment.Title;
 			};
-			
-			HBox subjectHBox = new HBox();
-			subjectHBox.PackStart(subjectLabel, true, true, 0);
-			subjectHBox.PackStart(quoteButton, false, false, 0);
-			subjectHBox.PackStart(replyButton, false, false, 0);
-			
+
+			HBox subjectHBox = new HBox ();
+			subjectHBox.PackStart (subjectLabel, true, true, 0);
+			subjectHBox.PackStart (quoteButton, false, false, 0);
+			subjectHBox.PackStart (replyButton, false, false, 0);
+
 			// Create the entry and the VBox to hold the comment together
-			TextView iterCommentView = new TextView();
+			TextView iterCommentView = new TextView ();
 			iterCommentView.Buffer.Text = comment.Content;
 			iterCommentView.HeightRequest = 100;
 			iterCommentView.WrapMode = WrapMode.Word;
 			iterCommentView.Editable = false;
-			
-			VBox iterVBox = new VBox();
-			iterVBox.PackStart(subjectHBox, false, false,0);
-			iterVBox.PackStart(iterCommentView, true, true, 0);
-			
+
+			VBox iterVBox = new VBox ();
+			iterVBox.PackStart (subjectHBox, false, false, 0);
+			iterVBox.PackStart (iterCommentView, true, true, 0);
+
 			// Create an expander
-			Expander iterContainer = new Expander(comment.Author);
-			
-			iterContainer.Add(iterVBox);
+			Expander iterContainer = new Expander (comment.Author);
+
+			iterContainer.Add (iterVBox);
 			iterContainer.Activated += ContainerActivated;
-			
-			iterContainer.ShowAll();
-			
-			commentVBox.PackStart(iterContainer, true, true, 0);
+
+			iterContainer.ShowAll ();
+
+			commentVBox.PackStart (iterContainer, true, true, 0);
 		}
-	
+
 		//public event EventHandler<CommentAddedEventArgs> NewCommentAdded;
 		public event CommentAddedDelegate NewCommentAdded;
-		
-		protected void AddCommentQuote(CommentData comment)
+
+		protected void AddCommentQuote (CommentData comment)
 		{
 			// Don't erase the existing comment no matter what.
 			// construct a "quoted" reply from the comment
 			string quoteString = "\n";
-			quoteString += "On " + comment.PostDate.ToString() + ", " + comment.Author + " wrote:";
-			string[] commentLines = comment.Content.Split('\n');
-			foreach(string commentLine in commentLines)
-			{
+			quoteString += "On " + comment.PostDate.ToString () + ", " + comment.Author + " wrote:";
+			string[] commentLines = comment.Content.Split ('\n');
+			foreach (string commentLine in commentLines) {
 				quoteString += "> " + commentLine + "\n";
-			}			
+			}
 			commentTextView.Buffer.Text += quoteString;
 		}
 
 		void ContainerActivated (object sender, EventArgs e)
 		{
-			GLib.Timeout.Add(100, UpdateSize);
+			GLib.Timeout.Add (100, UpdateSize);
 		}
-		
-		bool UpdateSize()
+
+		bool UpdateSize ()
 		{
 			int w, h;
-			this.GetSizeRequest(out w, out h);
+			this.GetSizeRequest (out w, out h);
 			//this.SetSizeRequest(w, h);
 			this.WidthRequest = w;
-			
+
 			return false;
-		}		
-		
+		}
+
 		public CommentWidget2 ()
 		{
 			this.Build ();
-			log = new LogUtil("CommentWidget2");
-			
-			log.SetHash(this);
-			
+			log = new LogUtil ("CommentWidget2");
+
+			log.SetHash (this);
+
 			addCommentButton.Clicked += AddCommentButtonClicked;
 		}
 
 		void AddCommentButtonClicked (object sender, EventArgs e)
 		{
-			CommentData comment = new CommentData();
-			
+			CommentData comment = new CommentData ();
+
 			// Re-create all the comment information
 			comment.Title = subjectEntry.Text;
-			comment.Author = "Me"; // TODO TODO TODO - change this
-			
+			comment.Author = "Me";
+			// TODO TODO TODO - change this
 			comment.Content = commentTextView.Buffer.Text;
 			comment.PostDate = DateTime.Now;
-			
-			CommentAddedEventArgs args = new CommentAddedEventArgs();
+
+			CommentAddedEventArgs args = new CommentAddedEventArgs ();
 			args.newComment = comment;
-			
-			NewCommentAdded(args);
-			
+
+			NewCommentAdded (args);
+
 			// now add the comment to the GUI
-			AddCommentToGui(comment);
-			
+			AddCommentToGui (comment);
+
 			// Clear out the reply window
 			this.commentTextView.Buffer.Text = "";
 			this.subjectEntry.Text = "";
 		}
-		
-		public void Initialize(List<CommentData> _comments)
+
+		public void Initialize (List<CommentData> _comments)
 		{
 			Comments = _comments;
-			
-			foreach(CommentData comment in Comments)
-			{
-				this.AddCommentToGui(comment);
+
+			foreach (CommentData comment in Comments) {
+				this.AddCommentToGui (comment);
 			}
-			
+
 		}
 	}
-	
-	
-	
-	
-	[Serializable]
+
+
+
+
+	[Serializable()]
 	public sealed class CommentAddedEventArgs : EventArgs
 	{
-		public CommentData newComment{
-			get;set;
+		public CommentData newComment {
+			get;
+			set;
 		}
 		public CommentAddedEventArgs ()
 		{
-			
+
 		}
 	}
 }

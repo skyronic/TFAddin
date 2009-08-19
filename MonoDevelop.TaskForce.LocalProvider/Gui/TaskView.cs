@@ -37,11 +37,11 @@ using MonoDevelop.Core.Gui;
 namespace MonoDevelop.TaskForce.LocalProvider.Gui
 {
 	enum CurrentRole
-		{
-			NewTask,
-			EditTask,
-			ViewTask,
-		}
+	{
+		NewTask,
+		EditTask,
+		ViewTask
+	}
 
 	/// <summary>
 	/// A single unified TaskView which can take on the role of 
@@ -50,124 +50,112 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 	{
 		protected LogUtil log;
 		protected TaskViewWidget taskViewWidget;
-		
+
 		public override Widget Control {
-			get {
-				return taskViewWidget;
-			}
+			get { return taskViewWidget; }
 		}
-		
+
 		protected ProviderData providerNode;
 		protected TaskData targetTask;
-		
-		
+
+
 		CurrentRole Role;
-		
-		public void NewTaskRole(ProviderData _providerNode)
+
+		public void NewTaskRole (ProviderData _providerNode)
 		{
 			providerNode = _providerNode;
 			Role = CurrentRole.NewTask;
-			
-			this.IsDirty = true;			
+
+			this.IsDirty = true;
 		}
-		
-		public void EditTaskRole(ProviderData _providerNode, TaskData _target)
+
+		public void EditTaskRole (ProviderData _providerNode, TaskData _target)
 		{
 			providerNode = _providerNode;
 			targetTask = _target;
-			
-			taskViewWidget.PopulateFromTaskData(_target);
+
+			taskViewWidget.PopulateFromTaskData (_target);
 			Role = CurrentRole.EditTask;
-			
+
 			this.ContentName = _target.Label;
 			this.IsDirty = false;
 		}
-		
+
 		public override void Save ()
 		{
-			log.WARN("Save () called");
-			
+			log.WARN ("Save () called");
+
 			// re-construct the data from the widget
-			taskViewWidget.ConvertToTaskCore();
+			taskViewWidget.ConvertToTaskCore ();
 			this.ContentName = taskViewWidget.TargetCore.Title;
-			
-			if(Role == CurrentRole.EditTask)
-			{
+
+			if (Role == CurrentRole.EditTask) {
 				// the task is already hooked up to the provider
 				// just force an update of the TFStore for now
 				targetTask.Label = taskViewWidget.TargetCore.Title;
-				targetTask.TriggerUpdate();
-				TaskForceMain.Instance.StartTFStoreUpdate();
-			}
-			else if(Role == CurrentRole.NewTask)
-			{
+				targetTask.TriggerUpdate ();
+				TaskForceMain.Instance.StartTFStoreUpdate ();
+			} else if (Role == CurrentRole.NewTask) {
 				// create a new task
-				TaskData data = new TaskData();
-				
+				TaskData data = new TaskData ();
+
 				data.CoreDataObject = taskViewWidget.TargetCore;
 				data.Label = taskViewWidget.TargetCore.Title;
-				
-				providerNode.AddChild(data);
-				TaskForceMain.Instance.StartTFStoreUpdate();
-				
+
+				providerNode.AddChild (data);
+				TaskForceMain.Instance.StartTFStoreUpdate ();
+
 				Role = CurrentRole.EditTask;
-				
+
 				// the new task now becomes the target
 				targetTask = data;
 			}
-			
+
 			// Unset the IsDirry
 			IsDirty = false;
 		}
-		
-		
+
+
 
 
 
 		public override void Load (string fileName)
 		{
-			log.WARN("Function not implemented - load() - with filename - " + fileName);
+			log.WARN ("Function not implemented - load() - with filename - " + fileName);
 		}
 
 		public override bool IsFile {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
-		
+
 		public override bool IsReadOnly {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
 
 
 		public TaskView ()
 		{
-			taskViewWidget = new TaskViewWidget();
+			taskViewWidget = new TaskViewWidget ();
 			taskViewWidget.TaskViewContent = this;
-			log = new LogUtil("TaskView");
-			
+			log = new LogUtil ("TaskView");
+
 			taskViewWidget.Changed += TaskViewWidgetChanged;
-			
+
 			// not dirty by default
 			this.IsDirty = false;
 		}
-		
-		public void ActivateCurrentTask()
+
+		public void ActivateCurrentTask ()
 		{
 			// only if it's editable task
-			if(Role == CurrentRole.EditTask)
-			{
+			if (Role == CurrentRole.EditTask) {
 				// activate the target task
-				TaskForceMain.Instance.ActivateTask(targetTask);				
-			}
-			else
-			{
+				TaskForceMain.Instance.ActivateTask (targetTask);
+			} else {
 				//MessageService.ShowMessage("Unable to activate task", "Please create the task first and save it for activation");
 				// Save the current task
-				Save();
-				TaskForceMain.Instance.ActivateTask(targetTask);
+				Save ();
+				TaskForceMain.Instance.ActivateTask (targetTask);
 			}
 		}
 

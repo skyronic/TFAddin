@@ -38,14 +38,15 @@ using System;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
-	public interface ICoreData // holds the core data of tasks, providers, etc. To be used only by providers
+
+
+	public interface ICoreData
 	{
-		string SerializeToXML();
-		void DeSerialize(string serializedString);
+		// holds the core data of tasks, providers, etc. To be used only by providers
+		string SerializeToXML ();
+		void DeSerialize (string serializedString);
 	}
-	
+
 	public interface IGeneralData
 	{
 		//string SerializeToXML();

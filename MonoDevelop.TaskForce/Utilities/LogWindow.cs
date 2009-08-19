@@ -38,15 +38,14 @@ using System;
 
 namespace MonoDevelop.TaskForce.Utilities
 {
-	
-	
+
+
 	public partial class LogWindow : Gtk.Window
 	{
-		
-		public LogWindow() : 
-				base(Gtk.WindowType.Toplevel)
+
+		public LogWindow () : base(Gtk.WindowType.Toplevel)
 		{
-			this.Build();
+			this.Build ();
 		}
 	}
 }

@@ -30,47 +30,45 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
+
+
 	public class CategoryData : NodeData
 	{
 		public override NodeType nodeType {
-		get {
-				return NodeType.Category;
-			}
+			get { return NodeType.Category; }
 		}
-		public object CoreDataObject
-		{get;set;}
-		
-		public CategoryData() : base()
+		public object CoreDataObject {
+			get;
+			set;
+		}
+
+		public CategoryData () : base()
 		{
-			
+
 		}
-		
+
 		public override bool CanMakeChild (NodeData childData)
 		{
-			return this.CanMakeChild(childData.nodeType);
+			return this.CanMakeChild (childData.nodeType);
 		}
 
 		public override bool CanMakeChild (NodeType childType)
 		{
-			if(childType == NodeType.Task)
-			{
+			if (childType == NodeType.Task) {
 				return true;
 			}
-			if(childType == NodeType.Category)
-			{
+			if (childType == NodeType.Category) {
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public override void PostSerializeHook ()
 		{
 			throw new System.NotImplementedException ();
 		}
 
-		
+
 	}
 }

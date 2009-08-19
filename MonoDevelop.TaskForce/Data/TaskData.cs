@@ -39,75 +39,75 @@ using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
+
+
 	public class TaskData : NodeData
 	{
 
 		public override NodeType nodeType {
-		get {
-				return NodeType.Task;
-			}
+			get { return NodeType.Task; }
 		}
-		
+
 		// The core data object which contains the provider specific data
-		
-		
-		[ItemProperty]
-		public ContextData TaskContext{get; private set;}		
-		
-		public TaskData() : base()
-		{
-			TaskContext = new ContextData();			
+
+
+		[ItemProperty()]
+		public ContextData TaskContext {
+			get;
+			private set;
 		}
-		
+
+		public TaskData () : base()
+		{
+			TaskContext = new ContextData ();
+		}
+
 		public override bool CanMakeChild (NodeData childData)
 		{
-			return this.CanMakeChild(childData.nodeType);
+			return this.CanMakeChild (childData.nodeType);
 		}
 
 		public override bool CanMakeChild (NodeType childType)
 		{
-			if(childType == NodeType.Task)
-			{
+			if (childType == NodeType.Task) {
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		/// <summary>
 		/// to be fired by TaskForceMain only
 		/// </summary>
-		public void OnTaskActivated()
+		public void OnTaskActivated ()
 		{
-			TaskContext.TaskActivated();
+			TaskContext.TaskActivated ();
 		}
-		
+
 		/// <summary>
 		/// To be fired by TaskForceMain only 
 		/// </summary>
-		public void OnTaskDeactivated()
+		public void OnTaskDeactivated ()
 		{
-			TaskContext.TaskDeactivated();
-		
+			TaskContext.TaskDeactivated ();
+
 		}
-		
+
 		public override void PostSerializeHook ()
 		{
 			// do any post-serialization work here
-			
-			base.PostSerializeHook();
+
+			base.PostSerializeHook ();
 		}
-		
+
 		public override void PostDeserializeHook ()
 		{
 			base.PostDeserializeHook ();
 			// Check if the label accidentally has a "*[A]* " at the beginning
-			this.Label.TrimStart("*[A]*  ".ToCharArray());
+			this.Label.TrimStart ("*[A]*  ".ToCharArray ());
 		}
 
 
-		
+
 	}
 }

@@ -39,9 +39,11 @@ namespace MonoDevelop.TaskForce.Context
 
 	public class DocumentStore
 	{
-		[ItemProperty]
-		public List<DocumentMemento> Documents
-		{get;set;}
+		[ItemProperty()]
+		public List<DocumentMemento> Documents {
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Captures the mementoes and closes all the documents as well
@@ -52,7 +54,7 @@ namespace MonoDevelop.TaskForce.Context
 			Documents.Clear ();
 
 			ReadOnlyCollection<Document> openDocuments = IdeApp.Workbench.Documents;
-			List<Document> toBeKilled = new List<Document>();
+			List<Document> toBeKilled = new List<Document> ();
 
 			foreach (Document doc in openDocuments) {
 				if (DocumentMemento.CanCaptureDocument (doc)) {
@@ -61,15 +63,14 @@ namespace MonoDevelop.TaskForce.Context
 					dm.CaptureMemento (doc);
 
 					Documents.Add (dm);
-					
+
 					// Add the document into the list to be closed
-					toBeKilled.Add(doc);
+					toBeKilled.Add (doc);
 				}
 			}
-			
-			foreach(Document doc in toBeKilled)
-			{
-				doc.Close();
+
+			foreach (Document doc in toBeKilled) {
+				doc.Close ();
 			}
 		}
 

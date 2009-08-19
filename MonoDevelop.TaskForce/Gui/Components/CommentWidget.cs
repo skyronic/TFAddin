@@ -31,131 +31,130 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.Components
 {
-	
-	
+
+
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class CommentWidget : Gtk.Bin
 	{
-		
-		private List<CommentData> Comments
-		{
+
+		private List<CommentData> Comments {
 			get;
 			set;
 		}
-		
+
 		protected ListStore treeStore;
 		protected LogUtil log;
-		
-		
+
+
 		/// <summary>
 		/// sets up the treeview model and store
 		/// </summary>
-		protected void PopulateTreeView()
+		protected void PopulateTreeView ()
 		{
-			treeStore = new ListStore(typeof(CommentData));
+			treeStore = new ListStore (typeof(CommentData));
 			// the header column, a single column for now
-			TreeViewColumn headerColumn = new TreeViewColumn();
+			TreeViewColumn headerColumn = new TreeViewColumn ();
 			headerColumn.Title = "Comment";
-			
+
 			// the header cell to show the comment header
 			// not to be confused with the Tree's header.
-			CellRendererText headerCell = new CellRendererText();
-			headerColumn.PackStart(headerCell,true);
-			
+			CellRendererText headerCell = new CellRendererText ();
+			headerColumn.PackStart (headerCell, true);
+
 			// set the renderer
-			headerColumn.SetCellDataFunc(headerCell, new TreeCellDataFunc(RenderCommentHeader));
-			
-			
-			
+			headerColumn.SetCellDataFunc (headerCell, new TreeCellDataFunc (RenderCommentHeader));
+
+
+
 			// Add the comments into the treestore
-			foreach(CommentData comment in Comments)
-			{
-				log.DEBUG("Added a new comment: " + comment.ToString());
-				treeStore.AppendValues(comment);
+			foreach (CommentData comment in Comments) {
+				log.DEBUG ("Added a new comment: " + comment.ToString ());
+				treeStore.AppendValues (comment);
 			}
 			// Add the column and model to the tree
-			commentTree.AppendColumn(headerColumn);
+			commentTree.AppendColumn (headerColumn);
 			commentTree.Model = treeStore;
-			
+
 			// handle a clicki
 			commentTree.SelectionNotifyEvent += HandleSelectionNotifyEvent;
 			commentTree.SelectionReceived += HandleSelectionReceived;
 			commentTree.RowActivated += HandleRowActivated;
 		}
 
-		void HandleRowActivated(object o, RowActivatedArgs args)
+		void HandleRowActivated (object o, RowActivatedArgs args)
 		{
 			// to retrieve the data
-			TreeIter iter = new TreeIter();
-			
+			TreeIter iter = new TreeIter ();
+
 			// get the iterator
-			treeStore.GetIter(out iter, args.Path);
-			
-			CommentData comment = treeStore.GetValue(iter, 0) as CommentData;
-			
+			treeStore.GetIter (out iter, args.Path);
+
+			CommentData comment = treeStore.GetValue (iter, 0) as CommentData;
+
 			// set the contentview's text
 			contentView.Buffer.Text = comment.Content;
-			
+
 			// enable the reply and the quote buttons
 			replyButton.Sensitive = true;
 			quoteButton.Sensitive = true;
 		}
 
-		void HandleSelectionNotifyEvent(object o, SelectionNotifyEventArgs args)
+		void HandleSelectionNotifyEvent (object o, SelectionNotifyEventArgs args)
 		{
-			log.WARN("SelectionNotifyEvent");
+			log.WARN ("SelectionNotifyEvent");
 		}
 
-		void HandleSelectionReceived(object o, SelectionReceivedArgs args)
+		void HandleSelectionReceived (object o, SelectionReceivedArgs args)
 		{
 			// get the comment
-			log.WARN("Selection recieved");
-			
+			log.WARN ("Selection recieved");
+
 		}
-		
-		private void RenderCommentHeader(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+
+		private void RenderCommentHeader (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
 		{
-			CommentData comment = model.GetValue(iter, 0) as CommentData;
-			(cell as CellRendererText).Markup = String.Format("<b>{0}</b>  {1} \n <i>{2}</i>",comment.Author, comment.PostDate.ToString(), comment.Title);
-	
+			CommentData comment = model.GetValue (iter, 0) as CommentData;
+			(cell as CellRendererText).Markup = String.Format ("<b>{0}</b>  {1} \n <i>{2}</i>", comment.Author, comment.PostDate.ToString (), comment.Title);
+
 		}
-		
-		public CommentWidget(List<CommentData> _comments)
+
+		public CommentWidget (List<CommentData> _comments)
 		{
-			log = new LogUtil("CommentWidget");
-			this.Build();
-			
-			log.DEBUG("Recieved comments with size" + _comments.Count);
+			log = new LogUtil ("CommentWidget");
+			this.Build ();
+
+			log.DEBUG ("Recieved comments with size" + _comments.Count);
 			Comments = _comments;
 			replyButton.Sensitive = false;
 			quoteButton.Sensitive = false;
-			PopulateTreeView();
+			PopulateTreeView ();
 		}
-		
+
 		/// <summary>
 		/// To be used only when stetic is being used
 		/// </summary>
-		public CommentWidget()
+		public CommentWidget ()
 		{
-						this.Build();
+			this.Build ();
 
 		}
-		
+
 		/// <summary>
 		/// Call the intialize function only if you have used stetic to embed the widget
 		/// </summary>
 		/// <param name="_comments">
 		/// A <see cref="List"/>
 		/// </param>
-		public void Initialize(List<CommentData> _comments)
+		public void Initialize (List<CommentData> _comments)
 		{
-			
-			log = new LogUtil("CommentWidget");
-			
-			log.DEBUG("Recieved comments with size" + _comments.Count);
+
+			log = new LogUtil ("CommentWidget");
+
+			log.DEBUG ("Recieved comments with size" + _comments.Count);
 			Comments = _comments;
 			replyButton.Sensitive = false;
 			quoteButton.Sensitive = false;
-			PopulateTreeView();		}
+			PopulateTreeView ();
+		}
 	}
 }

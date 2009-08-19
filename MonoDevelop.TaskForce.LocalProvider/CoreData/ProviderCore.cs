@@ -34,20 +34,22 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 
 	public class ProviderCore : ICoreData
 	{
-		
+
 		// Just to test the serialization
-		[ItemProperty]
-		public int AnswerToLife
-			{get;set;}
+		[ItemProperty()]
+		public int AnswerToLife {
+			get;
+			set;
+		}
 
 		#region ICoreData implementation
 		public void DeSerialize (string serializedString)
 		{
 		}
-		
+
 		public string SerializeToXML ()
 		{
-			return Utilities.Util.SerializeObjectToString(this);
+			return Utilities.Util.SerializeObjectToString (this);
 		}
 		#endregion
 

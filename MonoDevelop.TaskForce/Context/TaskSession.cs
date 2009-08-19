@@ -36,23 +36,23 @@ namespace MonoDevelop.TaskForce.Context
 	/// </summary>
 	public class TaskSession
 	{
-		[ItemProperty]
-		public DateTime StartTime
-		{
-			get;set;
+		[ItemProperty()]
+		public DateTime StartTime {
+			get;
+			set;
 		}
-		
-		[ItemProperty]
-		public DateTime EndTime
-		{
-			get;set;
+
+		[ItemProperty()]
+		public DateTime EndTime {
+			get;
+			set;
 		}
-		
-		public TimeSpan GetLength()
+
+		public TimeSpan GetLength ()
 		{
-			return EndTime.Subtract(StartTime);
+			return EndTime.Subtract (StartTime);
 		}
-		
+
 		public TaskSession ()
 		{
 			// assume we're starting now by default

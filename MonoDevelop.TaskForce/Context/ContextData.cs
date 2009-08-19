@@ -50,18 +50,20 @@ namespace MonoDevelop.TaskForce.Context
 		private TaskData parentTask;
 		private LogUtil log;
 
-		[ItemProperty]
+		[ItemProperty()]
 		private DocumentStore documentStore;
-		
-		[ItemProperty]
-		public List<TaskSession> Sessions
-		{get;set;}
-		
+
+		[ItemProperty()]
+		public List<TaskSession> Sessions {
+			get;
+			set;
+		}
+
 		private TaskSession activeSession;
 
 		public void TaskActivated ()
 		{
-			activeSession = new TaskSession();
+			activeSession = new TaskSession ();
 			documentStore.RestoreMemento ();
 		}
 
@@ -70,12 +72,12 @@ namespace MonoDevelop.TaskForce.Context
 			documentStore.CaptureMemento ();
 			activeSession.EndTime = DateTime.Now;
 			Sessions.Add (activeSession);
-			
+
 			// move the item to a new session
-			activeSession = new TaskSession();
-			
+			activeSession = new TaskSession ();
+
 			// Store the task information by triggering an update
-			TaskForceMain.Instance.StartTFStoreUpdate();
+			TaskForceMain.Instance.StartTFStoreUpdate ();
 		}
 
 
@@ -91,7 +93,7 @@ namespace MonoDevelop.TaskForce.Context
 			log.SetHash (this);
 
 			documentStore = new DocumentStore ();
-			Sessions = new List<TaskSession>();
+			Sessions = new List<TaskSession> ();
 
 		}
 	}

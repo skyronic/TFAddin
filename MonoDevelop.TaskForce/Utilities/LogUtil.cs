@@ -42,126 +42,126 @@ namespace MonoDevelop.TaskForce.Utilities
 	/// </summary>
 	public class LogUtil
 	{
-		
+
 		/// <summary>
 		/// The name of the logging module
 		/// </summary>
 		public string moduleName;
 		public string hashCode;
-		public LogUtil()
+		public LogUtil ()
 		{
 			this.moduleName = "Untitled";
 		}
-		
+
 		/// <summary>
 		/// Constructor with custom name
 		/// </summary>
 		/// <param name="_moduleName">
 		/// A <see cref="String"/> which is the name of the module.
 		/// </param>
-		public LogUtil(String _moduleName)
+		public LogUtil (String _moduleName)
 		{
 			this.moduleName = _moduleName;
 			this.hashCode = "";
 		}
-		protected string GetPrefix()
+		protected string GetPrefix ()
 		{
-			if(hashCode != "")
-				return String.Format("[TaskForce][{0}][#{1}#]",moduleName, hashCode);
-			
-			return String.Format("[TaskForce][{0}]",moduleName);
-			
+			if (hashCode != "")
+				return String.Format ("[TaskForce][{0}][#{1}#]", moduleName, hashCode);
+
+			return String.Format ("[TaskForce][{0}]", moduleName);
+
 		}
-		
-		public void SetHash(object o)
+
+		public void SetHash (object o)
 		{
-			hashCode =  o.GetHashCode().ToString();
+			hashCode = o.GetHashCode ().ToString ();
 		}
-		
+
 		/// <summary>
 		/// Write a Debug message
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>. Log message
 		/// </param>
-		public void DEBUG(String message)
+		public void DEBUG (String message)
 		{
 			ConsoleColor currentColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine("[DEBUG]" + GetPrefix() + message);
+			Console.WriteLine ("[DEBUG]" + GetPrefix () + message);
 			Console.ForegroundColor = currentColor;
 		}
-		
+
 		/// <summary>
 		/// Write an Info message
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>. Log message
 		/// </param>
-		public void INFO(String message)
+		public void INFO (String message)
 		{
 			ConsoleColor currentColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("[INFO]" + GetPrefix() + message);
+			Console.WriteLine ("[INFO]" + GetPrefix () + message);
 			Console.ForegroundColor = currentColor;
 		}
-		
-		
+
+
 		/// <summary>
 		/// Write a standard log message
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>. Log message
 		/// </param>
-		public void LOG(String message)
+		public void LOG (String message)
 		{
 			ConsoleColor currentColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Blue;
-			Console.WriteLine("[LOG]" + GetPrefix() + message);
+			Console.WriteLine ("[LOG]" + GetPrefix () + message);
 			Console.ForegroundColor = currentColor;
 		}
-		
-		
+
+
 		/// <summary>
 		/// Write a warning message.
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>. Log message.
 		/// </param>
-		public void WARN(String message)
+		public void WARN (String message)
 		{
 			ConsoleColor currentColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Magenta;
-			Console.WriteLine("[WARN]" + GetPrefix() + message);
+			Console.WriteLine ("[WARN]" + GetPrefix () + message);
 			Console.ForegroundColor = currentColor;
 		}
-		
-		
+
+
 		/// <summary>
 		/// Write an error message
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>. Log Message
 		/// </param>
-		public void ERROR(String message)
+		public void ERROR (String message)
 		{
 			ConsoleColor currentColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine("[ERROR]" + GetPrefix() + message);
+			Console.WriteLine ("[ERROR]" + GetPrefix () + message);
 			Console.ForegroundColor = currentColor;
 		}
-		
+
 		/// <summary>
 		/// Ignore the logs, but keep them in the source code
 		/// </summary>
 		/// <param name="message">
 		/// A <see cref="String"/>
 		/// </param>
-		public void NULL(String message)
+		public void NULL (String message)
 		{
-			
+
 		}
-		
+
 	}
 }
 

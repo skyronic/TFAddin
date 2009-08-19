@@ -35,10 +35,10 @@ namespace MonoDevelop.TaskForce.Commands
 
 		protected override void Run (object dataItem)
 		{
-			TaskForceMain.Instance.Main();
-			base.Run(dataItem);
+			TaskForceMain.Instance.Main ();
+			base.Run (dataItem);
 		}
-		
+
 		public TaskForceStartupHandler ()
 		{
 		}
@@ -46,9 +46,9 @@ namespace MonoDevelop.TaskForce.Commands
 		protected override void Run ()
 		{
 			// Start TaskForce
-			TaskForceMain.Instance.Main();
-			base.Run();
+			TaskForceMain.Instance.Main ();
+			base.Run ();
 		}
-		
+
 	}
 }

@@ -38,13 +38,13 @@ using System;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
+
+
 	public enum NodeType
 	{
 		Task,
 		Provider,
 		Category
-		
+
 	}
 }

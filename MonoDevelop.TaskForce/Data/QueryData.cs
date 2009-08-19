@@ -38,12 +38,12 @@ using System;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
+
+
 	public class QueryData
 	{
-		
-		public QueryData()
+
+		public QueryData ()
 		{
 		}
 	}

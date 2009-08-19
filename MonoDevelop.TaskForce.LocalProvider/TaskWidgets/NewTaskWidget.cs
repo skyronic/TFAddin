@@ -33,29 +33,35 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 {
-	
-				
-	
+
+
+
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class NewTaskWidget : Gtk.Bin
 	{
 		// the provider to which the task will go to
-		public ProviderData ProviderNode
-		{get;set;}
-		
-		public NewTaskView ViewContent
-		{get;set;}
-		
-		public bool NewTaskFlag
-		{get;set;}
-		
+		public ProviderData ProviderNode {
+			get;
+			set;
+		}
+
+		public NewTaskView ViewContent {
+			get;
+			set;
+		}
+
+		public bool NewTaskFlag {
+			get;
+			set;
+		}
+
 		protected LogUtil log;
 
 		protected virtual void OnApplyButtonClicked (object sender, System.EventArgs e)
 		{
-			
+
 			// Create a TaskCore object and populate with values from GUI
-			TaskCore core = new TaskCore();
+			TaskCore core = new TaskCore ();
 			/*
 			 * TODO: Why isn't this working? all the objects are defined in stetic
 			core.Title = this.taskNameEntry.Text;
@@ -69,30 +75,30 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 			core.CreateDate = DateTime.Now;
 			core.DueDate = DateTime.Now;
 			core.Priority = 10;
-			
-			log.INFO("Added new TaskCore - " + core.ToString());
+
+			log.INFO ("Added new TaskCore - " + core.ToString ());
 			// create a taskdata object
-			TaskData task = new TaskData();
-			
+			TaskData task = new TaskData ();
+
 			// attach the new core object to the task
 			task.CoreDataObject = core;
-			
+
 			// write the task data to the database
-			DBHelper.AddTask(core);
-			
+			DBHelper.AddTask (core);
+
 			// set the title of the task node
 			task.Label = core.Title;
-			
+
 			// Add the task to the provider's children and thus trigger
 			// an update of the treeview
-			ProviderNode.AddChild(task);
-			
+			ProviderNode.AddChild (task);
+
 		}
-			
-		public NewTaskWidget()
+
+		public NewTaskWidget ()
 		{
-			log = new LogUtil();
-			this.Build();
+			log = new LogUtil ();
+			this.Build ();
 		}
 	}
 }

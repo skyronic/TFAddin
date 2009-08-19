@@ -37,87 +37,95 @@ using System.IO;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	public delegate void NodeDataChangedHandler(NodeData source, NodeDataChangedEventArgs args);
-	
+	public delegate void NodeDataChangedHandler (NodeData source, NodeDataChangedEventArgs args);
+
 	public abstract class NodeData : IDisposable
 	{
-		
+
 		// The provider object (moved from providerdata to here)
-		[ItemProperty]
+		[ItemProperty()]
 		public IProvider provider;
-		
-		public NodeData()
+
+		public NodeData ()
 		{
-			children = new List<NodeData>();
-			data = new Hashtable();
+			children = new List<NodeData> ();
+			data = new Hashtable ();
 			parent = null;
-			log = new LogUtil("NodeData");
+			log = new LogUtil ("NodeData");
 		}
-		
-		[ItemProperty]
-		public string Label
-		{get;set;}
-		
-		
-		[ItemProperty]
-		public ICoreData CoreDataObject
-		{get;set;}
-		
-		public string CoreDataSerializationString
-		{get;set;}
-		
-		public abstract NodeType nodeType
-		{
+
+		[ItemProperty()]
+		public string Label {
+			get;
+			set;
+		}
+
+
+		[ItemProperty()]
+		public ICoreData CoreDataObject {
+			get;
+			set;
+		}
+
+		public string CoreDataSerializationString {
+			get;
+			set;
+		}
+
+		public abstract NodeType nodeType {
 			get;
 		}
-		
-		public Gdk.Pixbuf OpenIcon
-		{get;set;}
-		
-		Gdk.Pixbuf ClosedIcon
-		{get;set;}
-		
+
+		public Gdk.Pixbuf OpenIcon {
+			get;
+			set;
+		}
+
+		Gdk.Pixbuf ClosedIcon {
+			get;
+			set;
+		}
+
 		public NodeData parent;
-		
+
 		public string serializedString;
-		
+
 		// The children of the current node.
-		[ItemProperty]
+		[ItemProperty()]
 		public List<NodeData> children;
-		
-		
+
+
 		protected LogUtil log;
-		public Hashtable data; // Contains all the data
-		
-		public abstract bool CanMakeChild(NodeType childType);
-		public abstract bool CanMakeChild(NodeData childData);
-		
-		public virtual void AddChild(NodeData childData)
+		public Hashtable data;
+		// Contains all the data
+		public abstract bool CanMakeChild (NodeType childType);
+		public abstract bool CanMakeChild (NodeData childData);
+
+		public virtual void AddChild (NodeData childData)
 		{
 			// Check if this node can have this as a child
-			if(CanMakeChild(childData))
-			{
+			if (CanMakeChild (childData)) {
 				// First, remove the child from it's parent list
 				NodeData oldParent = childData.parent;
-				
-				if(oldParent != null)
-					childData.parent.children.Remove(childData);
-				
+
+				if (oldParent != null)
+					childData.parent.children.Remove (childData);
+
 				// set the child data's parent to the current object
 				childData.parent = this;
-				
+
 				// add the child data as a child
-				this.children.Add(childData);
-				
+				this.children.Add (childData);
+
 				// Inform both classes about the updates
-				this.TriggerUpdate();
-				
-				if(oldParent!=null)
-					oldParent.TriggerUpdate();
-				
+				this.TriggerUpdate ();
+
+				if (oldParent != null)
+					oldParent.TriggerUpdate ();
+
 			}
 		}
-		
+
 		/// <summary>
 		/// Adds a child and does not update GUI. to be used when heavy
 		/// tree activity is taking place 
@@ -127,129 +135,123 @@ namespace MonoDevelop.TaskForce.Data
 		/// <param name="childData">
 		/// A <see cref="NodeData"/>
 		/// </param>
-		public virtual void AddChildSilent(NodeData childData)
+		public virtual void AddChildSilent (NodeData childData)
 		{
 			// Check if this node can have this as a child
-			if(CanMakeChild(childData))
-			{
+			if (CanMakeChild (childData)) {
 				// First, remove the child from it's parent list
 				NodeData oldParent = childData.parent;
-				
-				if(oldParent != null)
-					childData.parent.children.Remove(childData);
-				
+
+				if (oldParent != null)
+					childData.parent.children.Remove (childData);
+
 				// set the child data's parent to the current object
 				childData.parent = this;
-				
+
 				// add the child data as a child
-				this.children.Add(childData);
-				
+				this.children.Add (childData);
+
 				// Inform both classes about the updates
 				//this.TriggerUpdate();
-				
+
 			}
 		}
-		
+
 		/// <summary>
 		/// Triggered when a node is changed
 		/// </summary>
 		public event NodeDataChangedHandler NodeDataChanged;
-		
-		public virtual void TriggerUpdate()
+
+		public virtual void TriggerUpdate ()
 		{
 			// Todo: Add args somewhere?
-			
-			NodeDataChangedEventArgs args = new NodeDataChangedEventArgs();			
-			NodeDataChanged(this, args);
+
+			NodeDataChangedEventArgs args = new NodeDataChangedEventArgs ();
+			NodeDataChanged (this, args);
 		}
-		
-		public virtual void SerializeData()
+
+		public virtual void SerializeData ()
 		{
-			PreSerializeHook();
-			
+			PreSerializeHook ();
+
 			// Serialize the current object
-			serializedString = Util.SerializeObjectToString(this);
-			
+			serializedString = Util.SerializeObjectToString (this);
+
 		}
-		
-		
+
+
 		/// <summary>
 		/// this does any generic NodeData post serialization 
 		/// </summary>
-		public virtual void PostSerializeHook()
+		public virtual void PostSerializeHook ()
 		{
-			
+
 		}
-		
-		public virtual void PostDeserializeHook()
+
+		public virtual void PostDeserializeHook ()
 		{
 			// Re-enable anything that needs to be done in a constructor normally
-			log = new LogUtil("NodeData");
-			
+			log = new LogUtil ("NodeData");
+
 			// Deserialize the CoreDataString into the CoreDataObject
 			//CoreDataObject.DeSerialize(CoreDataSerializationString);
-			
+
 			// Free up the memory contained in the CoreDataSerializedString
 			//CoreDataSerializationString = null;
-			
-			
+
+
 			// if there are no children available, make sure that there's a new object for children
-			if(children == null)
-			{
-				children = new List<NodeData>();
-			}
-			else
-			{
-				foreach(NodeData child in children)
-				{
+			if (children == null) {
+				children = new List<NodeData> ();
+			} else {
+				foreach (NodeData child in children) {
 					child.parent = this;
-					
+
 					// IMPORTANT: this assumes that the provider has been set already
 					child.provider = this.provider;
-					
-					child.PostDeserializeHook();
+
+					child.PostDeserializeHook ();
 				}
 			}
 		}
-		
-		
+
+
 		/// <summary>
 		/// Here, we will do all the actions required before serialization
 		/// is to take place. 
 		/// </summary>
-		public virtual void PreSerializeHook()		
-		{			
-			log.LOG("Performing pre serialization hook");
+		public virtual void PreSerializeHook ()
+		{
+			log.LOG ("Performing pre serialization hook");
 			// First, serialize the CoreData into a string
 			//CoreDataSerializationString = CoreDataObject.SerializeToXML();
-			
+
 			// call the Pre serialization hooks for all it's children so that they 
 			// make sure to do their required parts
-			foreach(NodeData node in children)
-			{
-				node.PreSerializeHook();
+			foreach (NodeData node in children) {
+				node.PreSerializeHook ();
 			}
 		}
-		
-		public virtual void DeserializeData()
+
+		public virtual void DeserializeData ()
 		{
-			
+
 		}
-		
+
 		public void Dispose ()
 		{
 			// TODO: how?
 		}
-		
-		
+
+
 	}
-	
+
 	public class NodeDataChangedEventArgs
 	{
 		public Hashtable argData;
-		public NodeDataChangedEventArgs()
+		public NodeDataChangedEventArgs ()
 		{
-			
+
 		}
 	}
 }

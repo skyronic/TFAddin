@@ -35,164 +35,148 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
-	
-	
+
+
 	public class ProviderNodeBuilder : TaskPadNodeBuilder
 	{
-		
-		public ProviderNodeBuilder() : base()
+
+		public ProviderNodeBuilder () : base()
 		{
-			log = new MonoDevelop.TaskForce.Utilities.LogUtil("ProviderNodeBuilder");
+			log = new MonoDevelop.TaskForce.Utilities.LogUtil ("ProviderNodeBuilder");
 		}
-		
-        public override Type CommandHandlerType
-        {
-            get
-            {
-                return typeof(ProviderNodeCommandHandler);
-            }
-        }
 
-        public override Type NodeDataType
-        {
-            get
-            {
-                return typeof(ProviderData);
-            }
-        }
+		public override Type CommandHandlerType {
+			get { return typeof(ProviderNodeCommandHandler); }
+		}
 
-        public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
-        {
-			
+		public override Type NodeDataType {
+			get { return typeof(ProviderData); }
+		}
+
+		public override void BuildChildNodes (ITreeBuilder treeBuilder, object dataObject)
+		{
+
 			base.BuildChildNodes (treeBuilder, dataObject);
-			if (dataObject is ProviderData)
-			{
+			if (dataObject is ProviderData) {
 				ProviderData providerData = dataObject as ProviderData;
-				
-				foreach (object child in providerData.children)
-				{
+
+				foreach (object child in providerData.children) {
 					treeBuilder.AddChild (child);
 				}
 			}
-        }
+		}
 
 
-        public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string _label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
-        {
+		public override void BuildNode (ITreeBuilder treeBuilder, object dataObject, ref string _label, ref Gdk.Pixbuf icon, ref Gdk.Pixbuf closedIcon)
+		{
 			// convert the data object to a nodedata
-			if (dataObject is ProviderData)
-			{
-			
-				log.SetHash(dataObject);
+			if (dataObject is ProviderData) {
+
+				log.SetHash (dataObject);
 				ProviderData providerData = dataObject as ProviderData;
-				
+
 				_label = providerData.Label;
 				// TODO: Change the silly icons
-				icon = Context.GetIcon(Gtk.Stock.Cdrom);
-				
-				
-				closedIcon = Context.GetIcon(Gtk.Stock.Close);
+				icon = Context.GetIcon (Gtk.Stock.Cdrom);
+
+
+				closedIcon = Context.GetIcon (Gtk.Stock.Close);
 			}
-			
-        }
+
+		}
 
 		public override void OnNodeDataChanged (MonoDevelop.TaskForce.Data.NodeData source, MonoDevelop.TaskForce.Data.NodeDataChangedEventArgs args)
 		{
-			if (source is ProviderData)
-			{
+			if (source is ProviderData) {
 				// get the tree builder
 				ITreeBuilder treeBuilder = Context.GetTreeBuilder (source);
 				treeBuilder.UpdateAll ();
 			}
 		}
 
-        public override void Dispose ()
-        {
-            base.Dispose();
-        }
+		public override void Dispose ()
+		{
+			base.Dispose ();
+		}
 
 
 
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
+		protected override void Initialize ()
+		{
+			base.Initialize ();
+		}
 
-        public override void DataTypeComparison(object dataObject)
-        {
-            throw new System.NotImplementedException();
-        }
+		public override void DataTypeComparison (object dataObject)
+		{
+			throw new System.NotImplementedException ();
+		}
 
-        public override string GetNodeName(ITreeNavigator thisNode, object dataObject)
-        {
-			if(dataObject is NodeData)
-			{
+		public override string GetNodeName (ITreeNavigator thisNode, object dataObject)
+		{
+			if (dataObject is NodeData) {
 				return (dataObject as NodeData).data["name"] as string;
 			}
 			return "";
-        }
+		}
 	}
-	
+
 	public class ProviderNodeCommandHandler : TaskPadNodeCommandHandler
 	{
-		public ProviderNodeCommandHandler()
+		public ProviderNodeCommandHandler ()
 		{
-			
+
 		}
-		
+
 		[CommandHandler(ContextMenuCommands.AddTask)]
-		public void OnAddTaskContextMenu ()			
+		public void OnAddTaskContextMenu ()
 		{
-			if(this.CurrentNode.DataItem is ProviderData) // always be sure
-			{
-				ProviderData self = this.CurrentNode.DataItem as ProviderData;				
-				
-				self.provider.NewTask(self);
-			}			
+			// always be sure
+			if (this.CurrentNode.DataItem is ProviderData) {
+				ProviderData self = this.CurrentNode.DataItem as ProviderData;
+
+				self.provider.NewTask (self);
+			}
 		}
-		
+
 		[CommandHandler(ContextMenuCommands.NewCategory)]
 		public void OnNewCategoryContextMenu ()
 		{
-			LogUtil log = new LogUtil("ProviderNodeCommandHandler");
-			log.DEBUG("Creating a new category");
-			if(this.CurrentNode.DataItem is ProviderData)
-			{
+			LogUtil log = new LogUtil ("ProviderNodeCommandHandler");
+			log.DEBUG ("Creating a new category");
+			if (this.CurrentNode.DataItem is ProviderData) {
 				ProviderData self = this.CurrentNode.DataItem as ProviderData;
-				
+
 				// call the new category view
-				self.provider.CreateNewCategory();
+				self.provider.CreateNewCategory ();
 			}
 		}
 		[CommandHandler(ContextMenuCommands.Trigger1)]
-		public void OnTrigger1Clicked()
+		public void OnTrigger1Clicked ()
 		{
-			LogUtil log = new LogUtil("ProviderNodeCommandHandler");
-			if(this.CurrentNode.DataItem is ProviderData)
-			{
-				log.INFO("Attempting to serialize provider");
+			LogUtil log = new LogUtil ("ProviderNodeCommandHandler");
+			if (this.CurrentNode.DataItem is ProviderData) {
+				log.INFO ("Attempting to serialize provider");
 				ProviderData self = this.CurrentNode.DataItem as ProviderData;
-				self.SerializeData();
-				
+				self.SerializeData ();
+
 			}
 		}
-		
+
 		[CommandHandler(ContextMenuCommands.Trigger2)]
-		public void OnTrigger2Clicked()
+		public void OnTrigger2Clicked ()
 		{
-			if(this.CurrentNode.DataItem is ProviderData)
-			{
-				LogUtil log = new LogUtil("OnTrigger1Clicked");
-				log.INFO("Attempting to serialize provider");
+			if (this.CurrentNode.DataItem is ProviderData) {
+				LogUtil log = new LogUtil ("OnTrigger1Clicked");
+				log.INFO ("Attempting to serialize provider");
 				ProviderData self = this.CurrentNode.DataItem as ProviderData;
 				TaskForceMain tfMain = TaskForceMain.Instance;
-				tfMain.TempAddNewProvider(self.serializedString);
+				tfMain.TempAddNewProvider (self.serializedString);
 			}
 		}
-		
+
 		public override void OnNodeChange ()
 		{
-			
+
 		}
 
 	}

@@ -39,26 +39,18 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		protected NewTaskWidget widget;
 
 		public override Widget Control {
-					get {
-						return widget;
-					}
-				}
+			get { return widget; }
+		}
 
 		public override string ContentName {
-			get {
-				return base.ContentName;
-			}
-			set {
-				base.ContentName = value;
-			}
+			get { return base.ContentName; }
+			set { base.ContentName = value; }
 		}
 
 		public override bool IsFile {
-			get {
-				return base.IsFile;
-			}
+			get { return base.IsFile; }
 		}
-		
+
 		/// <summary>
 		/// TODO: What the hell is this function supposed to do?
 		/// </summary>
@@ -72,17 +64,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 
 
 		public override bool IsReadOnly {
-			get {
-				return base.IsReadOnly;
-			}
+			get { return base.IsReadOnly; }
 		}
 
 		public override void Dispose ()
 		{
-			base.Dispose();
+			base.Dispose ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// Don't run this class without specifying the provider node
 		/// 
@@ -91,47 +81,39 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// <param name="providerNode">
 		/// A <see cref="ProviderData"/>
 		/// </param>
-		public NewTaskView(ProviderData providerNode)
+		public NewTaskView (ProviderData providerNode)
 		{
 			this.ContentName = "New Task";
-			log = new LogUtil("NewTaskView");
-			
-			widget = new NewTaskWidget();
+			log = new LogUtil ("NewTaskView");
+
+			widget = new NewTaskWidget ();
 			widget.ProviderNode = providerNode;
 			widget.ViewContent = this;
-			
-			widget.ShowAll();
-			
-			
+
+			widget.ShowAll ();
+
+
 		}
 	}
-	
+
 	public class EditTaskView : AbstractViewContent
 	{
 		protected LogUtil log;
 		protected EditTaskWidget widget;
 
 		public override Widget Control {
-					get {
-						return widget;
-					}
-				}
+			get { return widget; }
+		}
 
 		public override string ContentName {
-			get {
-				return base.ContentName;
-			}
-			set {
-				base.ContentName = value;
-			}
+			get { return base.ContentName; }
+			set { base.ContentName = value; }
 		}
 
 		public override bool IsFile {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
-		
+
 		/// <summary>
 		/// TODO: What the hell is this function supposed to do?
 		/// </summary>
@@ -145,17 +127,15 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 
 
 		public override bool IsReadOnly {
-			get {
-				return base.IsReadOnly;
-			}
+			get { return base.IsReadOnly; }
 		}
 
 		public override void Dispose ()
 		{
-			base.Dispose();
+			base.Dispose ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// Don't run this class without specifying the provider node
 		/// EDIT: and the TaskData or something like that.
@@ -167,22 +147,22 @@ namespace MonoDevelop.TaskForce.LocalProvider.TaskWidgets
 		/// <param name="seedTask">
 		/// 
 		/// </param>
-		public EditTaskView(ProviderData providerNode, TaskData seedTask)
+		public EditTaskView (ProviderData providerNode, TaskData seedTask)
 		{
 			this.ContentName = "Edit Task";
-			log = new LogUtil("NewTaskView");
-			
-			widget = new EditTaskWidget();
+			log = new LogUtil ("NewTaskView");
+
+			widget = new EditTaskWidget ();
 			widget.ProviderNode = providerNode;
 			widget.ViewContent = this;
 			widget.EditTarget = seedTask;
-			widget.PopulateForm();
-			
-			
-			widget.ShowAll();
-			
-			
+			widget.PopulateForm ();
+
+
+			widget.ShowAll ();
+
+
 		}
-	}	
-		
+	}
+
 }

@@ -38,12 +38,12 @@ using System;
 
 namespace MonoDevelop.TaskForce.LocalProvider
 {
-	
-	
+
+
 	public class Provider
 	{
-		
-		public Provider()
+
+		public Provider ()
 		{
 		}
 	}

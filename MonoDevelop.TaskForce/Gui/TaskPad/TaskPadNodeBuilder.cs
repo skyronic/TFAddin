@@ -42,8 +42,8 @@ using MonoDevelop.TaskForce.Utilities;
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
-	
-	
+
+
 	/// <summary>
 	/// Abstract skeleton nodebuilder
 	/// </summary>
@@ -51,77 +51,71 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 	{
 		protected LogUtil log;
 		public NodeType type;
-		
-		public TaskPadNodeBuilder() : base()
+
+		public TaskPadNodeBuilder () : base()
 		{
-			
+
 		}
-		
+
 		public override string ContextMenuAddinPath {
-			get {
-				return "/MonoDevelop/TaskForce/TaskPad/ContextMenu";
-			}
+			get { return "/MonoDevelop/TaskForce/TaskPad/ContextMenu"; }
 		}
 
 
-		
+
 		public override bool HasChildNodes (ITreeBuilder builder, object dataObject)
 		{
 			// TODO: Anything more to this?
-			if(dataObject is NodeData)
-			{
+			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
 				return (nodeData.children.Count > 0);
 			}
 			return false;
 		}
-		
-	
+
+
 		public override object GetParentObject (object dataObject)
 		{
-			if (dataObject is NodeData)
-			{
+			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
 				return nodeData.parent;
 			}
 			return null;
 		}
-		
+
 		public override void OnNodeAdded (object dataObject)
 		{
 			base.OnNodeAdded (dataObject);
-			if (dataObject is NodeData)
-			{
+			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
-				nodeData.NodeDataChanged += OnNodeDataChanged;				
+				nodeData.NodeDataChanged += OnNodeDataChanged;
 			}
 		}
-		
+
 		public override void OnNodeRemoved (object dataObject)
 		{
 			base.OnNodeAdded (dataObject);
-			if (dataObject is NodeData)
-			{
+			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
-				nodeData.NodeDataChanged -= OnNodeDataChanged;				
+				nodeData.NodeDataChanged -= OnNodeDataChanged;
 			}
 		}
 
 
 		public abstract void OnNodeDataChanged (MonoDevelop.TaskForce.Data.NodeData source, NodeDataChangedEventArgs args);
 
-		
-		public abstract void DataTypeComparison(object dataObject);
+
+		public abstract void DataTypeComparison (object dataObject);
 	}
-	
+
 	public abstract class TaskPadNodeCommandHandler : NodeCommandHandler
 	{
 		LogUtil log;
 		public TaskPadNodeCommandHandler ()
 		{
-			
+
 		}
 		public abstract void OnNodeChange ();
-		
+
 	}
 }

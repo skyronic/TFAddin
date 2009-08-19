@@ -59,14 +59,13 @@ namespace MonoDevelop.TaskForce
 			/// </summary>
 			get { return instance; }
 		}
-		
-		public ExtensibleTreeView TreeView
-		{get;
+
+		public ExtensibleTreeView TreeView {
+			get;
 			set;
 		}
-		
-		public TFStore Store
-		{
+
+		public TFStore Store {
 			get;
 			set;
 		}
@@ -80,9 +79,8 @@ namespace MonoDevelop.TaskForce
 			get;
 			set;
 		}
-		
-		public TaskSolutionPad TaskPad
-		{
+
+		public TaskSolutionPad TaskPad {
 			get;
 			set;
 		}
@@ -125,12 +123,12 @@ namespace MonoDevelop.TaskForce
 			log.DEBUG ("Activating task: " + _task.Label);
 
 			// Call the task activation hook which informs the context.
-			ActiveTask.OnTaskActivated();
+			ActiveTask.OnTaskActivated ();
 
 			// TaskActivated (args);TODO: Why am I getting an exception here?
 			ActiveTask.Label = "*[A]*  " + ActiveTask.Label;
 			// Update the tree to reflect the change on the label
-			ActiveTask.TriggerUpdate();
+			ActiveTask.TriggerUpdate ();
 
 		}
 
@@ -140,16 +138,16 @@ namespace MonoDevelop.TaskForce
 				if (IsTaskActive) {
 					log.DEBUG ("Deactivating task: " + ActiveTask.Label);
 					ActiveTaskChangedEventArgs args = new ActiveTaskChangedEventArgs ();
-					
+
 					// Call the task deactivated hook
-					ActiveTask.OnTaskDeactivated();
-					ActiveTask.Label = ActiveTask.Label.Remove(0, 7);
-					ActiveTask.TriggerUpdate();				
+					ActiveTask.OnTaskDeactivated ();
+					ActiveTask.Label = ActiveTask.Label.Remove (0, 7);
+					ActiveTask.TriggerUpdate ();
 					// Remove the "*[A]*  " string
 					//ActiveTask.Label.TrimStart("*[A]* ".ToCharArray());
-		
-					
-					
+
+
+
 					args.CurrentTask = ActiveTask;
 
 					ActiveTask = null;
@@ -159,22 +157,22 @@ namespace MonoDevelop.TaskForce
 				}
 			}
 		}
-		
-		public void TempAddNewProvider(string serializedString)
+
+		public void TempAddNewProvider (string serializedString)
 		{
-			log.INFO("The serialized string is - " + serializedString);
-			
+			log.INFO ("The serialized string is - " + serializedString);
+
 			// deserialize the string into a ProviderData			
-			object o1 = Util.DeserializeString(serializedString, typeof(ProviderData));
-			
+			object o1 = Util.DeserializeString (serializedString, typeof(ProviderData));
+
 			ProviderData tempProv = o1 as ProviderData;
-			tempProv.SerializeData();
-			log.INFO("The freshly serialized data is:" + tempProv.serializedString);
-			
-			tempProv.provider.ConstructBasicProvider(tempProv);
-			
+			tempProv.SerializeData ();
+			log.INFO ("The freshly serialized data is:" + tempProv.serializedString);
+
+			tempProv.provider.ConstructBasicProvider (tempProv);
+
 			// add the provider data node to the treeview, and pray it works
-			this.TreeView.AddChild(tempProv);
+			this.TreeView.AddChild (tempProv);
 		}
 
 		private TaskForceMain ()
@@ -182,121 +180,115 @@ namespace MonoDevelop.TaskForce
 			IsTaskActive = false;
 			log = new LogUtil ("TaskForceMain");
 		}
-		
-		
-		
-		
+
+
+
+
 		/// <summary>
 		/// The main function that will be executed on the startup of the application
 		/// 
 		/// Teh Entry point
 		/// </summary>
-		public void Main()
+		public void Main ()
 		{
-			log.INFO("TaskForce started");
-			
+			log.INFO ("TaskForce started");
+
 			// Subscribe to the solution opened event.
 			IdeApp.Workspace.SolutionLoaded += OnSolutionLoaded;
 			IdeApp.Workspace.SolutionUnloaded += OnSolutionUnloaded;
-			
-			this.RegisterAllTypes();
+
+			this.RegisterAllTypes ();
 		}
 
 		void OnSolutionUnloaded (object sender, SolutionEventArgs e)
 		{
-			
+
 		}
-		
-		
+
+
 		// We need both to be available for the population to take place.
 		bool padAvailable = false;
 		bool solutionAvailable = false;
-		
-		
+
+
 		/// <summary>
 		/// This function is called twice - once when the solution is loaded and once when the taskpad is loaded
 		/// this way, it works only on the second time. The user might not have the pad enabled for it to work.
 		/// </summary>
-		public void PopulateGui()
+		public void PopulateGui ()
 		{
-			if(padAvailable && solutionAvailable)
-			{
-			string targetFileName = activeSolution.BaseDirectory.Combine(".taskforce/taskforce.xml").FullPath;
-			
-			if(File.Exists(targetFileName))
-			{
-				log.INFO("Deserializing TFStore from file");
-				// Read from the file
-				Store = Util.DeserializeString(File.ReadAllText(targetFileName), typeof(TFStore)) as TFStore;
-				if(Store == null)
-				{
-					log.ERROR("unable to deserialize taskforce store");
-					return;
+			if (padAvailable && solutionAvailable) {
+				string targetFileName = activeSolution.BaseDirectory.Combine (".taskforce/taskforce.xml").FullPath;
+
+				if (File.Exists (targetFileName)) {
+					log.INFO ("Deserializing TFStore from file");
+					// Read from the file
+					Store = Util.DeserializeString (File.ReadAllText (targetFileName), typeof(TFStore)) as TFStore;
+					if (Store == null) {
+						log.ERROR ("unable to deserialize taskforce store");
+						return;
+					}
+					Store.TargetFile = targetFileName;
+					Store.TreeView = this.TreeView;
+
+					Store.PostDeserializeHook ();
+				} else {
+					// Create the directory				
+					FileService.CreateDirectory (activeSolution.BaseDirectory.Combine (".taskforce").FullPath);
+					Store = new TFStore ();
+
+					Store.TargetFile = targetFileName;
+					Store.TreeView = this.TreeView;
+					Store.CreateNewLocalProvider (activeSolution);
+
 				}
-				Store.TargetFile = targetFileName;
-				Store.TreeView = this.TreeView;
-				
-				Store.PostDeserializeHook();
-			}
-			else
-			{
-				// Create the directory				
-				FileService.CreateDirectory(activeSolution.BaseDirectory.Combine(".taskforce").FullPath);
-				Store = new TFStore();
-				
-				Store.TargetFile = targetFileName;
-				Store.TreeView = this.TreeView;
-				Store.CreateNewLocalProvider(activeSolution);
-				
-			}
 			}
 		}
-		
+
 		Solution activeSolution;
 
 		void OnSolutionLoaded (object sender, SolutionEventArgs e)
 		{
 			activeSolution = e.Solution;
-			
+
 			// set the bit and call the PopulateGui method
 			solutionAvailable = true;
-			PopulateGui();			
+			PopulateGui ();
 		}
-		
-		public void OnTaskPadLoaded()
+
+		public void OnTaskPadLoaded ()
 		{
 			padAvailable = true;
-			PopulateGui();
+			PopulateGui ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// Registers all the types with the serialization engine
 		/// </summary>
-		public void RegisterAllTypes()
+		public void RegisterAllTypes ()
 		{
 			// Register all the provider types with the data context of the serializer
-			ProviderData.RegisterProviderTypes();
-			
+			ProviderData.RegisterProviderTypes ();
+
 			// make a list of all the types here
-			List<Type> typeList = new List<Type>();
-			
-			typeList.Add(typeof(TaskData));
-			typeList.Add(typeof(TFStore));
-			typeList.Add(typeof(NodeData));
-			typeList.Add(typeof(ProviderData));
-			typeList.Add(typeof(MonoDevelop.TaskForce.Gui.Components.CommentData));
+			List<Type> typeList = new List<Type> ();
+
+			typeList.Add (typeof(TaskData));
+			typeList.Add (typeof(TFStore));
+			typeList.Add (typeof(NodeData));
+			typeList.Add (typeof(ProviderData));
+			typeList.Add (typeof(MonoDevelop.TaskForce.Gui.Components.CommentData));
 			// typeList.Add(typeof(TaskData));
-			
-			foreach(Type t in typeList)
-			{
-				Util.context.IncludeType(t);
+
+			foreach (Type t in typeList) {
+				Util.context.IncludeType (t);
 			}
 		}
-		
-		public void StartTFStoreUpdate()
+
+		public void StartTFStoreUpdate ()
 		{
-			Store.UpdateFile();
+			Store.UpdateFile ();
 		}
 	}
 

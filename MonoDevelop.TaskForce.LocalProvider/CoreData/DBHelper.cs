@@ -36,8 +36,8 @@ using MonoDevelop.TaskForce.Gui.Components;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
-	
-	[Serializable]
+
+	[Serializable()]
 	public sealed class DBHelperException : Exception
 	{
 		/// <summary>
@@ -46,30 +46,30 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		public DBHelperException ()
 		{
 		}
-		
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:DBHelperException"/> class
 		/// </summary>
 		/// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
-		public DBHelperException (string message) : base (message)
+		public DBHelperException (string message) : base(message)
 		{
 		}
-		
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:DBHelperException"/> class
 		/// </summary>
 		/// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
 		/// <param name="inner">The exception that is the cause of the current exception. </param>
-		public DBHelperException (string message, Exception inner) : base (message, inner)
+		public DBHelperException (string message, Exception inner) : base(message, inner)
 		{
 		}
-		
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:DBHelperException"/> class
 		/// </summary>
 		/// <param name="context">The contextual information about the source or destination.</param>
 		/// <param name="info">The object that holds the serialized object data.</param>
-		public DBHelperException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base (info, context)
+		public DBHelperException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
 		{
 		}
 	}
@@ -142,7 +142,7 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 			return 0;
 			//TODO: Return taskid
 		}
-		
+
 		/// <summary>
 		/// Updates the task data
 		/// 
@@ -152,21 +152,21 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <param name="input">
 		/// A <see cref="TaskCore"/>
 		/// </param>
-		public static void UpdateTask(TaskCore input)
+		public static void UpdateTask (TaskCore input)
 		{
 			// We're assuming that the task has the Task ID valid
-			SqliteCommand cmd = conn.CreateCommand();
+			SqliteCommand cmd = conn.CreateCommand ();
 			cmd.CommandText = "UPDATE Tasks SET Name = @name, Priority = @priority, Description = @description, CreateDate = @createdate, DueDate = @duedate, Depends = @depends WHERE TaskID = @taskid";
-			cmd.Parameters.AddWithValue("@name", input.Title);
-			cmd.Parameters.AddWithValue("@priority", input.Priority);
-			cmd.Parameters.AddWithValue("@description", input.Description);
-			cmd.Parameters.AddWithValue("@createdate", input.CreateDate.ToString(DateFormat));
-			cmd.Parameters.AddWithValue("@duedate", input.DueDate.ToString(DateFormat));
-			cmd.Parameters.AddWithValue("@depends", input.Depends);
-			cmd.Parameters.AddWithValue("@taskid", input.Id);
-			
-			
-			LogQuery(cmd);
+			cmd.Parameters.AddWithValue ("@name", input.Title);
+			cmd.Parameters.AddWithValue ("@priority", input.Priority);
+			cmd.Parameters.AddWithValue ("@description", input.Description);
+			cmd.Parameters.AddWithValue ("@createdate", input.CreateDate.ToString (DateFormat));
+			cmd.Parameters.AddWithValue ("@duedate", input.DueDate.ToString (DateFormat));
+			cmd.Parameters.AddWithValue ("@depends", input.Depends);
+			cmd.Parameters.AddWithValue ("@taskid", input.Id);
+
+
+			LogQuery (cmd);
 		}
 
 		/// <summary>
@@ -180,16 +180,16 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// </param>
 		public static void AddComment (TaskCore task, CommentData comment)
 		{
-			
+
 			SqliteCommand cmd = conn.CreateCommand ();
 			cmd.CommandText = "INSERT INTO Comments(TaskId, Subject, Author, Message, PostDate) VALUES (@taskid, @subject, @author, @message, @postdate);";
-			cmd.Parameters.AddWithValue ("@taskid", task.Id.ToString());
+			cmd.Parameters.AddWithValue ("@taskid", task.Id.ToString ());
 			cmd.Parameters.AddWithValue ("@subject", comment.Title);
 			cmd.Parameters.AddWithValue ("@author", comment.Author);
 			cmd.Parameters.AddWithValue ("@message", comment.Content);
-			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate.ToString(DateFormat));
-			
-			LogQuery(cmd);
+			cmd.Parameters.AddWithValue ("@postdate", comment.PostDate.ToString (DateFormat));
+
+			LogQuery (cmd);
 		}
 
 		/// <summary>

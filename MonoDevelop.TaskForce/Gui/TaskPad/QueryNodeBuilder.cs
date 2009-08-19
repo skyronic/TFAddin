@@ -43,12 +43,12 @@ using MonoDevelop.TaskForce.Gui.Components;
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
-	
+
 	public class QueryNodeBuilder
 	{
-		
-		
-		public QueryNodeBuilder()
+
+
+		public QueryNodeBuilder ()
 		{
 		}
 	}

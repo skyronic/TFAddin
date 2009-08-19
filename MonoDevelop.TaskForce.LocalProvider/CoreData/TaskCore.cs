@@ -36,62 +36,78 @@ using MonoDevelop.TaskForce.Data;
 
 namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 {
-	
-	
-	
+
+
+
 	public class TaskCore : ICoreData
 	{
-		
-		[ItemProperty]
-		public int Id
-		{get;set;}
-		
-		[ItemProperty]
-		public string Title
-		{get;set;}
-		
-		[ItemProperty]
-		public int Priority
-		{get;set;}
-		
-		[ItemProperty]
-		public string Description
-		{get;set;}
-		
-		[ItemProperty]
-		public DateTime CreateDate
-		{get;set;}
-		
-		[ItemProperty]
-		public DateTime DueDate
-		{get;set;}
-		
-		[ItemProperty]
-		public int Depends
-		{get;set;}
-		
-		
-		
-		
-		[ItemProperty]
-		public List<CommentData> Comments
-		{get;set;}
-		
-		public void AddComment(CommentData c)
-		{
-			Comments.Add(c);			
+
+		[ItemProperty()]
+		public int Id {
+			get;
+			set;
 		}
-		
-		public TaskCore()
-		{
-			Comments = new List<CommentData>();
+
+		[ItemProperty()]
+		public string Title {
+			get;
+			set;
 		}
-		
+
+		[ItemProperty()]
+		public int Priority {
+			get;
+			set;
+		}
+
+		[ItemProperty()]
+		public string Description {
+			get;
+			set;
+		}
+
+		[ItemProperty()]
+		public DateTime CreateDate {
+			get;
+			set;
+		}
+
+		[ItemProperty()]
+		public DateTime DueDate {
+			get;
+			set;
+		}
+
+		[ItemProperty()]
+		public int Depends {
+			get;
+			set;
+		}
+
+
+
+
+		[ItemProperty()]
+		public List<CommentData> Comments {
+			get;
+			set;
+		}
+
+		public void AddComment (CommentData c)
+		{
+			Comments.Add (c);
+		}
+
+		public TaskCore ()
+		{
+			Comments = new List<CommentData> ();
+		}
+
 		public override string ToString ()
 		{
-			return string.Format("[TaskCore: Id={0}, Title={1}, Description={2}, CreateDate={3}, DueDate={4}, Depends={5}, Comments={6}]", Id, Title, Description, CreateDate, DueDate, Depends, Comments);
+			return string.Format ("[TaskCore: Id={0}, Title={1}, Description={2}, CreateDate={3}, DueDate={4}, Depends={5}, Comments={6}]", Id, Title, Description, CreateDate, DueDate, Depends, Comments);
 		}
-		
+
 		/// <summary>
 		/// Seed the taskcore object with some junk information.
 		/// 
@@ -105,22 +121,22 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <param name="seedInt">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		public void SeedTaskCore(string seedString, int seedInt)
+		public void SeedTaskCore (string seedString, int seedInt)
 		{
 			Title = seedString + "_Title";
 			Description = seedString + "__Description";
 			CreateDate = DateTime.Now;
-			DueDate = DateTime.Now + TimeSpan.FromDays(seedInt + 4);
+			DueDate = DateTime.Now + TimeSpan.FromDays (seedInt + 4);
 			this.Priority = seedInt + 10;
-			
-			Comments = new List<CommentData>();
+
+			Comments = new List<CommentData> ();
 			// create three comments and add them
-			Comments.Add(new CommentData(seedString + "_author1", seedInt + 2));
-			Comments.Add(new CommentData(seedString + "_author2", seedInt + 5));
-			Comments.Add(new CommentData(seedString + "_author3", seedInt + 6));
-			
+			Comments.Add (new CommentData (seedString + "_author1", seedInt + 2));
+			Comments.Add (new CommentData (seedString + "_author2", seedInt + 5));
+			Comments.Add (new CommentData (seedString + "_author3", seedInt + 6));
+
 		}
-		
+
 		/// <summary>
 		/// Just seed the taskcore from the constructor
 		/// this way we won't have to create a new object making stubbing easier.
@@ -133,25 +149,25 @@ namespace MonoDevelop.TaskForce.LocalProvider.CoreData
 		/// <param name="seedInt">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		public TaskCore(string seedString, int seedInt)
+		public TaskCore (string seedString, int seedInt)
 		{
-			SeedTaskCore(seedString, seedInt);
+			SeedTaskCore (seedString, seedInt);
 		}
 
 		#region ICoreData implementation
 		public string SerializeToXML ()
 		{
 			// Get the serialized object and return the string
-			return Utilities.Util.SerializeObjectToString(this);
+			return Utilities.Util.SerializeObjectToString (this);
 		}
-		
+
 		public void DeSerialize (string serializedString)
 		{
-			throw new System.NotImplementedException();
+			throw new System.NotImplementedException ();
 		}
 		#endregion
-		
-		
+
+
 
 	}
 }

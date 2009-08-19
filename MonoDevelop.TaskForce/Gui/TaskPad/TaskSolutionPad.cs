@@ -54,9 +54,10 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.Initialize (builders, options, contextMenuPath);
 			TaskForceMain.Instance.TreeView = treeView;
 			TaskForceMain.Instance.TaskPad = this;
-			
-			TaskForceMain.Instance.OnTaskPadLoaded();			
-			
+
+			TaskForceMain.Instance.OnTaskPadLoaded ();
+
+		}
 			/*ProviderData providerData = new ProviderData ();
 			
 			TaskForceMain.Instance.TreeView = treeView;
@@ -64,6 +65,5 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 
 			treeView.AddChild (providerData);
 			providerData.provider.InitializeProvider (providerData);*/
-		}
 	}
 }

@@ -38,8 +38,8 @@ using System;
 
 namespace MonoDevelop.TaskForce.Gui.TaskPad
 {
-	
-	
+
+
 	public enum ContextMenuCommands
 	{
 		AddTask,
@@ -50,6 +50,6 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 		DeactivateTask,
 		Trigger1,
 		Trigger2,
-		DeleteTask,
+		DeleteTask
 	}
 }

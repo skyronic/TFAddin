@@ -42,20 +42,20 @@ namespace MonoDevelop.TaskForce.Context
 	public class DocumentMemento
 	{
 		LogUtil log;
-		
-		[ItemProperty]
+
+		[ItemProperty()]
 		public string FileName {
 			get;
 			set;
 		}
 
-		[ItemProperty]
+		[ItemProperty()]
 		public int CursorLine {
 			get;
 			set;
 		}
 
-		[ItemProperty]
+		[ItemProperty()]
 		public int CursorColumn {
 			get;
 			set;

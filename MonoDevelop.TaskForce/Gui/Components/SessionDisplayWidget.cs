@@ -40,34 +40,34 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		public SessionDisplayWidget ()
 		{
 			this.Build ();
-			
-			TreeViewColumn startColumn = new TreeViewColumn();
-			CellRendererText startRenderer = new CellRendererText();
+
+			TreeViewColumn startColumn = new TreeViewColumn ();
+			CellRendererText startRenderer = new CellRendererText ();
 			startColumn.Title = "Start";
-			startColumn.PackStart(startRenderer, true);
-			
-			TreeViewColumn stopColumn = new TreeViewColumn();
-			CellRendererText stopRenderer = new CellRendererText();
+			startColumn.PackStart (startRenderer, true);
+
+			TreeViewColumn stopColumn = new TreeViewColumn ();
+			CellRendererText stopRenderer = new CellRendererText ();
 			stopColumn.Title = "Stop";
-			stopColumn.PackStart(stopRenderer, true);
-			
-			TreeViewColumn durationColumn = new TreeViewColumn();
-			CellRenderer durationRenderer = new CellRendererText();
+			stopColumn.PackStart (stopRenderer, true);
+
+			TreeViewColumn durationColumn = new TreeViewColumn ();
+			CellRenderer durationRenderer = new CellRendererText ();
 			durationColumn.Title = "Duration";
-			durationColumn.PackStart(durationRenderer, true);
-			
-			this.sessionView1.AppendColumn(startColumn);
-			this.sessionView1.AppendColumn(stopColumn);
-			this.sessionView1.AppendColumn(durationColumn);
-			
-			startColumn.AddAttribute(startRenderer, "text", 0);
-			stopColumn.AddAttribute(stopRenderer, "text", 1);
-			durationColumn.AddAttribute(durationRenderer, "text", 2);
-			
-			sessionStore = new Gtk.ListStore(typeof(string), typeof(string), typeof(string));
-			sessionView1.Model = sessionStore;			
+			durationColumn.PackStart (durationRenderer, true);
+
+			this.sessionView1.AppendColumn (startColumn);
+			this.sessionView1.AppendColumn (stopColumn);
+			this.sessionView1.AppendColumn (durationColumn);
+
+			startColumn.AddAttribute (startRenderer, "text", 0);
+			stopColumn.AddAttribute (stopRenderer, "text", 1);
+			durationColumn.AddAttribute (durationRenderer, "text", 2);
+
+			sessionStore = new Gtk.ListStore (typeof(string), typeof(string), typeof(string));
+			sessionView1.Model = sessionStore;
 		}
-		
+
 		/// <summary>
 		/// Takes a taskdata and populates the treeview's store with session's
 		/// start time, end time, and duration
@@ -75,18 +75,14 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		/// <param name="data">
 		/// A <see cref="TaskData"/>
 		/// </param>
-		public void SetTaskData(TaskData data)
+		public void SetTaskData (TaskData data)
 		{
-			try
-			{
-				foreach(TaskSession session in data.TaskContext.Sessions)
-				{
-					sessionStore.AppendValues(session.StartTime.ToString(), session.EndTime.ToString(), session.GetLength().ToString());				
+			try {
+				foreach (TaskSession session in data.TaskContext.Sessions) {
+					sessionStore.AppendValues (session.StartTime.ToString (), session.EndTime.ToString (), session.GetLength ().ToString ());
 				}
-			}
-			catch
-			{
-				
+			} catch {
+
 			}
 		}
 	}

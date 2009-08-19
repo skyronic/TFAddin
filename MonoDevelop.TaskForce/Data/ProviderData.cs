@@ -33,81 +33,76 @@ using Mono.Addins;
 
 namespace MonoDevelop.TaskForce.Data
 {
-	
-	
+
+
 	public class ProviderData : NodeData
 	{
-		
-		public ProviderData() : base()
+
+		public ProviderData () : base()
 		{
-			log = new LogUtil("ProviderData");
-			log.SetHash(this);
-			
+			log = new LogUtil ("ProviderData");
+			log.SetHash (this);
+
 			// TODO: This is temporary
-			ExtensionNodeList nodes = AddinManager.GetExtensionNodes("/MonoDevelop/TaskForce/Providers");
-			
-			
+			ExtensionNodeList nodes = AddinManager.GetExtensionNodes ("/MonoDevelop/TaskForce/Providers");
+
+
 			// take nodes[0] by default
 			ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
-			provider = (IProvider) Activator.CreateInstance(node.Class);
-			
+			provider = (IProvider)Activator.CreateInstance (node.Class);
+
 		}
-		
-		public static void RegisterProviderTypes()
+
+		public static void RegisterProviderTypes ()
 		{
 			// TODO: This is temporary
-			ExtensionNodeList nodes = AddinManager.GetExtensionNodes("/MonoDevelop/TaskForce/Providers");
-			
+			ExtensionNodeList nodes = AddinManager.GetExtensionNodes ("/MonoDevelop/TaskForce/Providers");
+
 			// take nodes[0] by default
-			foreach(ProviderExtensionNode node in nodes)
-			{
-				
+			foreach (ProviderExtensionNode node in nodes) {
+
 				//ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
-				
-				
-				IProvider tempProvider = (IProvider) Activator.CreateInstance(node.Class);
-				tempProvider.RegisterTypes();
+
+
+				IProvider tempProvider = (IProvider)Activator.CreateInstance (node.Class);
+				tempProvider.RegisterTypes ();
 			}
 		}
-		
+
 		public override NodeType nodeType {
-		get {
-				return NodeType.Provider;
-			}
+			get { return NodeType.Provider; }
 		}
-		
-		
-		
-		
+
+
+
+
 		public override bool CanMakeChild (NodeData childData)
 		{
-			return this.CanMakeChild(childData.nodeType);
+			return this.CanMakeChild (childData.nodeType);
 		}
 
 		public override bool CanMakeChild (NodeType childType)
 		{
 			// A provider can only have a task as a datatype
-			if(childType == NodeType.Task)
-			{
+			if (childType == NodeType.Task) {
 				return true;
 			}
-			if(childType == NodeType.Category)
-			{
+			if (childType == NodeType.Category) {
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public override void PostSerializeHook ()
 		{
 			// Do any post-serialization work here
-			
-			
-			base.PostSerializeHook();
+
+
+			base.PostSerializeHook ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// To be exectued after deserialization, to clean up any mess that might've been created 
 		/// </summary>
@@ -115,16 +110,16 @@ namespace MonoDevelop.TaskForce.Data
 		{
 			base.PostDeserializeHook ();
 		}
-		
-		
+
+
 		/// <summary>
 		/// TODO: What's the point of this? 
 		/// </summary>
-		public void CreateEmptyProvider()
+		public void CreateEmptyProvider ()
 		{
 			// Creates the provider and seeds it with minimum possible information
-			provider.ConstructBasicProvider(this);
-			
+			provider.ConstructBasicProvider (this);
+
 		}
 
 

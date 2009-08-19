@@ -38,8 +38,8 @@ namespace MonoDevelop.TaskForce.Data.Serialization
 	/// </summary>
 	public interface ISerializationHooks
 	{
-		bool PreSerializationHook();
-		bool PostSerializationHook();
-		bool PostDeserializationHook();
+		bool PreSerializationHook ();
+		bool PostSerializationHook ();
+		bool PostDeserializationHook ();
 	}
 }
