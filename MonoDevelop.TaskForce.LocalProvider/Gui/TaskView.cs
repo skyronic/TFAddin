@@ -164,7 +164,10 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 			}
 			else
 			{
-				MessageService.ShowMessage("Unable to activate task", "Please create the task first and save it for activation");
+				//MessageService.ShowMessage("Unable to activate task", "Please create the task first and save it for activation");
+				// Save the current task
+				Save();
+				TaskForceMain.Instance.ActivateTask(targetTask);
 			}
 		}
 

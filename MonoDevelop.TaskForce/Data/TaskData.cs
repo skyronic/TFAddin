@@ -103,6 +103,8 @@ namespace MonoDevelop.TaskForce.Data
 		public override void PostDeserializeHook ()
 		{
 			base.PostDeserializeHook ();
+			// Check if the label accidentally has a "*[A]* " at the beginning
+			this.Label.TrimStart("*[A]*  ".ToCharArray());
 		}
 
 
