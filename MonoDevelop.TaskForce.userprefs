@@ -3,19 +3,16 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/Data/TFStore.cs" ctype="Workbench">
-    <Files>
-      <File FileName="MonoDevelop.TaskForce/Data/TFStore.cs" Line="131" Column="81" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="MonoDevelop.TaskForce" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="Commands" expanded="True" />
             <Node name="Context" expanded="True" />
             <Node name="Data" expanded="True">
-              <Node name="TFStore.cs" selected="True" />
+              <Node name="Serialization" expanded="True" />
             </Node>
             <Node name="Gui" expanded="True">
               <Node name="Components" expanded="True" />
@@ -33,11 +30,6 @@
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
-      </Pad>
-      <Pad Id="MonoDevelop.TaskForce.Gui.TaskPad">
-        <State expanded="True">
-          <Node name="*[A]*  Fix Multiple solution bugs" selected="True" />
-        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
