@@ -79,7 +79,8 @@ namespace MonoDevelop.TaskForce.Gui.Components
 		{
 			try {
 				foreach (TaskSession session in data.TaskContext.Sessions) {
-					sessionStore.AppendValues (session.StartTime.ToString (), session.EndTime.ToString (), session.GetLength ().ToString ());
+					string lengthString = String.Format("{0} Hours, {1} Minutes", session.GetLength().Hours, session.GetLength().Minutes);
+					sessionStore.AppendValues (session.StartTime.ToString (), session.EndTime.ToString (), lengthString);
 				}
 			} catch {
 

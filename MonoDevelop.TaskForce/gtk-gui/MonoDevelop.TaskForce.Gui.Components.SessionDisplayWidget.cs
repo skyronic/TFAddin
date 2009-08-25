@@ -21,6 +21,7 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             Stetic.Gui.Initialize(this);
             // Widget MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget
             Stetic.BinContainer.Attach(this);
+            this.HeightRequest = 200;
             this.Name = "MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget";
             // Container child MonoDevelop.TaskForce.Gui.Components.SessionDisplayWidget.Gtk.Container+ContainerChild
             this.GtkScrolledWindow = new Gtk.ScrolledWindow();
@@ -28,6 +29,7 @@ namespace MonoDevelop.TaskForce.Gui.Components {
             this.GtkScrolledWindow.ShadowType = ((Gtk.ShadowType)(1));
             // Container child GtkScrolledWindow.Gtk.Container+ContainerChild
             this.sessionView1 = new Gtk.TreeView();
+            this.sessionView1.HeightRequest = 105;
             this.sessionView1.CanFocus = true;
             this.sessionView1.Name = "sessionView1";
             this.GtkScrolledWindow.Add(this.sessionView1);
