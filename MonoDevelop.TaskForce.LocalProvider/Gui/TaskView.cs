@@ -143,7 +143,16 @@ namespace MonoDevelop.TaskForce.LocalProvider.Gui
 
 			// not dirty by default
 			this.IsDirty = false;
+			
+			this.taskViewWidget.Destroyed += TaskViewWidgetDestroyed;
+			
 		}
+
+		void TaskViewWidgetDestroyed (object sender, EventArgs e)
+		{
+			targetTask.EditWindowOpen = false;
+		}
+
 
 		public void ActivateCurrentTask ()
 		{

@@ -79,10 +79,16 @@ namespace MonoDevelop.TaskForce.LocalProvider
 						/*EditTaskView newTab = new EditTaskView(target.parent as ProviderData, target);
 			
 			IdeApp.Workbench.OpenDocument(newTab, true);*/
-TaskView taskView = new TaskView ();
-			taskView.EditTaskRole (providerNode, target);
+			
+			// only open if the edit window is not open already
+			if(!target.EditWindowOpen)
+			{
+				TaskView taskView = new TaskView ();
+				taskView.EditTaskRole (providerNode, target);
 
-			IdeApp.Workbench.OpenDocument (taskView, true);
+				IdeApp.Workbench.OpenDocument (taskView, true);
+				target.EditWindowOpen = true;
+			}
 		}
 
 		public void ViewTask (TaskData target)

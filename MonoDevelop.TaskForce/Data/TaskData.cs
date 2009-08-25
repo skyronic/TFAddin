@@ -60,11 +60,18 @@ namespace MonoDevelop.TaskForce.Data
 		public TaskData () : base()
 		{
 			TaskContext = new ContextData ();
+			EditWindowOpen = false;
 		}
 
 		public override bool CanMakeChild (NodeData childData)
 		{
 			return this.CanMakeChild (childData.nodeType);
+		}
+		
+		public bool EditWindowOpen
+		{
+			get;
+			set;
 		}
 
 		public override bool CanMakeChild (NodeType childType)
