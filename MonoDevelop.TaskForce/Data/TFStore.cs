@@ -82,7 +82,7 @@ namespace MonoDevelop.TaskForce.Data
 			ProviderData defaultProvider = new ProviderData ();
 
 			defaultProvider.provider.ConstructBasicProvider (defaultProvider);
-			defaultProvider.Label = "Tasks for " + ActiveSolution.Name;
+			//defaultProvider.Label = "Tasks for " + ActiveSolution.Name;
 
 			// Create some data in the provider first.
 			// defaultProvider.provider.SeedDataForTesting("test_seed");

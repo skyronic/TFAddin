@@ -168,6 +168,7 @@ namespace MonoDevelop.TaskForce.Data
 
 			NodeDataChangedEventArgs args = new NodeDataChangedEventArgs ();
 			NodeDataChanged (this, args);
+			
 		}
 
 		public virtual void SerializeData ()

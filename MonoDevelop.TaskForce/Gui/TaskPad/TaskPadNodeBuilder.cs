@@ -88,7 +88,8 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.OnNodeAdded (dataObject);
 			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
-				nodeData.NodeDataChanged += OnNodeDataChanged;
+				log.WARN("Subscribing to the NodeDataChanged handler now");
+				nodeData.NodeDataChanged += new NodeDataChangedHandler(OnNodeDataChanged);
 			}
 		}
 
@@ -97,12 +98,22 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 			base.OnNodeAdded (dataObject);
 			if (dataObject is NodeData) {
 				NodeData nodeData = dataObject as NodeData;
-				nodeData.NodeDataChanged -= OnNodeDataChanged;
+				nodeData.NodeDataChanged -= new NodeDataChangedHandler(OnNodeDataChanged);
 			}
 		}
 
 
-		public abstract void OnNodeDataChanged (MonoDevelop.TaskForce.Data.NodeData source, NodeDataChangedEventArgs args);
+		public virtual void OnNodeDataChanged (MonoDevelop.TaskForce.Data.NodeData source, NodeDataChangedEventArgs args)
+		{
+			if (source is NodeData) {
+				// get the tree builder
+				ITreeBuilder treeBuilder = Context.GetTreeBuilder (source);
+				if(treeBuilder != null)
+				{
+					treeBuilder.UpdateAll ();
+			}
+			}
+		}
 
 
 		public abstract void DataTypeComparison (object dataObject);

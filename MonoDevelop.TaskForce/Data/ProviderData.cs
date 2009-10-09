@@ -47,9 +47,12 @@ namespace MonoDevelop.TaskForce.Data
 			ExtensionNodeList nodes = AddinManager.GetExtensionNodes ("/MonoDevelop/TaskForce/Providers");
 
 
+			log.INFO("Creating a new provider");
 			// take nodes[0] by default
-			ProviderExtensionNode node = nodes[1] as ProviderExtensionNode;
+			ProviderExtensionNode node = nodes[0] as ProviderExtensionNode;
 			provider = (IProvider)Activator.CreateInstance (node.Class);
+			
+			
 
 		}
 

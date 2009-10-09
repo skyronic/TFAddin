@@ -85,14 +85,7 @@ namespace MonoDevelop.TaskForce.Gui.TaskPad
 
 		}
 
-		public override void OnNodeDataChanged (MonoDevelop.TaskForce.Data.NodeData source, MonoDevelop.TaskForce.Data.NodeDataChangedEventArgs args)
-		{
-			if (source is ProviderData) {
-				// get the tree builder
-				ITreeBuilder treeBuilder = Context.GetTreeBuilder (source);
-				treeBuilder.UpdateAll ();
-			}
-		}
+		
 
 		public override void Dispose ()
 		{
