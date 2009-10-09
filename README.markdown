@@ -21,8 +21,3 @@ This is being built as a Google summer of code project for MonoDevelop by Anirud
 ## Supported bug providers
 * local
 * bugzilla
-=======
-
-## Work Items:
-* Finish bugzilla integration
-
