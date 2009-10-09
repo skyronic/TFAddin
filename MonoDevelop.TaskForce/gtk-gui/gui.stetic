@@ -7,8 +7,8 @@
   <import>
     <widget-library name="../../../../main/build/bin/MonoDevelop.Components.dll" />
     <widget-library name="../../../../main/build/bin/MonoDevelop.Core.Gui.dll" />
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Ide.dll" />
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Projects.Gui.dll" />
+    <widget-library name="MonoDevelop.Ide, Version=2.1.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.Projects.Gui, Version=2.1.0.0, Culture=neutral" />
     <widget-library name="../../../../main/build/AddIns/MonoDevelop.TaskForce/MonoDevelop.TaskForce.dll" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MonoDevelop.TaskForce.Utilities.LogWindow" design-size="400 300">

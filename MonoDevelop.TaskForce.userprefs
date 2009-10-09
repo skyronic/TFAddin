@@ -1,27 +1,36 @@
 ﻿<Properties>
+  <MonoDevelop.AddinAuthoring.RegistryInfo name="monodevelop" appPath="/opt/mono/lib/monodevelop/bin" regPath="/home/anirudhs/.config/MonoDevelop" description="Free .NET Development Environment" testCommand="MonoDevelop.exe" ctype="AddinRegistry" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoDevelop.TaskForce/MonoDevelop.TaskForce.addin.xml" ctype="Workbench">
+    <Files>
+      <File FileName="MonoDevelop.TaskForce/Providers/IProvider.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.BugzillaProvider/BugzillaProviderMain.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.LocalProvider/ProviderFrontend.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce.BugzillaProvider/CoreData/BugzillaTaskCore.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce/Data/TFStore.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce/TaskForceMain.cs" Line="1" Column="1" />
+      <File FileName="MonoDevelop.TaskForce/MonoDevelop.TaskForce.addin.xml" Line="29" Column="16" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True" selected="True">
           <Node name="MonoDevelop.TaskForce" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="Commands" expanded="True" />
-            <Node name="Context" expanded="True" />
-            <Node name="Data" expanded="True">
-              <Node name="Serialization" expanded="True" />
-            </Node>
+            <Node name="AddinDescription" expanded="True" />
+            <Node name="Data" expanded="True" />
             <Node name="Gui" expanded="True">
-              <Node name="Components" expanded="True" />
               <Node name="TaskPad" expanded="True" />
             </Node>
-            <Node name="Providers" expanded="True" />
-            <Node name="Utilities" expanded="True" />
+          </Node>
+          <Node name="MonoDevelop.TaskForce.BugzillaProvider" expanded="True">
+            <Node name="AddinDescription" expanded="True" />
+            <Node name="CoreData" expanded="True" />
           </Node>
           <Node name="MonoDevelop.TaskForce.LocalProvider" expanded="True">
+            <Node name="AddinDescription" expanded="True" />
             <Node name="CoreData" expanded="True" />
             <Node name="Gui" expanded="True" />
             <Node name="TaskWidgets" expanded="True" />
@@ -30,6 +39,12 @@
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

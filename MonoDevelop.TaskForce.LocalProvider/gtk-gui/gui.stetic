@@ -5,11 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Components.dll" />
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Core.Gui.dll" />
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Dock.dll" />
-    <widget-library name="../../../../main/build/bin/MonoDevelop.Ide.dll" />
     <widget-library name="../../../../main/build/AddIns/MonoDevelop.TaskForce/MonoDevelop.TaskForce.dll" />
+    <widget-library name="MonoDevelop.Components, Version=2.1.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.Core.Gui, Version=2.1.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.Ide, Version=2.1.0.0, Culture=neutral" />
     <widget-library name="../../../../main/build/AddIns/MonoDevelop.TaskForce/MonoDevelop.TaskForce.LocalProvider.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TaskForce.LocalProvider.TaskWidgets.NewTaskWidget" design-size="655 483">

@@ -240,7 +240,7 @@ namespace MonoDevelop.TaskForce.LocalProvider
 			}*/
 
 			// create a few random taskcore items
-for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {
 				// create a core data object and seed it
 				TaskCore core = new TaskCore ();
 				core.SeedTaskCore (seedString, i);
