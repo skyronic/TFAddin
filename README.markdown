@@ -17,3 +17,7 @@ This is a guide to build TaskForce. Please contact me if it doesen't work.
 
 ## Author
 This is being built as a Google summer of code project for MonoDevelop by Anirudh Sanjeev <andy@ninjagod.com> (http://github.com/ninjagod )under the mentorship of Michael Hutchinson <mjhutchinson@gmail.com>.
+
+## Work Items:
+* Finish bugzilla integration
+
