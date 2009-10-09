@@ -42,7 +42,7 @@ namespace MonoDevelop.TaskForce.Data
 	public class TFStore
 	{
 		LogUtil log;
-
+		
 		[ItemProperty()]
 		public List<ProviderData> SolutionProviders {
 			get;
@@ -100,6 +100,9 @@ namespace MonoDevelop.TaskForce.Data
 		public void UpdateFile ()
 		{
 			log.INFO ("Updating file!");
+			
+			if(!TaskForceMain.Instance.DryRun)
+			{
 
 			// TODO: Create a lock here for potential threading bugs
 			if (File.Exists (TargetFile.FullPath + ".temp")) {
@@ -129,6 +132,7 @@ namespace MonoDevelop.TaskForce.Data
 			// rename the ".temp" file to regular xml
 			// FileService.RenameFile(TargetFile.FullPath + ".temp", TargetFile.FullPath);
 			FileService.SystemRename (TargetFile.FullPath + ".temp", TargetFile.FullPath);
+			}
 		}
 
 		/// <summary>

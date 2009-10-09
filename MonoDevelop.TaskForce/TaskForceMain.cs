@@ -59,6 +59,14 @@ namespace MonoDevelop.TaskForce
 			/// </summary>
 			get { return instance; }
 		}
+		
+		public bool DryRun
+		{
+			get
+			{
+				return true;
+			}
+		}
 
 		public ExtensibleTreeView TreeView {
 			get;
@@ -225,7 +233,7 @@ namespace MonoDevelop.TaskForce
 			if (padAvailable && solutionAvailable) {
 				string targetFileName = activeSolution.BaseDirectory.Combine (".taskforce/taskforce.xml").FullPath;
 
-				if (File.Exists (targetFileName)) {
+				if (File.Exists (targetFileName) && !DryRun) {
 					log.INFO ("Deserializing TFStore from file");
 					// Read from the file
 					Store = Util.DeserializeString (File.ReadAllText (targetFileName), typeof(TFStore)) as TFStore;
